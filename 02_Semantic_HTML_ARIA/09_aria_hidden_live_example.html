@@ -1,0 +1,24 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 09 - aria-hidden and aria-live</title> 
+	</head> 
+	<body> 
+
+		<!-- The star is decoration: the text already says "Favourite" -->
+		<button type="button">
+			<span aria-hidden="true">&#9733;</span> Favourite
+		</button>
+
+		<!-- Screen readers announce any change to this area -->
+		<p id="status" aria-live="polite"></p>
+
+		<button type="button"
+			onclick="document.getElementById('status').textContent='Saved!'">
+			Save
+		</button>
+
+	</body> 
+</html>

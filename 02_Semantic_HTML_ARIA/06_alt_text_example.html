@@ -1,0 +1,26 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 06 - Alt Text</title> 
+	</head> 
+	<body> 
+
+		<h1>Alt Text: Good, Bad, and Decorative</h1>
+
+		<!-- Bad: missing alt (Lighthouse will flag this) -->
+		<img src="beach.JPG" width="200">
+
+		<!-- Bad: not helpful -->
+		<img src="beach.JPG" width="200" alt="image">
+
+		<!-- Good: describes what the image shows -->
+		<img src="beach.JPG" width="200"
+			alt="Sandy beach with waves under a clear blue sky">
+
+		<!-- Decorative: empty alt, screen readers skip it -->
+		<img src="wave-divider.png" alt="">
+
+	</body> 
+</html>

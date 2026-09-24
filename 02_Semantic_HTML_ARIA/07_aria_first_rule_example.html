@@ -1,0 +1,28 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 07 - First Rule of ARIA</title> 
+	</head> 
+	<body> 
+
+		<h1>Press Tab to test each "button"</h1>
+
+		<!-- 1. Avoid: looks clickable, but Tab skips it -->
+		<div onclick="alert('Subscribed!')">
+			Subscribe (div)
+		</div>
+
+		<!-- 2. ARIA "fix": says "button"... but Tab still skips it -->
+		<div role="button" onclick="alert('Subscribed!')">
+			Subscribe (div + role)
+		</div>
+
+		<!-- 3. Prefer: a real button. Tab, Enter, Space: all free -->
+		<button type="button" onclick="alert('Subscribed!')">
+			Subscribe (button)
+		</button>
+
+	</body> 
+</html>

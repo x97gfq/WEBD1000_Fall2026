@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- FIX: lang tells screen readers which language/voice to use -->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Burridge Campus</title>
+	</head>
+	<body>
+
+		<!-- FIX: skip link for keyboard users -->
+		<a href="#main">Skip to main content</a>
+
+		<!-- FIX: header landmark + a real <h1> -->
+		<header>
+			<h1>Burridge Campus</h1>
+			<!-- FIX: icon-only button gets an accessible name -->
+			<button type="button" aria-label="Close menu">&times;</button>
+		</header>
+
+		<!-- FIX: nav landmark, a list of links, labelled, current page marked -->
+		<nav aria-label="Main">
+			<ul>
+				<li><a href="activity_answer.html" aria-current="page">Home</a></li>
+				<li><a href="../01_HTML_Examples/page1.html">About</a></li>
+				<li><a href="../01_HTML_Examples/page2.html">Programs</a></li>
+			</ul>
+		</nav>
+
+		<main id="main">
+			<!-- FIX: real heading, correct level (h2 under the h1) -->
+			<h2>Welcome</h2>
+			<!-- FIX: contrast. #595959 on white passes WCAG AA (#bbbbbb did not) -->
+			<p style="color: #595959;">Welcoming campus with big school spirit, Burridge operates from two locations along one of the province's most beautiful shores: the main site in Yarmouth and the Digby Learning Centre.</p>
+
+			<!-- FIX: article (stands on its own); heading level h3 not h4 -->
+			<article>
+				<h3>Campus Cinnamon Bun Day</h3>
+				<p>On Wednesdays, you'll want to head to the cafeteria to try the campus's famous cinnamon buns.</p>
+				<!-- FIX: figure + alt + figcaption -->
+				<figure>
+					<img src="beach.JPG" width="400" alt="Sandy beach with waves under a clear blue sky">
+					<figcaption>Mavillette Beach, a short drive from campus.</figcaption>
+				</figure>
+			</article>
+
+			<!-- FIX: caption, thead/tbody, th with scope -->
+			<table>
+				<caption>Average Temperature in Yarmouth</caption>
+				<thead>
+					<tr>
+						<th scope="col">Month</th>
+						<th scope="col">Temperature</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">January</th>
+						<td>-10&deg;C</td>
+					</tr>
+					<tr>
+						<th scope="row">August</th>
+						<td>+20&deg;C</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- FIX: form with a real label and a real button -->
+			<section aria-labelledby="signup-heading">
+				<h3 id="signup-heading">Newsletter</h3>
+				<form>
+					<label for="email">Email address</label>
+					<input type="email" id="email" name="email" required>
+					<button type="button" onclick="alert('Subscribed!')">Subscribe</button>
+				</form>
+			</section>
+		</main>
+
+		<!-- FIX: aside for related-but-not-essential content -->
+		<aside>
+			<h2>Did you know?</h2>
+			<p>Burridge hosts one of the Cube locations, a place to try out and develop new ideas.</p>
+		</aside>
+
+		<!-- FIX: footer landmark + address element -->
+		<footer>
+			<address>372 Pleasant St, Yarmouth, NS</address>
+			<p>&copy; 2026 Nova Scotia Community College</p>
+		</footer>
+
+	</body>
+</html>

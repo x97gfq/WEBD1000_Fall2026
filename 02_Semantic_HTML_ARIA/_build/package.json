@@ -1,0 +1,11 @@
+{
+  "name": "class5-deck-build",
+  "private": true,
+  "description": "Builds Class5_Semantic_HTML_ARIA.pptx from the example files",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

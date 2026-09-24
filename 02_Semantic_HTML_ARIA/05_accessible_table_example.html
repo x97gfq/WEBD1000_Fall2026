@@ -1,0 +1,33 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 05 - Accessible Table</title> 
+	</head> 
+	<body> 
+
+		<table>
+			<!-- caption: the table's name -->
+			<caption>Average Temperature in Yarmouth</caption>
+			<thead>
+				<tr>
+					<th scope="col">Month</th>
+					<th scope="col">Temperature</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!-- scope="row": this header labels the whole row -->
+					<th scope="row">January</th>
+					<td>-10&deg;C</td>
+				</tr>
+				<tr>
+					<th scope="row">August</th>
+					<td>+20&deg;C</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</body> 
+</html>

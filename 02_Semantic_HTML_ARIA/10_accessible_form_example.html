@@ -1,0 +1,26 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 10 - Accessible Form</title> 
+	</head> 
+	<body> 
+
+		<h1>Sign up for your timetable</h1>
+
+		<form>
+			<!-- for="email" matches id="email" -->
+			<label for="email">Email address</label>
+			<input type="email" id="email" name="email" required
+				aria-describedby="email-hint email-error" aria-invalid="true">
+
+			<!-- Read aloud after the label when the field gets focus -->
+			<p id="email-hint">We'll only use this to send your timetable.</p>
+			<p id="email-error">Error: enter an email like name@example.ca</p>
+
+			<button type="submit">Sign up</button>
+		</form>
+
+	</body> 
+</html>

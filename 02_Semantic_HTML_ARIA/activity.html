@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Burridge Campus</title>
+	</head>
+	<body>
+
+		<!-- CLASS ACTIVITY: This page has at least 10 accessibility problems.
+		     1. Open it with Live Server and run Lighthouse (Accessibility only). Write down your score.
+		     2. Press Tab through the page. Can you reach everything?
+		     3. Fix the HTML, then test again.
+		     (Ignore the style="..." attributes for now; we'll cover CSS soon.) -->
+
+		<div class="header">
+			<div style="font-size: 2em; font-weight: bold;">Burridge Campus</div>
+			<button type="button">&times;</button>
+		</div>
+
+		<div class="menu">
+			<div><a href="activity.html">Home</a></div>
+			<div><a href="../01_HTML_Examples/page1.html">About</a></div>
+			<div><a href="../01_HTML_Examples/page2.html">Programs</a></div>
+		</div>
+
+		<div class="content">
+			<div style="font-size: 1.5em; font-weight: bold;">Welcome</div>
+			<div style="color: #bbbbbb;">Welcoming campus with big school spirit, Burridge operates from two locations along one of the province's most beautiful shores: the main site in Yarmouth and the Digby Learning Centre.</div>
+
+			<div class="news">
+				<h4>Campus Cinnamon Bun Day</h4>
+				<div>On Wednesdays, you'll want to head to the cafeteria to try the campus's famous cinnamon buns.</div>
+				<img src="beach.JPG" width="400">
+				<div>Mavillette Beach, a short drive from campus.</div>
+			</div>
+
+			<table>
+				<tr>
+					<td>Month</td>
+					<td>Temperature</td>
+				</tr>
+				<tr>
+					<td>January</td>
+					<td>-10&deg;C</td>
+				</tr>
+				<tr>
+					<td>August</td>
+					<td>+20&deg;C</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="sidebar">
+			<div style="font-weight: bold;">Did you know?</div>
+			<div>Burridge hosts one of the Cube locations, a place to try out and develop new ideas.</div>
+		</div>
+
+		<div class="signup">
+			Email: <input type="email" name="email">
+			<div onclick="alert('Subscribed!')">Subscribe</div>
+		</div>
+
+		<div class="footer">
+			<div>372 Pleasant St, Yarmouth, NS</div>
+			<div>&copy; 2026 Nova Scotia Community College</div>
+		</div>
+
+	</body>
+</html>
