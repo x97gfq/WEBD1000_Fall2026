@@ -1,0 +1,11 @@
+{
+  "name": "class6-deck-build",
+  "private": true,
+  "description": "Builds wireframes.pptx and harbourside_ordering_wireframe.drawio",
+  "scripts": {
+    "build": "node wireframe.js && node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}
