@@ -1,0 +1,11 @@
+{
+  "name": "class8-deck-build",
+  "private": true,
+  "description": "Builds Class8_Intro_to_CSS.pptx (screenshots the examples with Microsoft Edge first)",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

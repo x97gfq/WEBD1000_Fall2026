@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 04 - Text and Fonts</title>
+		<style>
+			body {
+				/* A font stack: use the first one this computer has */
+				font-family: "Segoe UI", Arial, sans-serif;
+				font-size: 1rem;    /* the user's default size, usually 16px */
+				line-height: 1.6;   /* space between lines: 1.6 x font size */
+			}
+
+			h1 {
+				font-family: Georgia, "Times New Roman", serif;
+				font-size: 2.5rem;
+				font-weight: normal;
+			}
+
+			h2 {
+				font-size: 1.1rem;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+			}
+
+			.tagline {
+				font-style: italic;
+				text-align: center;
+			}
+
+			nav a {
+				text-decoration: none;   /* no underline */
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>Harbourside Fish &amp; Chips</h1>
+		<p class="tagline">Fresh from the wharf since 1987</p>
+
+		<nav>
+			<a href="#menu">Menu</a> |
+			<a href="#story">Our Story</a>
+		</nav>
+
+		<h2 id="story">Our Story</h2>
+		<p>We started with one fryer and a picnic table on the Yarmouth
+			waterfront. Today we still buy our haddock straight off the boats,
+			cut our fries by hand, and make our tartar sauce every morning.</p>
+
+	</body>
+</html>

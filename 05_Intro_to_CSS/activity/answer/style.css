@@ -1,0 +1,174 @@
+/* Harbourside Fish & Chips: style.css (ANSWER KEY)
+
+   Built up one activity at a time, so some selectors appear more than once.
+   That's fine: the browser combines them. In a real project you'd merge them. */
+
+
+/* ---------- Activity 1: Link it ---------- */
+body {
+	background-color: #F4F8FA;
+}
+
+
+/* ---------- Activity 2: Selectors ---------- */
+h1, h2 {
+	color: #12304A;
+}
+
+.price {
+	font-weight: bold;
+}
+
+.special {
+	background-color: #FBE9DF;
+}
+
+nav a {
+	color: #12304A;
+}
+
+
+/* ---------- Activity 3: Colour ---------- */
+header {
+	background-color: #12304A;
+	color: white;
+}
+
+/* More specific than "h1, h2", so the header's h1 is white */
+header h1 {
+	color: white;
+}
+
+/* White on navy: 13.6 : 1 */
+nav a {
+	color: white;
+}
+
+/* Dark orange on white: 5.5 : 1 (the logo orange #E97132 only gets 3.1 : 1) */
+.price {
+	color: #B5451B;
+}
+
+footer {
+	background-color: #262626;
+	color: #F2F2F2;
+}
+
+
+/* ---------- Activity 4: Text and fonts ---------- */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	line-height: 1.6;
+	color: #262626;
+}
+
+h1 {
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 2.2rem;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+nav a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+figcaption {
+	font-style: italic;
+	font-size: 0.9rem;
+	color: #595959;
+}
+
+
+/* ---------- Activity 5: The box model ---------- */
+
+/* * = every element. Width now includes padding and border */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+header,
+footer {
+	padding: 20px;
+}
+
+main {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/* Remove the bullets and indent from the nav list */
+nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* Sneak peek: display: inline puts the links side by side */
+nav li {
+	display: inline;
+	margin-right: 24px;
+}
+
+#menu article {
+	background-color: white;
+	border: 1px solid #D0D7DB;
+	border-radius: 8px;
+	padding: 4px 20px;
+	margin-bottom: 16px;
+}
+
+aside {
+	background-color: #E1E8EB;
+	padding: 4px 20px;
+	border-radius: 8px;
+}
+
+footer p {
+	margin: 4px 0;
+}
+
+
+/* ---------- Activity 6: Images ---------- */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 0 0 16px;
+}
+
+figure img {
+	display: block;
+	border-radius: 12px;
+}
+
+
+/* ---------- Activity 7: DevTools fixes ---------- */
+
+/* The mystery: after Activity 5, the Lobster Roll lost its highlight.
+   DevTools shows .special's background crossed out, because
+   "#menu article" has an id, and an id beats a class.
+   Fix: give the rule an id too, so it's at least as specific. */
+#menu .special {
+	background-color: #FBE9DF;
+	border-color: #E97132;
+}
+
+
+/* ---------- Make it yours ---------- */
+nav a:hover {
+	text-decoration: underline;
+}

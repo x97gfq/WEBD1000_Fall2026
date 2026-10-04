@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 07 - The Cascade</title>
+		<style>
+			/* Predict each line's colour, THEN check in DevTools */
+			body {
+				font-family: Arial, sans-serif;
+				color: gray;        /* inherited by everything inside body */
+			}
+
+			p {
+				color: green;
+			}
+
+			p {
+				color: blue;        /* same selector: the later rule wins */
+			}
+
+			.notice {
+				color: darkorange;  /* a class beats an element */
+			}
+
+			#special {
+				color: purple;      /* an id beats a class */
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>Who Wins?</h1>
+		<p>1. A plain paragraph.</p>
+		<p class="notice">2. A paragraph with a class.</p>
+		<p class="notice" id="special">3. A class and an id.</p>
+		<p class="notice" style="color: red;">4. A class and an inline style.</p>
+		<ul>
+			<li>5. A list item. There's no rule for li at all.</li>
+		</ul>
+
+	</body>
+</html>

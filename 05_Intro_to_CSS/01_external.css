@@ -1,0 +1,11 @@
+/* 01_external.css: linked from 01_three_ways_example.html
+   No <style> tags in a .css file, just rules. */
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #F4F8FA;
+}
+
+h1 {
+	color: navy;
+}

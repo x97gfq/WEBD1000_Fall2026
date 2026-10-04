@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 06 - Styling Images</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+			}
+
+			/* Never wider than its container, and keep the proportions */
+			img {
+				max-width: 100%;
+				height: auto;
+			}
+
+			.hero {
+				display: block;       /* so margin: auto can centre it */
+				width: 80%;
+				margin: 0 auto;
+				border-radius: 12px;  /* rounded corners */
+			}
+
+			figcaption {
+				text-align: center;
+				font-style: italic;
+				color: #595959;
+			}
+
+			/* A square crop, then a circle */
+			.round {
+				width: 150px;
+				height: 150px;
+				object-fit: cover;    /* fill the box, crop the extra */
+				border-radius: 50%;
+				border: 4px solid #E97132;
+			}
+		</style>
+	</head>
+	<body>
+
+		<figure>
+			<img class="hero" src="images/harbour.jpg" width="800" height="458"
+				alt="Rocky beach with calm water and a tree-lined point">
+			<figcaption>A short walk from the restaurant.</figcaption>
+		</figure>
+
+		<img class="round" src="images/harbour.jpg" width="800" height="458"
+			alt="The beach, cropped to a circle">
+
+	</body>
+</html>

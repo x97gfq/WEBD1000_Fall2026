@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 03 - Colour</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: white;    /* a colour name */
+			}
+
+			header {
+				background-color: #12304A;  /* hex: #RRGGBB */
+				color: rgb(255, 255, 255);  /* rgb: red, green, blue (0-255) */
+			}
+
+			/* Contrast: text vs. its background. WCAG AA needs 4.5 : 1 */
+			.fail {
+				color: #BBBBBB;   /* 1.9 : 1  fails */
+			}
+			.brand-orange {
+				color: #E97132;   /* 3.1 : 1  fails for normal text */
+			}
+			.pass {
+				color: #B5451B;   /* 5.5 : 1  passes */
+			}
+		</style>
+	</head>
+	<body>
+
+		<header>
+			<h1>Harbourside Fish &amp; Chips</h1>
+		</header>
+
+		<p class="fail">Light grey on white. Hard to read: 1.9 : 1.</p>
+		<p class="brand-orange">Our logo orange on white: 3.1 : 1. Still fails.</p>
+		<p class="pass">A darker orange on white: 5.5 : 1. Passes WCAG AA.</p>
+
+	</body>
+</html>

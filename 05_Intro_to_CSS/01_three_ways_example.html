@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 01 - Three Ways to Add CSS</title>
+
+		<!-- 3. External: a separate .css file. Best! -->
+		<link rel="stylesheet" href="01_external.css">
+
+		<!-- 2. Internal: a style block (this page only) -->
+		<style>
+			h2 {
+				color: teal;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- Styled by 01_external.css -->
+		<h1>Harbourside Fish &amp; Chips</h1>
+
+		<!-- Styled by the style block above -->
+		<h2>Fresh from the Wharf</h2>
+
+		<!-- 1. Inline: a style attribute on ONE element (avoid this) -->
+		<p style="color: darkorange;">Open 7 days a week.</p>
+
+		<p>Takeout and delivery.</p>
+
+	</body>
+</html>

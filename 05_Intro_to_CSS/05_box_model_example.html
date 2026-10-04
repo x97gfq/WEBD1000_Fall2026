@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 05 - The Box Model</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #E1E8EB;
+			}
+
+			main {
+				max-width: 700px;
+				margin: 0 auto;      /* auto left and right = centred */
+			}
+
+			.menu-item {
+				width: 300px;
+				padding: 20px;               /* space INSIDE the border */
+				border: 3px solid #1B5E82;   /* width, style, colour */
+				margin: 20px 0;              /* OUTSIDE: top/bottom, left/right */
+				background-color: white;
+			}
+
+			.border-box {
+				box-sizing: border-box;   /* width INCLUDES padding + border */
+			}
+		</style>
+	</head>
+	<body>
+
+		<main>
+			<h1>Both boxes say width: 300px</h1>
+
+			<article class="menu-item">
+				<h2>Haddock &amp; Chips</h2>
+				<p>300 + 20 + 20 + 3 + 3 = 346px wide.</p>
+			</article>
+
+			<article class="menu-item border-box">
+				<h2>Clam Strips</h2>
+				<p>border-box: exactly 300px wide.</p>
+			</article>
+		</main>
+
+	</body>
+</html>

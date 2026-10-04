@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 02 - Selectors</title>
+		<style>
+			/* Element: every <p> on the page */
+			p {
+				font-family: Arial, sans-serif;
+			}
+
+			/* Class (.): every element with class="price" */
+			.price {
+				font-weight: bold;
+				color: #B5451B;
+			}
+
+			/* ID (#): the ONE element with id="specials" */
+			#specials {
+				background-color: lightyellow;
+			}
+
+			/* Group (,): the same style for h1 AND h2 */
+			h1, h2 {
+				color: navy;
+			}
+
+			/* Descendant (space): only links INSIDE a nav */
+			nav a {
+				color: teal;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>Harbourside Fish &amp; Chips</h1>
+		<nav>
+			<a href="#menu">Menu</a>
+			<a href="#specials">Specials</a>
+		</nav>
+
+		<h2 id="menu">Menu</h2>
+		<p>Haddock &amp; Chips <span class="price">$16.99</span></p>
+		<p>Clam Strips <span class="price">$14.50</span></p>
+
+		<section id="specials">
+			<h2>Today's Special</h2>
+			<p>Lobster Roll <span class="price">$24.00</span></p>
+		</section>
+
+		<!-- Not in a nav, so this link keeps the default blue -->
+		<p>Questions? <a href="#contact">Contact us</a></p>
+
+	</body>
+</html>
