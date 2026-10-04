@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 05 - srcset and picture</title> 
+	</head> 
+	<body> 
+
+		<h1>Let the Browser Choose</h1>
+
+		<h2>srcset: same image, different sizes</h2>
+		<!-- The browser picks the smallest file that still looks sharp
+			on this screen. A phone downloads 13 KB instead of 134 KB -->
+		<img src="samples/beach_800.jpg"
+			srcset="samples/beach_400.jpg 400w,
+				samples/beach_800.jpg 800w,
+				samples/beach_original.jpg 1118w"
+			width="800" height="458"
+			alt="Rocky beach with calm water and a tree-lined point">
+
+		<h2>picture: same image, different formats</h2>
+		<!-- The browser uses the FIRST source it understands.
+			Old browsers skip them all and use the img -->
+		<picture>
+			<source srcset="samples/beach.avif" type="image/avif">
+			<source srcset="samples/beach.webp" type="image/webp">
+			<img src="samples/beach_q75.jpg" width="800" height="458"
+				alt="Rocky beach with calm water and a tree-lined point">
+		</picture>
+
+		<p>Which file did your browser pick? Right-click each image &rarr;
+			Open image in new tab, and look at the address bar.</p>
+
+	</body> 
+</html>

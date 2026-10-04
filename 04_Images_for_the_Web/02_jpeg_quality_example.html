@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 02 - JPEG Quality</title> 
+	</head> 
+	<body> 
+
+		<h1>How Low Can You Go?</h1>
+		<p>The same JPG saved at four quality settings.
+			Zoom in (Ctrl and +) and look at the rocks and the water.</p>
+
+		<figure>
+			<img src="samples/beach_q90.jpg" width="560" height="320"
+				alt="Beach photo saved at JPG quality 90">
+			<!-- Bigger than the original! Re-saving can't add back detail -->
+			<figcaption>Quality 90: about 140 KB</figcaption>
+		</figure>
+
+		<figure>
+			<img src="samples/beach_q75.jpg" width="560" height="320"
+				alt="Beach photo saved at JPG quality 75">
+			<!-- The sweet spot for most photos: 60 to 80 -->
+			<figcaption>Quality 75: about 92 KB</figcaption>
+		</figure>
+
+		<figure>
+			<img src="samples/beach_q50.jpg" width="560" height="320"
+				alt="Beach photo saved at JPG quality 50">
+			<figcaption>Quality 50: about 51 KB</figcaption>
+		</figure>
+
+		<figure>
+			<img src="samples/beach_q10.jpg" width="560" height="320"
+				alt="Beach photo saved at JPG quality 10, very blocky">
+			<!-- Lossy compression gone too far: 8 x 8 pixel blocks -->
+			<figcaption>Quality 10: about 12 KB (see the blocks?)</figcaption>
+		</figure>
+
+	</body> 
+</html>

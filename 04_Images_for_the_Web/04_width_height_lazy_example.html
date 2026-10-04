@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 04 - Width, Height and Lazy Loading</title> 
+	</head> 
+	<body> 
+
+		<h1>Harbourside Fish &amp; Chips</h1>
+
+		<!-- width and height: the browser saves the right amount of
+			space BEFORE the image downloads, so the page doesn't jump -->
+		<img src="samples/beach_800.jpg" width="800" height="458"
+			alt="Rocky beach with calm water and a tree-lined point">
+
+		<p>Fresh haddock, hand-cut fries, and a view of the water.</p>
+		<p>Scroll down to see our location.</p>
+
+		<!-- Lots of space so the next image starts off screen -->
+		<p style="height: 1500px;">&darr; Keep scrolling &darr;</p>
+
+		<!-- loading="lazy": don't download this until the user scrolls near it.
+			Never lazy-load the first big image at the top of the page -->
+		<img src="samples/beach_400.jpg" width="400" height="229" loading="lazy"
+			alt="The beach a short walk from the restaurant">
+
+		<p>Open DevTools &rarr; Network &rarr; Img, reload, then scroll.
+			Watch beach_400.jpg download only when you get near it.</p>
+
+	</body> 
+</html>

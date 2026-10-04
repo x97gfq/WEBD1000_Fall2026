@@ -1,0 +1,50 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 01 - Image Formats</title> 
+	</head> 
+	<body> 
+
+		<h1>One Photo, Six Files</h1>
+		<p>Same photo (1118 &times; 640 pixels), saved as different file types.
+			Can you see a difference? Check the file sizes in File Explorer.</p>
+
+		<!-- JPEG: lossy, millions of colours. The usual choice for photos -->
+		<figure>
+			<img src="samples/beach_q75.jpg" width="560" height="320"
+				alt="Rocky beach with calm water and a tree-lined point">
+			<figcaption>JPG, quality 75: about 92 KB</figcaption>
+		</figure>
+
+		<!-- PNG: lossless. Keeps every pixel, so photos get BIG -->
+		<figure>
+			<img src="samples/beach.png" width="560" height="320"
+				alt="Rocky beach with calm water and a tree-lined point">
+			<figcaption>PNG: about 978 KB (10&times; bigger, and it looks the same)</figcaption>
+		</figure>
+
+		<!-- GIF: only 256 colours. Look at the sky for colour bands -->
+		<figure>
+			<img src="samples/beach.gif" width="560" height="320"
+				alt="Rocky beach with calm water and a tree-lined point">
+			<figcaption>GIF, 256 colours: about 407 KB (look at the sky)</figcaption>
+		</figure>
+
+		<!-- WebP: modern. Works in every current browser -->
+		<figure>
+			<img src="samples/beach.webp" width="560" height="320"
+				alt="Rocky beach with calm water and a tree-lined point">
+			<figcaption>WebP, quality 75: about 91 KB</figcaption>
+		</figure>
+
+		<!-- AVIF: newest. Usually the smallest file for photos -->
+		<figure>
+			<img src="samples/beach.avif" width="560" height="320"
+				alt="Rocky beach with calm water and a tree-lined point">
+			<figcaption>AVIF, quality 50: about 69 KB</figcaption>
+		</figure>
+
+	</body> 
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "class7-deck-build",
+  "private": true,
+  "description": "Builds the sample images and Class7_Images_for_the_Web.pptx",
+  "scripts": {
+    "build": "node make_samples.js && node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0",
+    "sharp": "^0.33.0"
+  }
+}
