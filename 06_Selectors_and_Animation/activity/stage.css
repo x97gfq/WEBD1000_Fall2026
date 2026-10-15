@@ -1,0 +1,82 @@
+/* Animation Playground: stage.css
+   This file draws the stages and the objects. You don't need to change it.
+   Write YOUR animations in style.css.
+
+   Handy numbers:
+   - Every stage is 600px wide and 200px tall (inside the border).
+   - Every ball is 60px across.
+   - So a ball can move 540px right (600 - 60) and 140px down (200 - 60). */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: "Segoe UI", Arial, sans-serif;
+	background-color: #F4F8FA;
+	color: #262626;
+}
+
+header, footer {
+	background-color: #12304A;
+	color: white;
+	text-align: center;
+	padding: 16px;
+}
+
+header h1 {
+	margin: 0;
+}
+
+main {
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+h2 {
+	font-size: 1.1rem;
+	color: #12304A;
+	margin: 32px 0 8px;
+}
+
+/* ---------- The stages ---------- */
+.stage {
+	width: 600px;
+	height: 200px;
+	box-sizing: content-box;   /* 600 x 200 INSIDE the border */
+	background-color: white;
+	border: 2px solid #D0D7DB;
+	border-radius: 8px;
+	overflow: hidden;          /* anything that leaves the stage is hidden */
+}
+
+/* Puts the object in the middle of the stage */
+.centred {
+	display: grid;
+	place-items: center;
+}
+
+/* ---------- The objects ---------- */
+.ball {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-color: #E97132;
+}
+
+.box {
+	width: 80px;
+	height: 80px;
+	border-radius: 12px;
+	background-color: #A02B93;
+}
+
+/* A box with no size and four thick coloured borders = four triangles */
+.pinwheel {
+	width: 0;
+	height: 0;
+	border: 50px solid;
+	border-color: #E97132 #0F9ED5 #2E7D32 #A02B93;
+}

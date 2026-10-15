@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 02 - Structural Pseudo-classes</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			td, th {
+				padding: 8px 12px;
+				text-align: left;
+			}
+
+			/* Zebra stripes: every even row */
+			tr:nth-child(even) {
+				background-color: #E1E8EB;
+			}
+
+			/* The first row (the header row) */
+			tr:first-child {
+				background-color: #12304A;
+				color: white;
+			}
+
+			/* The last cell in each row */
+			td:last-child {
+				font-weight: bold;
+				color: #B5451B;
+			}
+
+			/* Every li EXCEPT the one with class="sold-out" */
+			li:not(.sold-out) {
+				color: #2E7D32;
+			}
+		</style>
+	</head>
+	<body>
+
+		<table>
+			<tr><th>Item</th><th>Size</th><th>Price</th></tr>
+			<tr><td>Haddock &amp; Chips</td><td>1 piece</td><td>$16.99</td></tr>
+			<tr><td>Haddock &amp; Chips</td><td>2 pieces</td><td>$21.99</td></tr>
+			<tr><td>Clam Strips</td><td>Regular</td><td>$14.50</td></tr>
+			<tr><td>Lobster Roll</td><td>Regular</td><td>$24.00</td></tr>
+		</table>
+
+		<h2>Desserts</h2>
+		<ul>
+			<li>Blueberry grunt</li>
+			<li class="sold-out">Apple crisp (sold out)</li>
+			<li>Ice cream</li>
+		</ul>
+
+	</body>
+</html>

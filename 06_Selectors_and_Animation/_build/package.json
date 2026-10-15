@@ -1,0 +1,11 @@
+{
+  "name": "class9-deck-build",
+  "private": true,
+  "description": "Builds Selectors_and_Animation.pptx (screenshots the examples with Microsoft Edge first)",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

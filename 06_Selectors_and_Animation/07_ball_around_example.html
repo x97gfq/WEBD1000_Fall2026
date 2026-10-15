@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 07 - A Ball Around the Browser</title>
+		<style>
+			body {
+				margin: 0;
+				overflow: hidden;   /* no scrollbars when the ball reaches the edge */
+			}
+
+			.ball {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;   /* a square with round corners = a circle */
+				background-color: #E97132;
+				/* name, duration, speed curve, how many times */
+				animation: around 4s linear infinite;
+			}
+
+			/* 100vw = the full browser width, 100vh = the full height */
+			@keyframes around {
+				0% {
+					transform: translate(0, 0);                   /* top left */
+				}
+				25% {
+					transform: translate(calc(100vw - 80px), 0);  /* top right */
+					background-color: #0F9ED5;
+				}
+				50% {
+					transform: translate(calc(100vw - 80px), calc(100vh - 80px));
+					background-color: #A02B93;                    /* bottom right */
+				}
+				75% {
+					transform: translate(0, calc(100vh - 80px));  /* bottom left */
+					background-color: #2E7D32;
+				}
+				100% {
+					transform: translate(0, 0);                   /* back home */
+				}
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="ball"></div>
+
+	</body>
+</html>

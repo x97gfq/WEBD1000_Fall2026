@@ -1,0 +1,72 @@
+/* Animation Playground: style.css (ANSWER KEY)
+
+   There's more than one right answer for every challenge.
+   If it moves, it's right! */
+
+
+/* ---------- Challenge 1: Roll ---------- */
+/* 600px stage - 60px ball = 540px */
+@keyframes roll {
+	from { transform: translateX(0); }
+	to   { transform: translateX(540px); }
+}
+
+#roll {
+	animation: roll 2s infinite;
+}
+
+
+/* ---------- Challenge 2: Ping-pong ---------- */
+/* The same roll keyframes! alternate = there, then back */
+#ping-pong {
+	animation: roll 1s infinite alternate;
+}
+
+
+/* ---------- Challenge 3: Pinwheel ---------- */
+/* 360deg = one full turn. linear = the same speed all the way round */
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to   { transform: rotate(360deg); }
+}
+
+#pinwheel {
+	animation: spin 2s linear infinite;
+}
+
+
+/* ---------- Challenge 4: Pulse ---------- */
+@keyframes pulse {
+	from { transform: scale(1);   background-color: #A02B93; }
+	to   { transform: scale(1.5); background-color: #E97132; }
+}
+
+#pulse {
+	animation: pulse 1s infinite alternate;
+}
+
+
+/* ---------- Bonus: Around the Block ---------- */
+/* Percentages are checkpoints: 540px across, 140px down */
+@keyframes around {
+	0%   { transform: translate(0, 0); }
+	25%  { transform: translate(540px, 0); }
+	50%  { transform: translate(540px, 140px); }
+	75%  { transform: translate(0, 140px); }
+	100% { transform: translate(0, 0); }
+}
+
+#around {
+	animation: around 4s linear infinite;
+}
+
+
+/* ---------- Make it yours ---------- */
+/* Example: a green ping-pong ball, and a pinwheel that spins backwards */
+#ping-pong {
+	background-color: #2E7D32;
+}
+
+#pinwheel:hover {
+	animation-direction: reverse;
+}

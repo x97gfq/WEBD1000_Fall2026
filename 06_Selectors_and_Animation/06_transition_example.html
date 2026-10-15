@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 06 - Transitions</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			.card {
+				width: 220px;
+				padding: 16px;
+				border: 1px solid #D0D7DB;
+				border-radius: 8px;
+				background-color: white;
+				/* WHAT to animate, HOW LONG, and the speed curve */
+				transition: transform 0.3s ease, background-color 0.3s ease;
+			}
+
+			/* The END state: the transition fills in the in-between */
+			.card:hover {
+				transform: translateY(-10px) scale(1.05);
+				background-color: #FBE9DF;
+			}
+
+			button {
+				font-size: 1rem;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 6px;
+				background-color: #12304A;
+				color: white;
+				transition: background-color 0.5s;
+			}
+
+			button:hover {
+				background-color: #B5451B;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- Hover over the card, then the button -->
+		<div class="card">
+			<h2>Lobster Roll</h2>
+			<p>Fresh lobster on a toasted bun.</p>
+			<button>Add to order</button>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 03 - Attribute Selectors</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+				line-height: 1.8;
+			}
+
+			/* [attr="value"]: an exact match */
+			input[type="email"] {
+				border: 2px solid #1B5E82;
+			}
+
+			/* ^= starts with: links that leave our site */
+			a[href^="https"] {
+				color: #A02B93;
+			}
+
+			/* $= ends with: links to PDF files */
+			a[href$=".pdf"] {
+				color: #B5451B;
+				font-weight: bold;
+			}
+
+			/* [attr]: has the attribute at all */
+			a[target] {
+				text-decoration: underline wavy;
+			}
+		</style>
+	</head>
+	<body>
+
+		<p><a href="#menu">Our menu</a> (a link on this page)</p>
+		<p><a href="https://novascotia.com">Visit Nova Scotia</a> (another site)</p>
+		<p><a href="menu.pdf">Printable menu</a> (a PDF)</p>
+		<p><a href="https://maps.google.com" target="_blank">Directions</a> (new tab)</p>
+
+		<label>Name <input type="text"></label>
+		<label>Email <input type="email"></label>
+
+	</body>
+</html>

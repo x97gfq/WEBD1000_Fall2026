@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 05 - Pseudo-elements</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+				line-height: 1.6;
+			}
+
+			/* A pseudo-element (::) styles PART of an element */
+			.intro::first-letter {
+				font-family: Georgia, serif;
+				font-size: 2.5rem;
+				color: #B5451B;
+			}
+
+			/* ::before adds content at the start (CSS only, not in the HTML) */
+			.new::before {
+				content: "NEW ";
+				background-color: #E97132;
+				color: #1E1E1E;
+				font-size: 0.75rem;
+				font-weight: bold;
+				padding: 2px 6px;
+				border-radius: 4px;
+			}
+
+			/* ::after adds content at the end */
+			.price::after {
+				content: " + tax";
+				color: #595959;
+				font-size: 0.85rem;
+			}
+
+			/* Text the user highlights with the mouse */
+			::selection {
+				background-color: #12304A;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+
+		<p class="intro">Welcome to Harbourside, where the haddock comes straight off the boat.</p>
+		<h2 class="new">Lobster Poutine</h2>
+		<p class="price">$18.50</p>
+
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 01 - Pseudo-classes</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			/* A pseudo-class (:) styles an element in a certain STATE */
+			a:link    { color: #1B5E82; }   /* not visited yet */
+			a:visited { color: #A02B93; }   /* already visited */
+
+			/* Mouse over it */
+			a:hover {
+				background-color: #FBE9DF;
+			}
+
+			/* Tabbed to with the keyboard: never remove this! */
+			a:focus-visible,
+			button:focus-visible {
+				outline: 3px solid #E97132;
+				outline-offset: 3px;
+			}
+
+			button {
+				font-size: 1rem;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 6px;
+				background-color: #12304A;
+				color: white;
+			}
+
+			button:hover  { background-color: #1B5E82; }
+			button:active { background-color: #B5451B; } /* while clicking */
+		</style>
+	</head>
+	<body>
+
+		<h1>Order Online</h1>
+		<p>
+			<a href="#menu">See the menu</a> or
+			<a href="#hours">check our hours</a>.
+		</p>
+
+		<!-- Hover, click and hold, then press Tab -->
+		<button>Order now</button>
+		<button>Call us</button>
+
+	</body>
+</html>

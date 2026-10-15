@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 04 - Combinators</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			/* space = descendant: ANY p inside article (any depth) */
+			article p {
+				color: #1B5E82;
+			}
+
+			/* > = child: only p's DIRECTLY inside article */
+			article > p {
+				border-left: 4px solid #1B5E82;
+				padding-left: 8px;
+			}
+
+			/* + = adjacent sibling: the p RIGHT AFTER an h2 */
+			h2 + p {
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			/* ~ = general sibling: EVERY p after an h3 */
+			h3 ~ p {
+				color: #B5451B;
+			}
+		</style>
+	</head>
+	<body>
+
+		<article>
+			<h2>Lobster Roll</h2>
+			<p>Fresh lobster on a toasted bun.</p>
+			<p>Served with a side salad.</p>
+			<div>
+				<p>Nested in a div (not a direct child).</p>
+			</div>
+		</article>
+
+		<h3>Allergies</h3>
+		<p>Ask us about gluten-free batter.</p>
+		<p>Our fries are cooked in peanut oil.</p>
+
+	</body>
+</html>

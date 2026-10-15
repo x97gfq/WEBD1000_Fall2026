@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 08 - The Timing Function Race</title>
+		<style>
+			body {
+				font-family: Consolas, monospace;
+				overflow: hidden;
+			}
+
+			p {
+				margin: 10px 0 2px;
+			}
+
+			.ball {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				/* Same race for everyone: 3 seconds, there and back, forever */
+				animation: race 3s infinite alternate;
+			}
+
+			@keyframes race {
+				from { transform: translateX(0); }
+				to   { transform: translateX(calc(100vw - 70px)); }
+			}
+
+			/* Only the speed curve is different. Who wins? */
+			.linear      { animation-timing-function: linear; }
+			.ease        { animation-timing-function: ease; }
+			.ease-in     { animation-timing-function: ease-in; }
+			.ease-out    { animation-timing-function: ease-out; }
+			.ease-in-out { animation-timing-function: ease-in-out; }
+			.steps       { animation-timing-function: steps(5); }
+
+			/* A colour for each runner */
+			.linear      { background-color: #E97132; }
+			.ease        { background-color: #0F9ED5; }
+			.ease-in     { background-color: #A02B93; }
+			.ease-out    { background-color: #2E7D32; }
+			.ease-in-out { background-color: #12304A; }
+			.steps       { background-color: #C62828; }
+		</style>
+	</head>
+	<body>
+
+		<p>linear</p>      <div class="ball linear"></div>
+		<p>ease</p>        <div class="ball ease"></div>
+		<p>ease-in</p>     <div class="ball ease-in"></div>
+		<p>ease-out</p>    <div class="ball ease-out"></div>
+		<p>ease-in-out</p> <div class="ball ease-in-out"></div>
+		<p>steps(5)</p>    <div class="ball steps"></div>
+
+	</body>
+</html>
