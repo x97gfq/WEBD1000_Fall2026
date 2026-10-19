@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 07 - Zebra Stripes</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			caption {
+				font-weight: bold;
+				text-align: left;
+				padding-bottom: 8px;
+			}
+
+			/* Lines between rows only: cleaner than a full grid */
+			th, td {
+				border-bottom: 1px solid #D0D7DB;
+				padding: 8px 12px;
+				text-align: left;
+			}
+
+			thead th {
+				background-color: #12304A;
+				color: white;
+			}
+
+			/* tbody: so the header row isn't counted */
+			tbody tr:nth-child(even) {
+				background-color: #E1E8EB;
+			}
+
+			/* Helps your eye follow a row across */
+			tbody tr:hover {
+				background-color: #FBE9DF;
+			}
+		</style>
+	</head>
+	<body>
+
+		<table>
+			<caption>Fresh Fish Prices</caption>
+			<thead>
+				<tr>
+					<th scope="col">Fish</th>
+					<th scope="col">Caught in</th>
+					<th scope="col">Price / lb</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Haddock</th>
+					<td>Yarmouth</td>
+					<td>$11.99</td>
+				</tr>
+				<tr>
+					<th scope="row">Halibut</th>
+					<td>Digby</td>
+					<td>$24.50</td>
+				</tr>
+				<tr>
+					<th scope="row">Scallops</th>
+					<td>Digby</td>
+					<td>$29.99</td>
+				</tr>
+				<tr>
+					<th scope="row">Lobster (live)</th>
+					<td>Lobster Bay</td>
+					<td>$15.99</td>
+				</tr>
+				<tr>
+					<th scope="row">Mussels</th>
+					<td>Lunenburg</td>
+					<td>$5.49</td>
+				</tr>
+				<tr>
+					<th scope="row">Cod</th>
+					<td>Yarmouth</td>
+					<td>$10.99</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</body>
+</html>

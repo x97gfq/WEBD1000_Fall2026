@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 08 - A Responsive Table</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			/* The wrapper scrolls sideways, not the whole page */
+			.table-wrap {
+				overflow-x: auto;
+			}
+
+			table {
+				min-width: 700px;
+				border-collapse: collapse;
+			}
+
+			th, td {
+				border-bottom: 1px solid #D0D7DB;
+				padding: 8px 12px;
+				text-align: left;
+			}
+
+			thead th {
+				background-color: #12304A;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>Weekly Specials</h1>
+		<p>On a phone, swipe the table sideways.</p>
+
+		<!-- role, aria-label and tabindex: keyboard users can scroll it too -->
+		<div class="table-wrap" role="region" aria-label="Weekly specials" tabindex="0">
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">Meal</th>
+						<th scope="col">Monday</th>
+						<th scope="col">Tuesday</th>
+						<th scope="col">Wednesday</th>
+						<th scope="col">Thursday</th>
+						<th scope="col">Friday</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">Lunch</th>
+						<td>Fish tacos</td>
+						<td>Chowder</td>
+						<td>Clam strips</td>
+						<td>Fish burger</td>
+						<td>Lobster roll</td>
+					</tr>
+					<tr>
+						<th scope="row">Dinner</th>
+						<td>Haddock</td>
+						<td>Scallops</td>
+						<td>Halibut</td>
+						<td>Mussels</td>
+						<td>Fish fry</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 02 - A Horizontal Menu</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+				margin: 0;
+			}
+
+			nav {
+				background-color: #12304A;
+				padding: 0 20px;
+			}
+
+			/* 1. Remove the bullets and the indent */
+			nav ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+
+				/* 2. Put the items side by side (a sneak peek at Flexbox) */
+				display: flex;
+				gap: 4px;
+			}
+
+			/* 3. Make the whole link a big box that's easy to click */
+			nav a {
+				display: block;
+				padding: 14px 18px;
+				color: white;
+				text-decoration: none;
+				font-weight: bold;
+			}
+
+			nav a:hover,
+			nav a:focus-visible {
+				background-color: #1B5E82;
+			}
+
+			/* 4. Show which page you're on */
+			nav a[aria-current="page"] {
+				border-bottom: 4px solid #E97132;
+			}
+		</style>
+	</head>
+	<body>
+
+		<nav aria-label="Main">
+			<ul>
+				<li><a href="#home" aria-current="page">Home</a></li>
+				<li><a href="#menu">Menu</a></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+		</nav>
+
+	</body>
+</html>

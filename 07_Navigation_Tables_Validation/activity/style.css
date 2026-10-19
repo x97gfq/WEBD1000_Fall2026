@@ -1,0 +1,126 @@
+/* Harbourside Fish & Chips: style.css
+   Your name: ____________
+
+   The top half is our finished CSS from Class 8, tidied up.
+   Today you add to the bottom half, under a heading for each Try It.
+   (Try Its 5 and 7 happen only in index.html. Try It 8 checks this file.) */
+
+
+/* ========== From Class 8 ========== */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: #F4F8FA;
+	color: #262626;
+	font-family: "Segoe UI", Arial, sans-serif;
+	line-height: 1.6;
+}
+
+header {
+	background-color: #12304A;
+	color: white;
+	padding: 20px 20px 0;
+}
+
+h1, h2 {
+	color: #12304A;
+}
+
+header h1 {
+	color: white;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 2.2rem;
+	font-weight: normal;
+	margin: 8px 0 12px;
+}
+
+h2 {
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+main {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 0 0 16px;
+}
+
+figure img {
+	display: block;
+	border-radius: 12px;
+}
+
+figcaption {
+	font-style: italic;
+	font-size: 0.9rem;
+	colour: #595959;
+}
+
+.price {
+	font-weight: bold
+	color: #B5451B;
+}
+
+#menu article {
+	background-color: white;
+	border: 1px solid #D0D7DB;
+	border-radius: 8px;
+	padding: 4px 20px;
+	margin-bottom: 16px;
+}
+
+#menu .special {
+	background-color: #FBE9DF;
+	border-color: #E97132;
+}
+
+aside {
+	background-color: #E1E8EB;
+	padding: 4px 20px 20px;
+	border-radius: 8px;
+}
+
+footer {
+	background-color: #262626;
+	color: #F2F2F2;
+	padding: 20px;
+}
+
+footer p {
+	margin: 4px 0;
+}
+
+
+/* ========== Class 10: today's work ========== */
+
+/* ---------- Try It 1: A horizontal nav ---------- */
+
+
+/* ---------- Try It 2: Style the links ---------- */
+
+
+/* ---------- Try It 3: A dropdown ---------- */
+
+
+/* ---------- Try It 4: Make the dropdown readable ---------- */
+
+
+/* ---------- Try It 6: Style the hours table ---------- */
+
+
+/* ---------- Make it yours ---------- */
+

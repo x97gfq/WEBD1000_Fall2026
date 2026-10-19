@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 04 - A Dropdown Menu</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+				margin: 0;
+			}
+
+			nav {
+				background-color: #12304A;
+				padding: 0 20px;
+			}
+
+			nav ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+			}
+
+			nav a {
+				display: block;
+				padding: 14px 18px;
+				color: white;
+				text-decoration: none;
+				font-weight: bold;
+			}
+
+			/* 1. The dropdown is placed against its own li */
+			nav li {
+				position: relative;
+			}
+
+			/* 2. Hide the inner list, and float it above the page */
+			nav ul ul {
+				display: none;
+				position: absolute;
+				top: 100%;
+				left: 0;
+				min-width: 200px;
+				background-color: white;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+			}
+
+			/* 3. Show it on hover, or on keyboard focus inside */
+			nav li:hover > ul,
+			nav li:focus-within > ul {
+				display: block;
+			}
+
+			nav ul ul a {
+				color: #12304A;
+				font-weight: normal;
+			}
+
+			nav a:hover,
+			nav a:focus-visible {
+				background-color: #1B5E82;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+
+		<nav aria-label="Main">
+			<ul>
+				<li><a href="#home">Home</a></li>
+				<li>
+					<a href="#menu">Menu ▾</a>
+					<!-- A list inside a list item -->
+					<ul>
+						<li><a href="#fish">Fish &amp; Chips</a></li>
+						<li><a href="#lobster">Lobster</a></li>
+						<li><a href="#kids">Kids' Menu</a></li>
+					</ul>
+				</li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+		</nav>
+
+		<main>
+			<p>The dropdown floats over this text instead of pushing it down.</p>
+		</main>
+
+	</body>
+</html>

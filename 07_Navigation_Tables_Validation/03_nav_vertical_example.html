@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 03 - A Vertical Menu</title>
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			/* A list is already vertical: we just style it */
+			nav {
+				width: 220px;
+			}
+
+			nav ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			nav li {
+				margin-bottom: 4px;
+			}
+
+			/* display: block = the whole row is clickable, not just the words */
+			nav a {
+				display: block;
+				padding: 10px 14px;
+				background-color: #E1E8EB;
+				color: #12304A;
+				text-decoration: none;
+				border-left: 4px solid transparent;
+				border-radius: 4px;
+			}
+
+			nav a:hover,
+			nav a:focus-visible {
+				background-color: #FBE9DF;
+				border-left-color: #E97132;
+			}
+
+			nav a[aria-current="page"] {
+				background-color: #12304A;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+
+		<nav aria-label="Menu sections">
+			<h1>Our Menu</h1>
+			<ul>
+				<li><a href="#starters">Starters</a></li>
+				<li><a href="#fish" aria-current="page">Fish &amp; Chips</a></li>
+				<li><a href="#lobster">Lobster</a></li>
+				<li><a href="#kids">Kids' Menu</a></li>
+				<li><a href="#drinks">Drinks</a></li>
+			</ul>
+		</nav>
+
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 11 - CSS That Fails Quietly</title>
+		<!-- This CSS has 4 errors. The browser just skips them! -->
+		<style>
+			body {
+				font-family: "Segoe UI", Arial, sans-serif;
+			}
+
+			h1 {
+				colour: #12304A;
+			}
+
+			p {
+				font-size: 18;
+			}
+
+			.price {
+				font-weight: bold
+				color: #B5451B;
+			}
+
+			.note {
+				text-align: middle;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>Today's Specials</h1>
+		<p>Fresh lobster on a toasted bun.</p>
+		<p class="price">$24.00</p>
+		<p class="note">While supplies last!</p>
+
+	</body>
+</html>
