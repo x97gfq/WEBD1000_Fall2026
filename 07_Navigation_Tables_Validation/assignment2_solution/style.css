@@ -1,0 +1,29 @@
+/* One stylesheet, linked from index.html and portfolio.html */
+
+body {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 0 16px;
+	font-family: "Segoe UI", Arial, sans-serif;
+	line-height: 1.6;
+	color: #262626;
+}
+
+h1, h2 { color: #12304A; }
+
+nav ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	gap: 20px;
+}
+
+nav a[aria-current="page"] { font-weight: bold; }
+
+/* Responsive photos: fit any screen, never stretched */
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 16px;
+}

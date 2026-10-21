@@ -1,7 +1,7 @@
 {
   "name": "class10-deck-build",
   "private": true,
-  "description": "Builds Navigation_Tables_Validation.pptx (screenshots the examples with Microsoft Edge first)",
+  "description": "Builds Navigation_and_Tables.pptx and Validation_and_Assignment_2.pptx (screenshots the examples with Microsoft Edge first)",
   "scripts": {
     "build": "node build_deck.js"
   },
