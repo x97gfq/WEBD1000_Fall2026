@@ -1,0 +1,45 @@
+/* Example 13: grid-template-areas (Example 12, fixed) */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.3rem;
+	margin-top: 0;
+}
+
+.grid-item {
+	padding: 12px;
+	background-color: #E1E8EB;
+	border: 2px solid #12304A;
+	font-weight: bold;
+}
+
+/* 1. Draw the layout: one string per row */
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-areas:
+		"header header header"
+		"nav    main   aside"
+		"footer footer footer";
+	gap: 10px;
+}
+
+/* 2. Put each part in its area */
+header { grid-area: header; }
+nav    { grid-area: nav; }
+main   { grid-area: main; }
+aside  { grid-area: aside; }
+footer { grid-area: footer; }
+
+/* Flexbox inside a grid item: the links stacked */
+nav {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}

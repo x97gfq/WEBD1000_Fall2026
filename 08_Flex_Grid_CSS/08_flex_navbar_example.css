@@ -1,0 +1,61 @@
+/* Example 08: A Flexbox header */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 0;
+	color: #262626;
+}
+
+main {
+	padding: 0 24px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+/* 1. Three items in a row, lined up down the middle */
+.site-header {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 12px 24px;
+	background-color: #12304A;
+}
+
+/* 2. An auto margin soaks up ALL the free space:
+      the nav (and the button) go right */
+.site-header nav {
+	margin-left: auto;
+}
+
+/* 3. Flex inside flex: the links in a row */
+.site-header ul {
+	display: flex;
+	gap: 4px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.site-header a {
+	display: block;
+	padding: 8px 12px;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.site-header .logo {
+	padding-left: 0;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 1.5rem;
+	font-weight: normal;
+}
+
+.site-header .button {
+	border-radius: 6px;
+	background-color: #F4A06B;
+	color: #12304A;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 10 - Grid Columns</title>
+		<link rel="stylesheet" href="10_grid_columns_example.css">
+	</head>
+	<body>
+
+		<h1>Example 10: display: grid and grid-template-columns</h1>
+
+		<h2>1. <code>150px 150px 150px</code>: three fixed columns</h2>
+		<div class="grid fixed">
+			<div class="item">1</div>
+			<div class="item">2</div>
+			<div class="item">3</div>
+			<div class="item">4</div>
+			<div class="item">5</div>
+		</div>
+
+		<h2>2. <code>1fr 2fr 1fr</code>: shares of the space (the middle gets two)</h2>
+		<div class="grid shares">
+			<div class="item">1fr</div>
+			<div class="item">2fr</div>
+			<div class="item">1fr</div>
+			<div class="item">4</div>
+			<div class="item">5</div>
+		</div>
+
+		<h2>3. <code>repeat(4, 1fr)</code>: four equal columns</h2>
+		<div class="grid four">
+			<div class="item">1</div>
+			<div class="item">2</div>
+			<div class="item">3</div>
+			<div class="item">4</div>
+			<div class="item">5</div>
+		</div>
+
+	</body>
+</html>

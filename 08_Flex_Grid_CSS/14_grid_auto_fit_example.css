@@ -1,0 +1,35 @@
+/* Example 14: a responsive grid with auto-fit */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+/* As many 160px+ columns as fit.
+   The browser does the maths */
+.gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 12px;
+}
+
+.tile {
+	padding: 40px 10px;
+	border-radius: 8px;
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Every second tile a different blue (a Class 9 selector) */
+.tile:nth-child(even) {
+	background-color: #1B5E82;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Flexbox Playground</title>
+		<link rel="stylesheet" href="playground.css">
+	</head>
+	<body>
+
+		<header>
+			<h1>Flexbox Playground</h1>
+			<p>Change a value and watch the boxes move. The code box shows the CSS you would write.</p>
+		</header>
+
+		<main class="playground">
+			<form class="controls">
+				<fieldset data-selector=".container">
+					<legend>The container (the parent)</legend>
+					<label>display
+						<select data-prop="display">
+							<option>flex</option>
+							<option>block</option>
+						</select>
+					</label>
+					<label>flex-direction
+						<select data-prop="flex-direction" data-default="row">
+							<option>row</option>
+							<option>row-reverse</option>
+							<option>column</option>
+							<option>column-reverse</option>
+						</select>
+					</label>
+					<label>justify-content
+						<select data-prop="justify-content" data-default="flex-start">
+							<option>flex-start</option>
+							<option>center</option>
+							<option>flex-end</option>
+							<option>space-between</option>
+							<option>space-around</option>
+							<option>space-evenly</option>
+						</select>
+					</label>
+					<label>align-items
+						<select data-prop="align-items" data-default="stretch">
+							<option>stretch</option>
+							<option>flex-start</option>
+							<option>center</option>
+							<option>flex-end</option>
+							<option>baseline</option>
+						</select>
+					</label>
+					<label>flex-wrap
+						<select data-prop="flex-wrap" data-default="nowrap">
+							<option>nowrap</option>
+							<option>wrap</option>
+						</select>
+					</label>
+					<label>gap
+						<select data-prop="gap" data-default="0">
+							<option>0</option>
+							<option>8px</option>
+							<option>16px</option>
+							<option>32px</option>
+						</select>
+					</label>
+				</fieldset>
+
+				<fieldset data-selector=".item:nth-child(2)">
+					<legend>Item 2 (the orange one)</legend>
+					<label>flex
+						<select data-prop="flex" data-default="0 1 auto">
+							<option>0 1 auto</option>
+							<option>1</option>
+							<option>2</option>
+							<option>0 0 200px</option>
+						</select>
+					</label>
+					<label>order
+						<select data-prop="order" data-default="0">
+							<option>0</option>
+							<option>-1</option>
+							<option>1</option>
+							<option>10</option>
+						</select>
+					</label>
+					<label>align-self
+						<select data-prop="align-self" data-default="auto">
+							<option>auto</option>
+							<option>flex-start</option>
+							<option>center</option>
+							<option>flex-end</option>
+							<option>stretch</option>
+						</select>
+					</label>
+				</fieldset>
+
+				<p class="buttons">
+					<button type="button" class="add">Add an item</button>
+					<button type="button" class="remove">Remove one</button>
+					<button type="reset">Reset</button>
+				</p>
+			</form>
+
+			<div class="stage">
+				<div class="container">
+					<div class="item">1</div>
+					<div class="item">2</div>
+					<div class="item">3<br>three</div>
+					<div class="item">4</div>
+					<div class="item">5</div>
+				</div>
+			</div>
+
+			<pre class="code"><code></code></pre>
+		</main>
+
+		<script src="playground.js"></script>
+	</body>
+</html>

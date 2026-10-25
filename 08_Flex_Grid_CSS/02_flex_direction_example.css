@@ -1,0 +1,65 @@
+/* Example 02: flex-direction */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 1rem;
+	margin: 0 0 6px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+/* The four demos sit side by side (with flexbox, of course) */
+.demos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+}
+
+.demos section {
+	width: 200px;
+}
+
+.container {
+	display: flex;
+	gap: 6px;
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 6px;
+}
+
+.item {
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	padding: 10px 16px;
+}
+
+/* The only difference between the four containers */
+.row {
+	flex-direction: row;
+}
+
+.row-reverse {
+	flex-direction: row-reverse;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.column-reverse {
+	flex-direction: column-reverse;
+}

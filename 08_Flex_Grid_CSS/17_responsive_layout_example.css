@@ -1,0 +1,93 @@
+/* Example 17: a responsive layout (grid + flexbox + float) */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 12px;
+	color: #262626;
+	line-height: 1.5;
+}
+
+h1 {
+	font-size: 1.3rem;
+	margin-top: 0;
+	color: #12304A;
+}
+
+header, footer {
+	padding: 12px;
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+}
+
+nav, aside {
+	padding: 8px;
+	background-color: #E1E8EB;
+}
+
+main {
+	display: flow-root; /* contains the floated photo */
+	padding: 12px;
+	border: 1px solid #D0D7DB;
+}
+
+nav a {
+	color: #12304A;
+	font-weight: bold;
+}
+
+.photo {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+/* 1. Phones first: one column, in reading order */
+.page {
+	display: grid;
+	gap: 10px;
+	grid-template-areas:
+		"header"
+		"nav"
+		"main"
+		"aside"
+		"footer";
+}
+
+header { grid-area: header; }
+nav    { grid-area: nav; }
+main   { grid-area: main; }
+aside  { grid-area: aside; }
+footer { grid-area: footer; }
+
+/* 2. Flexbox: the links in a row that wraps */
+nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* 3. Wider than 700px: three columns, links stacked, photo floated */
+@media (min-width: 700px) {
+	.page {
+		grid-template-columns: 160px 1fr 180px;
+		grid-template-areas:
+			"header header header"
+			"nav    main   aside"
+			"footer footer footer";
+	}
+
+	nav ul {
+		flex-direction: column;
+	}
+
+	.photo {
+		float: right;
+		width: 45%;
+		margin: 0 0 8px 16px;
+	}
+}

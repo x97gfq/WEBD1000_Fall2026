@@ -1,0 +1,55 @@
+/* Example 09: Flexbox cards */
+
+/* Page basics */
+* {
+	box-sizing: border-box; /* so 200px includes the padding and border */
+}
+
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	background-color: #F4F8FA;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+	color: #12304A;
+}
+
+/* 1. The cards side by side, wrapping onto new lines */
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+/* 2. Grow, shrink, start at 200px.
+      Each card is ALSO a flex column */
+.card {
+	flex: 1 1 200px;
+	display: flex;
+	flex-direction: column;
+	padding: 0 16px 16px;
+	border: 1px solid #D0D7DB;
+	border-radius: 8px;
+	background-color: white;
+}
+
+.card h2 {
+	font-size: 1.1rem;
+	color: #12304A;
+}
+
+/* 3. An auto margin pushes the button down */
+.card .button {
+	margin-top: auto;
+	padding: 8px;
+	border-radius: 6px;
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+}

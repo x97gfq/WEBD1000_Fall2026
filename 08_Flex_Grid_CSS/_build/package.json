@@ -1,0 +1,11 @@
+{
+  "name": "week8-deck-build",
+  "private": true,
+  "description": "Builds Flexbox.pptx (Week 8, Class 1) and Grid_and_Float.pptx (Week 8, Class 2); screenshots the examples with Microsoft Edge first",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

@@ -1,0 +1,66 @@
+/* Example 07: sizing items with flex, and order */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 0.95rem;
+	margin: 16px 0 6px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+.container {
+	display: flex;
+	gap: 8px;
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 6px;
+}
+
+.item {
+	padding: 12px;
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* 1. flex: 1 = one share each */
+.equal .item,
+.double .item {
+	flex: 1;
+}
+
+/* 2. Two shares: twice as wide as the others */
+.double .big {
+	flex: 2;
+	background-color: #B5451B;
+}
+
+/* 3. flex: grow shrink basis. Always 160px */
+.sidebar {
+	flex: 0 0 160px;
+	background-color: #1B5E82;
+}
+
+.main {
+	flex: 1;
+}
+
+/* 4. Items start at order: 0. Lower goes first */
+.first {
+	order: -1;
+	background-color: #B5451B;
+}

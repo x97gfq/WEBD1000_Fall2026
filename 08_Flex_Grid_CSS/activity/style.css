@@ -1,0 +1,231 @@
+/* Harbourside Fish & Chips: style.css (Harbourside, Part 3)
+
+   The top half is our finished CSS from Classes 8 and 10, tidied up.
+   This week you add to the bottom half, under a heading for each Try It. */
+
+
+/* ========== From Classes 8 and 10 ========== */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: #F4F8FA;
+	color: #262626;
+	font-family: "Segoe UI", Arial, sans-serif;
+	line-height: 1.6;
+}
+
+header {
+	background-color: #12304A;
+	color: white;
+	padding: 20px 20px 0;
+}
+
+h1, h2 {
+	color: #12304A;
+}
+
+header h1 {
+	color: white;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 2.2rem;
+	font-weight: normal;
+	margin: 8px 0 12px;
+}
+
+h2 {
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+main {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 0 0 16px;
+}
+
+figure img {
+	display: block;
+	border-radius: 12px;
+}
+
+figcaption {
+	font-style: italic;
+	font-size: 0.9rem;
+	color: #595959;
+}
+
+.price {
+	font-weight: bold;
+	color: #B5451B;
+}
+
+#menu article {
+	background-color: white;
+	border: 1px solid #D0D7DB;
+	border-radius: 8px;
+	padding: 4px 20px;
+	margin-bottom: 16px;
+}
+
+#menu .special {
+	background-color: #FBE9DF;
+	border-color: #E97132;
+}
+
+aside {
+	background-color: #E1E8EB;
+	padding: 4px 20px 20px;
+	border-radius: 8px;
+}
+
+footer {
+	background-color: #262626;
+	color: #F2F2F2;
+	padding: 20px;
+}
+
+footer p {
+	margin: 4px 0;
+}
+
+.small {
+	font-size: 0.85rem;
+}
+
+/* The nav and its dropdown */
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	gap: 4px;
+}
+
+nav a {
+	display: block;
+	padding: 12px 16px;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+nav a:hover,
+nav a:focus-visible {
+	background-color: #1B5E82;
+}
+
+nav a[aria-current="page"] {
+	border-bottom: 4px solid #E97132;
+}
+
+nav li {
+	position: relative;
+}
+
+nav ul ul {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	min-width: 220px;
+	background-color: white;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+nav li:hover > ul,
+nav li:focus-within > ul {
+	display: block;
+}
+
+nav ul ul a {
+	color: #12304A;
+	font-weight: normal;
+}
+
+nav ul ul a:hover,
+nav ul ul a:focus-visible {
+	background-color: #FBE9DF;
+}
+
+/* The hours table */
+.table-wrap {
+	overflow-x: auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+caption {
+	font-weight: bold;
+	text-align: left;
+}
+
+th, td {
+	padding: 8px 12px;
+	border-bottom: 1px solid #D0D7DB;
+	text-align: left;
+}
+
+thead th {
+	background-color: #12304A;
+	color: white;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #E9EFF2;
+}
+
+
+/* ========== Week 8, Class 1: Flexbox ========== */
+
+/* ---------- Try It 1: The header ---------- */
+
+
+
+/* ---------- Try It 2: Menu cards side by side ---------- */
+
+
+
+/* ---------- Try It 3: Line up the prices ---------- */
+
+
+
+/* ---------- Try It 4: The footer, and today's special first ---------- */
+
+
+
+
+/* ========== Week 8, Class 2: Grid and float ========== */
+
+/* ---------- Try It 5: A page layout with grid ---------- */
+
+
+
+/* ---------- Try It 6: Menu cards with grid ---------- */
+
+
+
+/* ---------- Try It 7: Float the photo ---------- */
+
+
+
+/* ---------- Try It 8: On a phone (keep this one LAST in the file) ---------- */
+
+

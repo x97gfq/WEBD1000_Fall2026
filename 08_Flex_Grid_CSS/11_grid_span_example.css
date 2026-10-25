@@ -1,0 +1,54 @@
+/* Example 11: spanning rows and columns */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+/* Four columns. Every row is 64px tall */
+.grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: 64px;
+	gap: 8px;
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 6px;
+}
+
+.item {
+	padding: 8px;
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+}
+
+/* span 2 = two tracks, from wherever it lands */
+.a {
+	grid-column: span 2;
+	background-color: #B5451B;
+}
+
+.c {
+	grid-row: span 2;
+	background-color: #1B5E82;
+}
+
+/* LINES, not columns: line 2 to 4 = two columns */
+.e {
+	grid-column: 2 / 4;
+	background-color: #B5451B;
+}
+
+/* -1 is the last line, so 1 / -1 is the full width */
+.f {
+	grid-column: 1 / -1;
+	background-color: #1B5E82;
+}

@@ -1,0 +1,65 @@
+/* Example 03: justify-content */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 0.95rem;
+	margin: 12px 0 4px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+.container {
+	display: flex;
+	gap: 6px;
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 4px;
+}
+
+.item {
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	padding: 6px 18px;
+}
+
+/* Where does the spare space on the main axis go? */
+.start {
+	justify-content: flex-start;
+}
+
+.center {
+	justify-content: center;
+}
+
+.end {
+	justify-content: flex-end;
+}
+
+/* First and last items touch the edges */
+.between {
+	justify-content: space-between;
+}
+
+/* The same space around each item (half at the ends) */
+.around {
+	justify-content: space-around;
+}
+
+/* Every gap is the same, the ends too */
+.evenly {
+	justify-content: space-evenly;
+}

@@ -1,0 +1,78 @@
+/* Example 04: align-items */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 0.95rem;
+	margin: 0 0 6px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+/* The five demos sit side by side */
+.demos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.demos section {
+	width: 160px;
+}
+
+/* A tall container, so there's room to move on the cross axis */
+.container {
+	display: flex;
+	gap: 6px;
+	height: 140px;
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 4px;
+}
+
+.item {
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	padding: 6px 12px;
+}
+
+/* A bigger middle item, so baseline has something to line up */
+.item:nth-child(2) {
+	font-size: 1.8rem;
+	background-color: #1B5E82;
+}
+
+/* align-items: the cross axis (up and down here) */
+.stretch {
+	align-items: stretch;
+}
+
+.start {
+	align-items: flex-start;
+}
+
+.center {
+	align-items: center;
+}
+
+.end {
+	align-items: flex-end;
+}
+
+/* The bottoms of the letters line up */
+.baseline {
+	align-items: baseline;
+}

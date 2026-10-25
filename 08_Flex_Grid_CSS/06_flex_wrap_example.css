@@ -1,0 +1,50 @@
+/* Example 06: flex-wrap and gap */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 0.95rem;
+	margin: 16px 0 6px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+/* gap: space BETWEEN items, never at the edges */
+.container {
+	display: flex;
+	gap: 12px;
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 8px;
+}
+
+/* Every card asks to be 140px wide */
+.card {
+	width: 140px;
+	padding: 16px 8px;
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* The only difference between the two containers */
+.nowrap {
+	flex-wrap: nowrap;
+}
+
+.wrap {
+	flex-wrap: wrap;
+}

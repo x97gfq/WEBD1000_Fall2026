@@ -1,0 +1,54 @@
+/* Example 10: display: grid and grid-template-columns */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 0.95rem;
+	margin: 16px 0 6px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+/* The grid container. gap works just like in flexbox */
+.grid {
+	display: grid;
+	gap: 8px;
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 6px;
+}
+
+.item {
+	padding: 10px;
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* 1. Fixed widths: the columns never change size */
+.fixed {
+	grid-template-columns: 150px 150px 150px;
+}
+
+/* 2. fr = a fraction (share) of the free space */
+.shares {
+	grid-template-columns: 1fr 2fr 1fr;
+}
+
+/* 3. repeat(4, 1fr) is short for 1fr 1fr 1fr 1fr */
+.four {
+	grid-template-columns: repeat(4, 1fr);
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 07 - flex and order</title>
+		<link rel="stylesheet" href="07_flex_grow_example.css">
+	</head>
+	<body>
+
+		<h1>Example 07: sizing items with flex, and order</h1>
+
+		<h2>1. <code>flex: 1</code> on every item: equal shares</h2>
+		<div class="container equal">
+			<div class="item">flex: 1</div>
+			<div class="item">flex: 1</div>
+			<div class="item">flex: 1</div>
+		</div>
+
+		<h2>2. <code>flex: 2</code> on the middle one: a double share</h2>
+		<div class="container double">
+			<div class="item">flex: 1</div>
+			<div class="item big">flex: 2</div>
+			<div class="item">flex: 1</div>
+		</div>
+
+		<h2>3. A fixed sidebar, and a main area that takes the rest</h2>
+		<div class="container">
+			<div class="item sidebar">160px sidebar</div>
+			<div class="item main">main: flex: 1</div>
+		</div>
+
+		<h2>4. <code>order: -1</code> moves item 3 to the front</h2>
+		<div class="container">
+			<div class="item">1</div>
+			<div class="item">2</div>
+			<div class="item first">3 (order: -1)</div>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,44 @@
+/* Example 01: display: flex */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 1rem;
+	margin: 20px 0 6px;
+}
+
+code {
+	color: #8A2B0B;
+}
+
+/* The container: the parent (dashed outline) */
+.container {
+	background-color: #E1E8EB;
+	border: 2px dashed #12304A;
+	padding: 6px;
+}
+
+/* The items: the children (navy boxes) */
+.item {
+	background-color: #12304A;
+	color: white;
+	font-weight: bold;
+	padding: 12px 20px;
+	margin: 4px;
+}
+
+/* One line makes .container a flex container,
+   and its children become flex items */
+.flex {
+	display: flex;
+}
