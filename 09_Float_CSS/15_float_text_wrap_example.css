@@ -1,0 +1,40 @@
+/* Example 15: wrapping text with float */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	color: #262626;
+	line-height: 1.5;
+}
+
+article {
+	max-width: 760px;
+}
+
+h1 {
+	font-size: 1.4rem;
+	margin-top: 0;
+	color: #12304A;
+}
+
+/* 1. Photo on the left, text flows around it */
+.photo {
+	float: left;
+	width: 45%;
+	height: auto;
+	margin: 4px 20px 10px 0;
+	border-radius: 8px;
+}
+
+/* 2. A pull quote floats to the right */
+.pull-quote {
+	float: right;
+	width: 35%;
+	margin: 0 0 10px 20px;
+	padding-left: 12px;
+	border-left: 4px solid #E97132;
+	color: #12304A;
+	font-size: 1.2rem;
+	font-style: italic;
+}
