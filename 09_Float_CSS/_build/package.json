@@ -1,0 +1,11 @@
+{
+  "name": "week9-deck-build",
+  "private": true,
+  "description": "Builds Float.pptx (Week 9, Class 1); screenshots the Week 8 float examples with Microsoft Edge first",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}
