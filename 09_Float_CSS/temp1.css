@@ -1,18 +1,12 @@
 .left {
 	float: left;
-	width: 45%;
-	height: auto;
-	margin: 4px;
-	border: solid blue 1px;
-	border-radius: 8px;
+	width: 20%;
+	border: solid red 1px;
 }
 
 .right {
 	float: right;
-	width: 45%;
-	height: auto;
-	margin: 4px;
+	width: 20%;
 	border: solid red 1px;
-	border-radius: 8px;
 }
 
