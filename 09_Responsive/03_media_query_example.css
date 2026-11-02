@@ -1,0 +1,37 @@
+/* Example 03: a first media query */
+
+/* Page basics */
+h1 {
+	color: #12304A;
+}
+
+.status {
+	padding: 10px;
+	background-color: white;
+	border-radius: 8px;
+	font-weight: bold;
+}
+
+/* 1. The normal styles: used at every width */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 20px;
+	font-size: 22px;
+	background-color: #E4EFF3;
+}
+
+.status::before {
+	content: "Wider than 768px";
+}
+
+/* 2. Only when the window is 768px or narrower */
+@media (max-width: 768px) {
+	body {
+		font-size: 14px;
+		background-color: #FBE9DF;
+	}
+
+	.status::before {
+		content: "768px or narrower";
+	}
+}

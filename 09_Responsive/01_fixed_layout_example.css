@@ -1,0 +1,59 @@
+/* Example 01: a page that is NOT responsive. Make the window narrow and scroll sideways. */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 0;
+	color: #262626;
+	line-height: 1.5;
+}
+
+header, footer {
+	padding: 12px;
+	background-color: #12304A;
+	color: white;
+}
+
+h1 {
+	margin: 0;
+}
+
+h2 {
+	margin-top: 0;
+	font-size: 1.2rem;
+	color: #12304A;
+}
+
+article {
+	padding: 12px;
+	background-color: #E1E8EB;
+	border-radius: 8px;
+}
+
+footer {
+	margin-top: 20px;
+}
+
+/* 1. A fixed width: always 960px */
+.container {
+	width: 960px;
+	margin: 0 auto;
+}
+
+/* 2. A fixed-size photo */
+.photo {
+	display: block;
+	width: 800px;
+}
+
+/* 3. Three fixed columns */
+.cards {
+	display: grid;
+	grid-template-columns: 300px 300px 300px;
+	gap: 30px;
+}
+
+/* 4. A fixed heading size */
+h1 {
+	font-size: 2.5rem;
+}

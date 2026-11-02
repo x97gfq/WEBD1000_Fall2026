@@ -1,0 +1,47 @@
+/* Example 07: fluid typography */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+.label {
+	margin-top: 14px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #595959;
+}
+
+.vw-only, .vw-jump, .fluid {
+	color: #12304A;
+	font-weight: bold;
+	line-height: 1.2;
+}
+
+/* 1. vw: 1vw is 1% of the window's width */
+.vw-only {
+	font-size: 5vw;
+}
+
+/* 2. vw and media queries. Watch it jump at 768px! */
+@media (max-width: 768px) {
+	.vw-jump {
+		font-size: 6vw;
+	}
+}
+
+@media (min-width: 769px) {
+	.vw-jump {
+		font-size: 3vw;
+	}
+}
+
+/* 3. clamp(smallest, fluid, biggest) */
+.fluid {
+	font-size: clamp(1.5rem, 1rem + 3vw, 3rem);
+}

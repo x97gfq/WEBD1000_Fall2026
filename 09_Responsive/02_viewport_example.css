@@ -1,0 +1,19 @@
+/* Example 02: the viewport meta tag (the tag itself is in the HTML) */
+
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 16px;
+	color: #262626;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+h1 {
+	color: #12304A;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}

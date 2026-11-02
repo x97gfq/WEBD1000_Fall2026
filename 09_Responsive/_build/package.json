@@ -1,0 +1,11 @@
+{
+  "name": "week9-responsive-deck-build",
+  "private": true,
+  "description": "Builds Responsive_Web_Design.pptx (Week 9, Class 2); screenshots the example pages with Microsoft Edge first",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

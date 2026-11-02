@@ -1,0 +1,74 @@
+/* Example 08: Example 01, made responsive */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 0;
+	color: #262626;
+	line-height: 1.5;
+}
+
+header, footer {
+	padding: 12px;
+	background-color: #12304A;
+	color: white;
+}
+
+h1 {
+	margin: 0;
+}
+
+h2 {
+	margin-top: 0;
+	font-size: 1.2rem;
+	color: #12304A;
+}
+
+article {
+	padding: 12px;
+	background-color: #E1E8EB;
+	border-radius: 8px;
+}
+
+footer {
+	margin-top: 20px;
+}
+
+/* 1. Fluid: 80% wide, up to a limit */
+.container {
+	width: 80%;
+	max-width: 1170px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+/* 2. A photo that fits its container */
+.photo {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* 3. Three columns that share the space */
+.cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+/* 4. A heading that grows, within limits */
+h1 {
+	font-size: clamp(1.5rem, 1rem + 3vw, 3rem);
+}
+
+/* 5. Tablets and phones. Keep this last! */
+@media (max-width: 768px) {
+	.container {
+		width: 100%;
+		padding: 0 15px;
+	}
+
+	.cards {
+		grid-template-columns: 1fr;
+	}
+}

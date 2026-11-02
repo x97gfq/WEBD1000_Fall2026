@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 05 - Fluid Layouts</title>
+		<link rel="stylesheet" href="05_fluid_layout_example.css">
+	</head>
+	<body>
+
+		<!-- Make the window narrow: only the fixed box and the wrong box stick out -->
+		<div class="fixed">Fixed: always 700px wide</div>
+
+		<div class="container">
+			<p>Fluid: always 80% of the window, and centred.</p>
+			<img src="images/harbour.jpg" width="800" height="458"
+				alt="Rocky beach with calm water and a tree-lined point">
+		</div>
+
+		<h2>The padding trap</h2>
+
+		<div class="frame">
+			<div class="wrong">100% + padding: sticks out of the dashed box</div>
+			<div class="right">100% + padding + border-box: fits</div>
+		</div>
+
+	</body>
+</html>

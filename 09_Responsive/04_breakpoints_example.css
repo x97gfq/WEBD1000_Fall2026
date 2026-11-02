@@ -1,0 +1,70 @@
+/* Example 04: breakpoints, written phones first with min-width */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 16px;
+}
+
+h1 {
+	margin-top: 0;
+	color: #12304A;
+}
+
+.status {
+	font-weight: bold;
+	color: #A0402A;
+}
+
+.cards div {
+	padding: 24px 12px;
+	background-color: #12304A;
+	color: white;
+	text-align: center;
+	border-radius: 8px;
+}
+
+/* 1. Phones first: no media query, one column */
+.cards {
+	display: grid;
+	gap: 12px;
+	grid-template-columns: 1fr;
+}
+
+.status::before {
+	content: "Phone: one column";
+}
+
+/* 2. Tablets: 481px and wider, two columns */
+@media (min-width: 481px) {
+	.cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.status::before {
+		content: "Tablet: two columns";
+	}
+}
+
+/* 3. Desktops: 769px and wider, four columns */
+@media (min-width: 769px) {
+	.cards {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.status::before {
+		content: "Desktop: four columns";
+	}
+}
+
+/* 4. Big screens: 1200px and wider, stop growing and centre the page */
+@media (min-width: 1200px) {
+	.page {
+		width: 1170px;
+		margin: 0 auto;
+	}
+
+	.status::before {
+		content: "Big screen: four columns, centred";
+	}
+}

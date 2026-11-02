@@ -1,0 +1,68 @@
+/* Example 05: fluid layouts */
+
+/* Page basics */
+body {
+	font-family: "Segoe UI", Arial, sans-serif;
+	margin: 16px;
+	color: #262626;
+}
+
+h2 {
+	margin-bottom: 8px;
+	color: #12304A;
+}
+
+.fixed, .container {
+	margin-bottom: 12px;
+	padding: 8px 0;
+	background-color: #E1E8EB;
+	text-align: center;
+}
+
+.frame {
+	border: 2px dashed #7F7F7F;
+}
+
+.wrong, .right {
+	margin: 8px 0;
+	color: white;
+}
+
+.wrong {
+	background-color: #C62828;
+}
+
+.right {
+	background-color: #2E7D32;
+}
+
+/* 1. Fixed: a pixel width ignores the window */
+.fixed {
+	width: 700px;
+}
+
+/* 2. Fluid: a percentage follows the window */
+.container {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* 3. The photo fits, and keeps its shape */
+.container img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* 4. The trap: padding goes ON TOP of 100% */
+.wrong {
+	width: 100%;
+	padding: 10px 30px;
+}
+
+/* 5. The fix: padding stays inside the width */
+.right {
+	width: 100%;
+	padding: 10px 30px;
+	box-sizing: border-box;
+}

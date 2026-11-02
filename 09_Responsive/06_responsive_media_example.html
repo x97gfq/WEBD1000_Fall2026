@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 06 - Responsive Images and Video</title>
+		<link rel="stylesheet" href="06_responsive_media_example.css">
+	</head>
+	<body>
+
+		<!-- These videos show the poster image only. To play a real one, add this inside the video element:
+			<source src="your_video.mp4" type="video/mp4"> -->
+		<h1>Responsive Images and Video</h1>
+
+		<div class="columns">
+			<div>
+				<h2>An image</h2>
+				<img class="photo" src="images/harbour.jpg" width="800" height="458"
+					alt="Rocky beach with calm water and a tree-lined point">
+			</div>
+
+			<div>
+				<h2>A video: aspect-ratio</h2>
+				<video class="video" controls poster="images/harbour.jpg"></video>
+			</div>
+
+			<div>
+				<h2>A video: the old padding trick</h2>
+				<div class="video-container">
+					<video controls poster="images/harbour.jpg"></video>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
