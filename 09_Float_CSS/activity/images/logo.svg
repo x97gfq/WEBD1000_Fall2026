@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+	<!-- Harbourside Fish & Chips logo: a few flat shapes, so it's tiny as an SVG -->
+	<title>Harbourside Fish &amp; Chips</title>
+	<circle cx="120" cy="120" r="112" fill="#12304A"/>
+	<ellipse cx="108" cy="104" rx="52" ry="30" fill="#E97132"/>
+	<path d="M152 104 L196 74 L196 134 Z" fill="#E97132"/>
+	<circle cx="82" cy="96" r="7" fill="#12304A"/>
+	<path d="M38 166 q 22 -16 44 0 t 44 0 t 44 0 t 32 -6" fill="none" stroke="#0F9ED5" stroke-width="10" stroke-linecap="round"/>
+	<path d="M58 196 q 20 -12 40 0 t 40 0 t 40 0" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+</svg>

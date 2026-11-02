@@ -1,6 +1,6 @@
 // Builds Float.pptx (Week 9, Class 1), in the same style as the Class 5–11 and Week 8 decks.
 // This is the float section of Grid_and_Float.pptx, carried forward from Week 8, Class 2.
-// The examples and Harbourside stay in 08_Flex_Grid_CSS, so REPO points there: this folder only holds the deck.
+// The examples and Harbourside (activity/) are in this folder; Try Its 1 to 6 come over from 08_Flex_Grid_CSS already done.
 // To rebuild: cd 09_Float_CSS/_build, run "npm install" once, then "npm run build".
 // The "Result" pictures are screenshots of the example pages, taken with Microsoft Edge (headless) each build.
 // Code slides read the example files directly, so edit those files and re-run to update the slides.
@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 
-const REPO = path.join(__dirname, "..", "..", "08_Flex_Grid_CSS"); // the examples live in Week 8
+const REPO = path.join(__dirname, "..");
 const SCR = __dirname;
 const SHOTS = path.join(SCR, "shots");
 
@@ -520,20 +520,20 @@ const SH = {
 titleSlide("Week 9, Class 1", "Float: wrapping text around a photo, and the clearfix.",
   "Welcome back! We didn't get to float last class, so we're picking it up today.\n\nFloat is the old layout tool that's still the best way to wrap text around a photo. It's the third layout tool after flexbox and grid.");
 
-checkInSlide("Take attendance while everyone checks these four things.\n\nWhile you do, have students git pull (in case anything changed), open their Harbourside page from last class with Live Server, and open 15_float_text_wrap_example.html in 08_Flex_Grid_CSS.");
+checkInSlide("Take attendance while everyone checks these four things.\n\nWhile you do, have students git pull, open activity/index.html in 09_Float_CSS with Live Server (Try Its 1 to 6 are already done), and open 15_float_text_wrap_example.html in the same folder.");
 
 overviewSlide("Week 9, Class 1: Overview", "Float", [
   "Float: wrapping text around a photo",
   "Collapsing parents: the clearfix and display: flow-root",
   "Harbourside, Part 3: Try It 7, float the photo",
 ], [["Wrap", "Text around a photo"], ["Collapse", "Why the box disappears"], ["Fix", "display: flow-root"]],
-  "Carried forward from Week 8, Class 2. Rough plan for this part: about 15 minutes.\n- Examples 15 and 16\n- Pop Quiz 1\n- Try It 7 (5 min)\n\nThe examples and the Harbourside page are still in the 08_Flex_Grid_CSS folder.\n\nTry It 7 builds on Try It 5 (the page layout with grid). Anyone who missed it can copy the Try It 1 to 5 CSS from activity/answer/style.css.");
+  "Carried forward from Week 8, Class 2. Rough plan for this part: about 15 minutes.\n- Examples 15 and 16\n- Pop Quiz 1\n- Try It 7 (5 min)\n\nThe examples and the Harbourside page are in the 09_Float_CSS folder.\n\nTry It 7 builds on Try It 5 (the page layout with grid). The Harbourside page in activity/ has Try Its 1 to 6 already done, so everyone starts from the same place.");
 
 dividerSlide("Float", "Text around a photo   ·   the clearfix   ·   the old way to make columns",
   "Float is the oldest of the three. It was made for one job: letting text flow around an image, like in a newspaper or a magazine. In the 2000s and early 2010s, people also used it to build whole page layouts, because there wasn't anything better. That took a lot of hacks.\n\nToday, use grid and flexbox for layout, and float for its original job. But you'll still meet floats in older code, so it's worth knowing how they behave.");
 
 codeSlide({
-  kicker: "FLOAT 1 · EXAMPLE 15", title: "Wrapping Text Around a Photo", file: "08_Flex_Grid_CSS/15_float_text_wrap_example.css",
+  kicker: "FLOAT 1 · EXAMPLE 15", title: "Wrapping Text Around a Photo", file: "09_Float_CSS/15_float_text_wrap_example.css",
   lines: between(cssOf("15_float_text_wrap_example.html"), "/* 1."), result: SH.ex15, size: 13.5,
   bullets: [
     [["float: left", "c"], ": the photo moves to the left, and the text flows around its right side."],
@@ -543,7 +543,7 @@ codeSlide({
 });
 
 codeSlide({
-  kicker: "FLOAT 2 · EXAMPLE 16", title: "Floats and the Clearfix", file: "08_Flex_Grid_CSS/16_float_clearfix_example.css",
+  kicker: "FLOAT 2 · EXAMPLE 16", title: "Floats and the Clearfix", file: "09_Float_CSS/16_float_clearfix_example.css",
   lines: between(cssOf("16_float_clearfix_example.html"), "/* 1."), result: SH.ex16, size: 12.5,
   bullets: [
     ["Floats don't count towards their parent's height. Only floats inside? The box ", ["collapses", "b"], "."],
