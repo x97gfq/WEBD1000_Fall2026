@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Harbourside Fish &amp; Chips</title>
+
+		<!-- Harbourside, Part 4: rebuild it with Bootstrap.
+		     This is our page from Week 7 with NO CSS at all. Today Bootstrap does the layout,
+		     and style.css only adds the Harbourside colours.
+		     Follow Try Its 2 to 7 in the slides. answer/ has the finished page. -->
+
+		<!-- Try It 2: Bootstrap's CSS, then style.css, go here -->
+
+	</head>
+	<body>
+
+		<header>
+			<!-- Try It 3: replace the logo and the nav (down to </nav>) with a Bootstrap navbar -->
+			<img src="images/logo.svg" width="64" height="64" alt="">
+
+			<!-- Try It 4: replace this h1 with a banner -->
+			<h1>Harbourside Fish &amp; Chips</h1>
+
+			<nav aria-label="Main">
+				<ul>
+					<li>
+						<a href="#menu">Menu</a>
+						<ul>
+							<li><a href="#haddock">Haddock &amp; Chips</a></li>
+							<li><a href="#clams">Clam Strips</a></li>
+							<li><a href="#lobster">Lobster Roll</a></li>
+							<li><a href="#kids">Kids' Fish Bites</a></li>
+						</ul>
+					</li>
+					<li><a href="#hours">Hours &amp; Location</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Try It 2: add class="container my-5" to main -->
+		<main>
+			<!-- Try It 4: two columns from md up: the text, then the photo.
+			     The h2 and the two paragraphs go in the first column, the figure in the second. -->
+			<section class="intro">
+				<h2>Fresh from the Wharf</h2>
+				<figure>
+					<img src="images/harbour.jpg" width="800" height="458"
+						alt="Rocky beach with calm water and a tree-lined point">
+					<figcaption>Our view of the Yarmouth waterfront.</figcaption>
+				</figure>
+				<p>We buy our haddock <strong>straight off the <em>boats</em></strong>,
+					cut our fries by hand, and make our tartar sauce every morning.</p>
+				<p>Harbourside opened in 1987 in an old net loft at the end of Water Street.
+					In the summer we open the back deck, so bring a sweater: the fog rolls in
+					off the Gulf of Maine most afternoons.</p>
+			</section>
+
+			<section id="menu">
+				<h2>Our Menu</h2>
+
+				<!-- Try It 5: a row of cards: 1 across on a phone, 2 from sm, 4 from lg -->
+				<article id="haddock">
+					<h3>Haddock &amp; Chips</h3>
+					<p>One piece of local haddock in our crispy batter, with fries and coleslaw.</p>
+					<p class="price">$16.99</p>
+				</article>
+
+				<article id="clams">
+					<h3>Clam Strips</h3>
+					<p>Lightly breaded clam strips with fries and tartar sauce.</p>
+					<p class="price">$14.50</p>
+				</article>
+
+				<article id="lobster" class="special">
+					<h3>Lobster Roll</h3>
+					<p>Today's special. Fresh lobster on a toasted bun with a side salad.</p>
+					<p class="price">$24.00</p>
+				</article>
+
+				<article id="kids">
+					<h3>Kids' Fish Bites</h3>
+					<p>Bite-size haddock with fries and a juice box.</p>
+					<p class="price">$9.50</p>
+				</article>
+			</section>
+
+			<!-- Try It 6: the hours in a Bootstrap table, beside the address -->
+			<aside id="hours">
+				<h2>Hours &amp; Location</h2>
+				<p>12 Water Street, Yarmouth, NS</p>
+
+				<table>
+					<caption>Opening hours</caption>
+					<thead>
+						<tr>
+							<th scope="col">Day</th>
+							<th scope="col">Open</th>
+							<th scope="col">Close</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Monday</th>
+							<td>11am</td>
+							<td>8pm</td>
+						</tr>
+						<tr>
+							<th scope="row">Tuesday</th>
+							<td>11am</td>
+							<td>8pm</td>
+						</tr>
+						<tr>
+							<th scope="row">Wednesday</th>
+							<td>11am</td>
+							<td>8pm</td>
+						</tr>
+						<tr>
+							<th scope="row">Thursday</th>
+							<td>11am</td>
+							<td>8pm</td>
+						</tr>
+						<tr>
+							<th scope="row">Friday</th>
+							<td>11am</td>
+							<td>9pm</td>
+						</tr>
+						<tr>
+							<th scope="row">Saturday</th>
+							<td>11am</td>
+							<td>9pm</td>
+						</tr>
+						<tr>
+							<th scope="row">Sunday</th>
+							<td>Noon</td>
+							<td>7pm</td>
+						</tr>
+					</tbody>
+				</table>
+			</aside>
+		</main>
+
+		<!-- Try It 6: classes on the footer too -->
+		<footer id="contact">
+			<p>Call us: 902-555-0147</p>
+			<p class="small">&copy; 2026 Harbourside Fish &amp; Chips</p>
+		</footer>
+
+		<!-- Try It 3: Bootstrap's JavaScript goes here, just before </body> -->
+
+	</body>
+</html>

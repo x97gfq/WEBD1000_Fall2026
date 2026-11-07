@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 05: Components</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container py-4">
+			<!-- 1. Buttons: btn, then a colour -->
+			<h2 class="h5">1. Buttons</h2>
+			<p>
+				<button type="button" class="btn btn-primary">Primary</button>
+				<button type="button" class="btn btn-success">Success</button>
+				<button type="button" class="btn btn-outline-danger">Outline</button>
+				<a class="btn btn-dark btn-lg" href="#">A big link</a>
+			</p>
+
+			<!-- 2. Alerts: role="alert" is read out -->
+			<h2 class="h5">2. Alerts</h2>
+			<div class="alert alert-warning" role="alert">
+				<strong>Heads up:</strong> the deck closes at 8pm when it's foggy.
+			</div>
+
+			<!-- 3. Cards, in a row: two across from md up -->
+			<h2 class="h5">3. Cards</h2>
+			<div class="row g-3">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h3 class="card-title h5">
+								Haddock &amp; Chips
+								<span class="badge text-bg-success">Local</span>
+							</h3>
+							<p class="card-text">Local haddock, with fries and coleslaw.</p>
+							<a href="#" class="btn btn-primary">Order</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h3 class="card-title h5">
+								Lobster Roll
+								<span class="badge text-bg-warning">Special</span>
+							</h3>
+							<p class="card-text">Fresh lobster on a toasted bun with a side salad.</p>
+							<a href="#" class="btn btn-primary">Order</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

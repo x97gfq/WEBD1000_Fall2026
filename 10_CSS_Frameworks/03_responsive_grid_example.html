@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 03: A Responsive Grid</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="03_responsive_grid_example.css">
+	</head>
+	<body>
+		<div class="container py-4">
+			<h1 class="h3">Drag the window narrower</h1>
+
+			<!-- Only one badge shows at a time: d-none hides it, d-md-inline shows it again from md up -->
+			<p>You're at:
+				<span class="badge text-bg-secondary d-sm-none">xs: under 576px</span>
+				<span class="badge text-bg-info d-none d-sm-inline d-md-none">sm: 576px and up</span>
+				<span class="badge text-bg-primary d-none d-md-inline d-lg-none">md: 768px and up</span>
+				<span class="badge text-bg-success d-none d-lg-inline d-xl-none">lg: 992px and up</span>
+				<span class="badge text-bg-dark d-none d-xl-inline">xl: 1200px and up</span>
+			</p>
+
+			<!-- 1 across, then 2 from md, then 4 from lg -->
+			<div class="row g-3">
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="box">1</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="box">2</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="box">3</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="box">4</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

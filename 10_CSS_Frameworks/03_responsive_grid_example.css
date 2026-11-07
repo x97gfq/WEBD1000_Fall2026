@@ -1,0 +1,11 @@
+/* Example 03: colours only. The columns' widths all come from Bootstrap. */
+
+.box {
+	background-color: #1B5E82;
+	color: white;
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+	padding: 24px 0;
+	border-radius: 8px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Try It 1: A Colour Grid</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<!-- Try It 1 (Class 1), done together. No CSS file: it's all Bootstrap classes. -->
+		<div class="container py-4">
+			<h1 class="mb-4">My Colour Grid</h1>
+
+			<!-- Three equal columns from md (768px) up. Stacked on a phone. -->
+			<div class="row g-3">
+				<div class="col-md-4">
+					<div class="text-bg-primary p-4 h-100">
+						<h2 class="h4">Primary</h2>
+						<p>text-bg-primary picks white text for us.</p>
+						<button type="button" class="btn btn-light">A light button</button>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="text-bg-success p-4 h-100">
+						<h2 class="h4">Success</h2>
+						<p>Same idea, a different colour.</p>
+						<button type="button" class="btn btn-outline-light">An outline button</button>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="text-bg-warning p-4 h-100">
+						<h2 class="h4">Warning</h2>
+						<p>On yellow, it picks black text, so you can still read it.</p>
+						<button type="button" class="btn btn-dark">A dark button</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

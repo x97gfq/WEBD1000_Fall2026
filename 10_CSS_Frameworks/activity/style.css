@@ -1,0 +1,15 @@
+/* Harbourside Fish & Chips: style.css (Harbourside, Part 4: Bootstrap)
+
+   Bootstrap does the layout today. This file is only for what makes the page look like Harbourside.
+   It's linked AFTER Bootstrap (Try It 2), so when a rule here ties with one of Bootstrap's, ours wins.
+
+   Try Its 3, 4 and 6 use a class called bg-harbour, so it's here already. Try It 7 goes under it. */
+
+/* Our navy, for the navbar, the banner and the footer */
+.bg-harbour {
+	background-color: #12304A;
+}
+
+
+/* ========== Try It 7: make it yours ========== */
+

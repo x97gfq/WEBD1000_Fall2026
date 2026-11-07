@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Harbourside Fish &amp; Chips</title>
+
+		<!-- ANSWER KEY. Harbourside, Part 4: the same page, rebuilt with Bootstrap. -->
+
+		<!-- Try It 2: Bootstrap's CSS first, then ours -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+
+		<header>
+			<!-- Try It 3: a navbar. Full menu from md up, a menu button under that. -->
+			<nav class="navbar navbar-expand-md bg-harbour" data-bs-theme="dark" aria-label="Main">
+				<div class="container">
+					<a class="navbar-brand d-flex align-items-center gap-2" href="#">
+						<img src="../images/logo.svg" width="40" height="40" alt="">
+						Harbourside
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+						aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="mainNav">
+						<ul class="navbar-nav ms-auto">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#menu" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#haddock">Haddock &amp; Chips</a></li>
+									<li><a class="dropdown-item" href="#clams">Clam Strips</a></li>
+									<li><a class="dropdown-item" href="#lobster">Lobster Roll</a></li>
+									<li><a class="dropdown-item" href="#kids">Kids' Fish Bites</a></li>
+								</ul>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="#hours">Hours &amp; Location</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- Try It 4: a banner under the navbar -->
+			<div class="bg-harbour text-white text-center py-5">
+				<h1 class="display-5">Harbourside Fish &amp; Chips</h1>
+				<p class="lead">On the Yarmouth waterfront since 1987.</p>
+				<a class="btn btn-harbour btn-lg" href="#menu">See the menu</a>
+			</div>
+		</header>
+
+		<!-- Try It 2: a container keeps the page in the middle, with room at the sides -->
+		<main class="container my-5">
+
+			<!-- Try It 4: two columns from md up: the text, then the photo -->
+			<section class="intro row g-4 align-items-center mb-5">
+				<div class="col-md-6">
+					<h2>Fresh from the Wharf</h2>
+					<p>We buy our haddock <strong>straight off the <em>boats</em></strong>,
+						cut our fries by hand, and make our tartar sauce every morning.</p>
+					<p>Harbourside opened in 1987 in an old net loft at the end of Water Street.
+						In the summer we open the back deck, so bring a sweater: the fog rolls in
+						off the Gulf of Maine most afternoons.</p>
+				</div>
+				<div class="col-md-6">
+					<figure class="figure mb-0">
+						<img src="../images/harbour.jpg" width="800" height="458"
+							class="figure-img img-fluid rounded shadow-sm"
+							alt="Rocky beach with calm water and a tree-lined point">
+						<figcaption class="figure-caption">Our view of the Yarmouth waterfront.</figcaption>
+					</figure>
+				</div>
+			</section>
+
+			<section id="menu" class="mb-5">
+				<h2>Our Menu</h2>
+
+				<!-- Try It 5: a row of cards: 1 across on a phone, 2 from sm, 4 from lg -->
+				<div class="row g-4">
+					<div class="col-sm-6 col-lg-3">
+						<article id="haddock" class="card h-100 shadow-sm">
+							<div class="card-body">
+								<h3 class="card-title h5">Haddock &amp; Chips</h3>
+								<p class="card-text">One piece of local haddock in our crispy batter, with fries and coleslaw.</p>
+								<p class="price mb-0">$16.99</p>
+							</div>
+						</article>
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<article id="clams" class="card h-100 shadow-sm">
+							<div class="card-body">
+								<h3 class="card-title h5">Clam Strips</h3>
+								<p class="card-text">Lightly breaded clam strips with fries and tartar sauce.</p>
+								<p class="price mb-0">$14.50</p>
+							</div>
+						</article>
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<article id="lobster" class="card h-100 shadow-sm special">
+							<div class="card-body">
+								<span class="badge text-bg-warning mb-2">Today's special</span>
+								<h3 class="card-title h5">Lobster Roll</h3>
+								<p class="card-text">Fresh lobster on a toasted bun with a side salad.</p>
+								<p class="price mb-0">$24.00</p>
+							</div>
+						</article>
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<article id="kids" class="card h-100 shadow-sm">
+							<div class="card-body">
+								<h3 class="card-title h5">Kids' Fish Bites</h3>
+								<p class="card-text">Bite-size haddock with fries and a juice box.</p>
+								<p class="price mb-0">$9.50</p>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- Try It 6: the address beside a Bootstrap table -->
+			<aside id="hours" class="row g-4">
+				<div class="col-md-5">
+					<h2>Hours &amp; Location</h2>
+					<p>12 Water Street, Yarmouth, NS</p>
+				</div>
+				<div class="col-md-7">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<caption>Opening hours</caption>
+							<thead>
+								<tr>
+									<th scope="col">Day</th>
+									<th scope="col">Open</th>
+									<th scope="col">Close</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Monday</th>
+									<td>11am</td>
+									<td>8pm</td>
+								</tr>
+								<tr>
+									<th scope="row">Tuesday</th>
+									<td>11am</td>
+									<td>8pm</td>
+								</tr>
+								<tr>
+									<th scope="row">Wednesday</th>
+									<td>11am</td>
+									<td>8pm</td>
+								</tr>
+								<tr>
+									<th scope="row">Thursday</th>
+									<td>11am</td>
+									<td>8pm</td>
+								</tr>
+								<tr>
+									<th scope="row">Friday</th>
+									<td>11am</td>
+									<td>9pm</td>
+								</tr>
+								<tr>
+									<th scope="row">Saturday</th>
+									<td>11am</td>
+									<td>9pm</td>
+								</tr>
+								<tr>
+									<th scope="row">Sunday</th>
+									<td>Noon</td>
+									<td>7pm</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</aside>
+		</main>
+
+		<!-- Try It 6: the footer -->
+		<footer id="contact" class="bg-harbour text-white text-center py-4">
+			<p class="mb-1">Call us: 902-555-0147</p>
+			<p class="small mb-0">&copy; 2026 Harbourside Fish &amp; Chips</p>
+		</footer>
+
+		<!-- Try It 3: Bootstrap's JavaScript, for the menu button and the dropdown -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>

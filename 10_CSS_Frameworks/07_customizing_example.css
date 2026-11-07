@@ -1,0 +1,26 @@
+/* Example 07: changing Bootstrap's colours. Linked AFTER bootstrap.min.css. */
+
+/* 0. Same specificity as Bootstrap's, and later,
+      so ours wins */
+body {
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+/* 1. The old way. Looks right until you hover:
+      Bootstrap's .btn:hover is more specific,
+      and it puts the blue back. */
+.old-way {
+	background-color: #B5451B;
+	border-color: #B5451B;
+}
+
+/* 2. Bootstrap 5's way: set the button's variables.
+      All its states (hover too) read these. */
+.new-way {
+	--bs-btn-bg: #B5451B;
+	--bs-btn-border-color: #B5451B;
+	--bs-btn-hover-bg: #8A2B0B;
+	--bs-btn-hover-border-color: #8A2B0B;
+	--bs-btn-active-bg: #8A2B0B;
+	--bs-btn-active-border-color: #8A2B0B;
+}

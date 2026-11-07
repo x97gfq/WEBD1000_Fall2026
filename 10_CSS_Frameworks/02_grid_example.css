@@ -1,0 +1,15 @@
+/* Example 02: colours only, so you can see each column.
+   Every size and position on this page comes from Bootstrap's classes. */
+
+.row {
+	margin-bottom: 10px;
+}
+
+.row > div {
+	background-color: #12304A;
+	color: white;
+	border: 2px solid white;
+	padding: 10px 0;
+	text-align: center;
+	font-family: Consolas, monospace;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<!-- Bootstrap is built phones first, so it needs last week's viewport tag -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 01: Bootstrap Starter</title>
+
+		<!-- 1. Bootstrap's CSS, from a CDN -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+		<!-- 2. Your own CSS, AFTER Bootstrap's, so your rules win ties -->
+		<link rel="stylesheet" href="01_bootstrap_starter_example.css">
+	</head>
+	<body>
+		<div class="container py-4">
+			<h1>Hello, Bootstrap!</h1>
+			<p class="lead">Two links in the head, one script at the end, and classes on the HTML.</p>
+			<button type="button" class="btn btn-primary">A Bootstrap button</button>
+			<button type="button" class="btn btn-outline-secondary">Another one</button>
+		</div>
+
+		<!-- 3. Bootstrap's JavaScript, just before </body>. Only the parts that move need it:
+		     the navbar's menu button, dropdowns, modals and carousels. -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>

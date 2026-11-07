@@ -1,0 +1,46 @@
+/* Harbourside Fish & Chips: style.css (Harbourside, Part 4: ANSWER KEY)
+
+   Bootstrap does the layout today. This file is only for what makes the page look like Harbourside.
+   It's linked AFTER Bootstrap (Try It 2), so when a rule here ties with one of Bootstrap's, ours wins. */
+
+/* Our navy, for the navbar, the banner and the footer */
+.bg-harbour {
+	background-color: #12304A;
+}
+
+
+/* ========== Try It 7: make it yours ========== */
+
+/* 1. Headings in Georgia, like the old site */
+h1, h2, .navbar-brand {
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+h2 {
+	color: #12304A;
+}
+
+/* 2. Prices in our orange-red */
+.price {
+	color: #B5451B;
+	font-weight: bold;
+}
+
+/* 3. Today's special stands out */
+.special {
+	background-color: #FBE9DF;
+	border-color: #E97132;
+}
+
+/* 4. A Harbourside button. In Bootstrap 5, change the button's variables,
+      not background-color, or the hover goes back to Bootstrap's blue. */
+.btn-harbour {
+	--bs-btn-color: #FFFFFF;
+	--bs-btn-bg: #B5451B;
+	--bs-btn-border-color: #B5451B;
+	--bs-btn-hover-color: #FFFFFF;
+	--bs-btn-hover-bg: #8A2B0B;
+	--bs-btn-hover-border-color: #8A2B0B;
+	--bs-btn-active-bg: #8A2B0B;
+	--bs-btn-active-border-color: #8A2B0B;
+}

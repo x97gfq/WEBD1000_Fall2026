@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 09: Menu Cards in Tailwind CSS</title>
+		<!-- Tailwind's "Play CDN": it reads your classes and writes the CSS in the browser.
+		     Fine for learning and trying things. Real projects build the CSS file ahead of time. -->
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	</head>
+	<body class="bg-slate-100">
+		<!-- The same three cards as Example 08, built from small utility classes -->
+		<div class="max-w-6xl mx-auto px-6 py-6">
+			<h1 class="text-2xl font-semibold mb-4">Our Menu</h1>
+			<div class="grid gap-4 md:grid-cols-3">
+				<article class="bg-white rounded-lg shadow p-5">
+					<h2 class="text-lg font-semibold">Haddock &amp; Chips</h2>
+					<p class="mt-2">Local haddock, with fries and coleslaw.</p>
+					<p class="mt-3 font-bold text-red-700">$16.99</p>
+					<a href="#" class="inline-block mt-3 px-4 py-2 rounded
+						bg-blue-600 text-white hover:bg-blue-700">Order</a>
+				</article>
+				<article class="bg-white rounded-lg shadow p-5">
+					<h2 class="text-lg font-semibold">Clam Strips</h2>
+					<p class="mt-2">Lightly breaded clam strips with fries and tartar sauce.</p>
+					<p class="mt-3 font-bold text-red-700">$14.50</p>
+					<a href="#" class="inline-block mt-3 px-4 py-2 rounded
+						bg-blue-600 text-white hover:bg-blue-700">Order</a>
+				</article>
+				<article class="bg-white rounded-lg shadow p-5">
+					<h2 class="text-lg font-semibold">Lobster Roll</h2>
+					<p class="mt-2">Fresh lobster on a toasted bun with a side salad.</p>
+					<p class="mt-3 font-bold text-red-700">$24.00</p>
+					<a href="#" class="inline-block mt-3 px-4 py-2 rounded
+						bg-blue-600 text-white hover:bg-blue-700">Order</a>
+				</article>
+			</div>
+		</div>
+	</body>
+</html>

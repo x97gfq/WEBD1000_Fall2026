@@ -1,0 +1,11 @@
+{
+  "name": "week10-frameworks-deck-build",
+  "private": true,
+  "description": "Builds CSS_Frameworks_Bootstrap.pptx (Week 10); screenshots the example pages with Microsoft Edge first",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}
