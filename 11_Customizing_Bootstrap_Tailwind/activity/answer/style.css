@@ -1,7 +1,7 @@
 /* Harbourside Fish & Chips: style.css (Harbourside, Part 4: ANSWER KEY)
 
    Bootstrap does the layout today. This file is only for what makes the page look like Harbourside.
-   It's linked AFTER Bootstrap (Try It 2), so when a rule here ties with one of Bootstrap's, ours wins. */
+   It's linked AFTER Bootstrap (Try It 1), so when a rule here ties with one of Bootstrap's, ours wins. */
 
 /* Our navy, for the navbar, the banner and the footer */
 .bg-harbour {
@@ -9,7 +9,7 @@
 }
 
 
-/* ========== Try It 7: make it yours ========== */
+/* ========== Try It 6: make it yours ========== */
 
 /* 1. Headings in Georgia, like the old site */
 h1, h2, .navbar-brand {

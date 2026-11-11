@@ -1,4 +1,4 @@
-/* Example 07: changing Bootstrap's colours. Linked AFTER bootstrap.min.css. */
+/* Example 01: changing Bootstrap's colours. Linked AFTER bootstrap.min.css. */
 
 /* 0. Same specificity as Bootstrap's, and later,
       so ours wins */

@@ -1,0 +1,11 @@
+{
+  "name": "week11-customizing-deck-build",
+  "private": true,
+  "description": "Builds Customizing_Bootstrap_Tailwind.pptx (Week 11); screenshots the example pages with Microsoft Edge first",
+  "scripts": {
+    "build": "node build_deck.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}

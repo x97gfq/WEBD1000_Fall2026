@@ -1,7 +1,8 @@
 // Builds CSS_Frameworks_Bootstrap.pptx (Week 10, Classes 1 and 2), in the same style as the Week 8 and Week 9 decks.
 // To rebuild: cd 10_CSS_Frameworks/_build, run "npm install" once, then "npm run build".
 // The "Result" pictures are screenshots of the example pages, taken with Microsoft Edge (headless) each build.
-// Bootstrap and Tailwind load from a CDN, so the build needs the internet.
+// Bootstrap loads from a CDN, so the build needs the internet.
+// Customizing, Tailwind and Harbourside moved to Week 11: 11_Customizing_Bootstrap_Tailwind/_build/build_deck.js.
 // Code slides read the example files directly, so edit those files and re-run to update the slides.
 const pptxgen = require("pptxgenjs");
 const fs = require("fs");
@@ -345,8 +346,9 @@ function numCircle(s, n, x, y, color, d = 0.5) {
 }
 
 // "Try it" slide: numbered steps on the left, the code to type in a code box on the right
-function trySlide({ n, title, time, steps, code, lang = "css", codeTitle = "IN STYLE.CSS", tip, notes, stepGap, lw }) {
-  const s = activitySlide(`Try It ${n}: ${title} (${time})`, notes);
+// label: a title that isn't a numbered Try It (the warm-up, and Your Layout parts 2 and 3)
+function trySlide({ n, title, label, time, steps, code, lang = "css", codeTitle = "IN STYLE.CSS", tip, notes, stepGap, lw }) {
+  const s = activitySlide(`${label || `Try It ${n}: ${title}`} (${time})`, notes);
   const LW = lw || 6.55;
   card(s, { x: 0.75, y: 1.45, w: LW, h: 5.5 });
   stepGap = stepGap || Math.min(1.0, 5.0 / steps.length);
@@ -568,6 +570,64 @@ function strip(s, x, y, w, h, color, label, size = 13) {
   if (label) txt(s, label, { x, y, w, h, fontSize: size, fontFace: MONO, bold: true, color: C.white, align: "center", valign: "middle" });
 }
 
+// "What you should see": screenshots in one row, all the same height, filling the slide's width
+function resultSlide(title, frames, notes, maxH = 5.0, caption) {
+  const s = activitySlide(title, notes);
+  const gap = 0.35, w = W - 1.5;
+  const h = Math.min(maxH, (w - gap * (frames.length - 1)) / frames.reduce((a, f) => a + 1 / f.img.ratio, 0));
+  let x = 0.75 + (w - frames.reduce((a, f) => a + h / f.img.ratio, 0) - gap * (frames.length - 1)) / 2;
+  frames.forEach(({ img, label }) => { framedImage(s, img, x, 1.85, h / img.ratio, label); x += h / img.ratio + gap; });
+  if (caption) {
+    const cy = 1.85 + h + 0.4;
+    card(s, { x: 0.75, y: cy, w, h: 0.75, fill: C.white });
+    richBullets(s, [caption], { x: 1.05, y: cy, w: w - 0.6, h: 0.75, size: 16, bullet: false, valign: "middle" });
+  }
+  return s;
+}
+
+// Bootstrap's own colours, for slides that point at text-bg-* classes
+const BS = { primary: "0D6EFD", warning: "FFC107", info: "0DCAF0", dark: "212529" };
+const DOCS = "https://getbootstrap.com/docs/5.3/components/";
+const W3 = "https://www.w3schools.com/bootstrap5/bootstrap_";
+
+// A page of component tiles, 4 across and 3 down. Each: [name, what it is, docs page, W3Schools page or null, needs JS?]
+function componentSlide(title, items, notes) {
+  const s = plainSlide(title, notes);
+  const cols = 4, gap = 0.2, tw = (W - 1.5 - gap * (cols - 1)) / cols, th = 1.45;
+  items.forEach(([name, d, doc, w3, js], i) => {
+    const x = 0.75 + (i % cols) * (tw + gap), y = 1.4 + Math.floor(i / cols) * (th + 0.17);
+    const color = js ? C.purple : C.teal;
+    card(s, { x, y, w: tw, h: th });
+    s.addShape(pres.shapes.RECTANGLE, { x, y, w: 0.1, h: th, fill: { color }, line: { color } });
+    txt(s, [{ text: name, options: { hyperlink: { url: DOCS + doc + "/", tooltip: name + " in Bootstrap's docs" } } }],
+      { x: x + 0.25, y: y + 0.1, w: tw - 1.2, h: 0.38, fontSize: 15.5, bold: true, color: C.navy });
+    if (js) pill(s, "NEEDS JS", x + tw - 1.0, y + 0.12, C.purple, 0.88);
+    txt(s, d, { x: x + 0.25, y: y + 0.48, w: tw - 0.4, h: 0.58, fontSize: 11.5, color: C.dark, valign: "top" });
+    const links = [{ text: "Docs", options: { hyperlink: { url: DOCS + doc + "/" } } }];
+    if (w3) links.push({ text: "   ·   ", options: { color: C.mid } }, { text: "W3Schools", options: { hyperlink: { url: W3 + w3 + ".php" } } });
+    txt(s, links, { x: x + 0.25, y: y + th - 0.36, w: tw - 0.4, h: 0.28, fontSize: 11, bold: true, color: C.teal });
+  });
+  card(s, { x: 0.75, y: 6.38, w: W - 1.5, h: 0.62, fill: "FBE9DF", border: "F2C6AC" });
+  richBullets(s, [[["Your turn: ", "b"], "pick one, open its docs page, and copy the example into your layout. Change the words. ", ["Click a name to open its page.", "i"]]],
+    { x: 1.0, y: 6.38, w: W - 2.0, h: 0.62, size: 14, bullet: false, valign: "middle" });
+  return s;
+}
+
+// A link card: a coloured bar, the name (a link), the address, and a line about it
+function linkCard(s, { x, y, w, h, name, url, show, d, color, video }) {
+  card(s, { x, y, w, h });
+  s.addShape(pres.shapes.RECTANGLE, { x, y, w: 0.1, h, fill: { color }, line: { color } });
+  let tx = x + 0.3;
+  if (video) {
+    s.addShape(pres.shapes.OVAL, { x: x + 0.28, y: y + 0.17, w: 0.42, h: 0.42, fill: { color: C.red }, line: { color: C.red }, hyperlink: { url, tooltip: name } });
+    s.addShape(pres.shapes.ISOSCELES_TRIANGLE, { x: x + 0.43, y: y + 0.28, w: 0.17, h: 0.2, rotate: 90, fill: { color: C.white }, line: { color: C.white } });
+    tx = x + 0.85;
+  }
+  txt(s, [{ text: name, options: { hyperlink: { url, tooltip: name } } }], { x: tx, y: y + 0.1, w: x + w - tx - 0.2, h: 0.36, fontSize: 15.5, bold: true, color: C.navy });
+  txt(s, [{ text: show, options: { hyperlink: { url } } }], { x: tx, y: y + 0.46, w: x + w - tx - 0.2, h: 0.26, fontSize: 10.5, fontFace: MONO, color: C.teal });
+  txt(s, d, { x: tx, y: y + 0.73, w: x + w - tx - 0.2, h: h - 0.8, fontSize: 12, color: C.dark, valign: "top" });
+}
+
 // ---------- screenshots ----------
 const SH = {
   ex01: shot("01_bootstrap_starter_example.html", "ex01", 900, 300),
@@ -579,29 +639,26 @@ const SH = {
   ex05: shot("05_components_example.html", "ex05", 1000, 500),
   ex06d: shot("06_navbar_example.html", "ex06d", 1000, 230),
   ex06p: phone("06_navbar_example.html", "ex06p", 360, 330),
-  ex07: shot("07_customizing_example.html", "ex07", 900, 200),
-  // :hover can't be screenshotted, so this copy applies Bootstrap's own .btn:hover rule to both buttons
-  ex07h: shot(variant("07_customizing_example.html", "ex07h",
-    ".btn.old-way, .btn.new-way { background-color: var(--bs-btn-hover-bg); border-color: var(--bs-btn-hover-border-color); }"), "ex07h", 900, 200),
-  ex08: shot("08_bootstrap_cards_example.html", "ex08", 1100, 300),
-  ex09: shot("09_tailwind_cards_example.html", "ex09", 1100, 300),
-  try1: shot("activity/try_it_1_answer.html", "try1", 1000, 330),
-  try1p: phone("activity/try_it_1_answer.html", "try1p", 360, 640),
-  act0: shot("activity/index.html", "act0", 900, 700),
-  actD: shot("activity/answer/index.html", "actD", 1100, 1500),
-  actP: phone("activity/answer/index.html", "actP", 360, 700),
+  try1: shot("try_it_1_answer.html", "try1", 1000, 330),
+  try1p: phone("try_it_1_answer.html", "try1p", 360, 640),
+  // Your Layout: the warm-up, then the navbar (Part 2) and cards (Part 3)
+  wire: shot("layout/00_wireframe.svg", "wire", 1200, 720, 1),
+  lay1: shot("layout/01_layout_answer.html", "lay1", 1000, 350),
+  lay1p: phone("layout/01_layout_answer.html", "lay1p", 360, 760),
+  lay2: shot("layout/02_navbar_answer.html", "lay2", 1000, 330),
+  // The phone menu, open: the same page with the collapse forced open
+  lay2p: phone(variant("layout/02_navbar_answer.html", "lay2open", ".navbar-collapse.collapse { display: block !important; }"), "lay2p", 360, 470),
+  lay3: shot("layout/03_cards_answer.html", "lay3", 1000, 660),
+  lay3p: phone("layout/03_cards_answer.html", "lay3p", 360, 1080),
 };
 
-// Students' index.html is in activity/, not activity/answer/, so the image paths lose the ../
-const ANS = fileLines("activity/answer/index.html").map((l) => l.replace("../images/", "images/"));
-const ANSCSS = fileLines("activity/answer/style.css");
 
 // =====================================================================
 // WEEK 10, CLASS 1: CSS Frameworks and the Bootstrap Grid
 section("Class 1 - CSS Frameworks and the Bootstrap Grid");
 
 titleSlide("Week 10, Class 1", "CSS frameworks, and Bootstrap's 12-column grid.",
-  "Welcome back! For the last few weeks we've written every line of CSS ourselves: flexbox, grid, float, media queries. This week we look at CSS frameworks: CSS that someone else has already written, that we link to and use with class names.\n\nBootstrap is the main one. Next class we also look at Tailwind CSS, then rebuild Harbourside with Bootstrap.\n\nSame routine as before: pop quizzes all the way through, and Try Its.");
+  "Welcome back! For the last few weeks we've written every line of CSS ourselves: flexbox, grid, float, media queries. This week we look at CSS frameworks: CSS that someone else has already written, that we link to and use with class names.\n\nBootstrap is the main one, this week and next. Next week we also look at Tailwind CSS, and rebuild Harbourside with Bootstrap.\n\nSame routine as before: pop quizzes all the way through, and Try Its.");
 
 setupSlide("Attendance and a Quick Check-in", [
   ["OUTLOOK", "Are you checking your school Outlook email?"], ["TEAMS", "Are you signed into Teams?"],
@@ -678,7 +735,7 @@ dividerSlide("CSS Frameworks", "What they are   ·   what they cost   ·   the p
 
 {
   const s = panelSlide("What a Framework Costs",
-    "Last year's slides only listed the benefits. Students should hear the other side too, so they can choose.\n\n- Every site looks the same: the default Bootstrap look (that blue button, that navbar) is very recognizable. You need your own CSS on top to look like yourself. That's Try It 7 next class.\n- Size: bootstrap.min.css is about 230 KB, and the JavaScript bundle about 80 KB. Compressed over the network they're about 31 KB and 24 KB. Most pages use a small part of it. Show this in the DevTools Network tab on Example 01 (F12, Network, reload).\n- Lots of classes: the HTML gets busy, and there are hundreds of class names to learn. The docs are open on every developer's second monitor.\n- You still need CSS: to change the look, and to fix things when they go wrong. Which is why we learned CSS first.\n\nOn balance, frameworks are very widely used, especially for prototypes, admin pages and internal tools, where speed matters more than a unique look.");
+    "Last year's slides only listed the benefits. Students should hear the other side too, so they can choose.\n\n- Every site looks the same: the default Bootstrap look (that blue button, that navbar) is very recognizable. You need your own CSS on top to look like yourself. That's next week.\n- Size: bootstrap.min.css is about 230 KB, and the JavaScript bundle about 80 KB. Compressed over the network they're about 31 KB and 24 KB. Most pages use a small part of it. Show this in the DevTools Network tab on Example 01 (F12, Network, reload).\n- Lots of classes: the HTML gets busy, and there are hundreds of class names to learn. The docs are open on every developer's second monitor.\n- You still need CSS: to change the look, and to fix things when they go wrong. Which is why we learned CSS first.\n\nOn balance, frameworks are very widely used, especially for prototypes, admin pages and internal tools, where speed matters more than a unique look.");
   [["Sites look alike", "The \"Bootstrap look\" is easy to spot. You'll want your own CSS on top."],
     ["A big file", "About 230 KB of CSS (31 KB compressed), and most pages use a small part."],
     ["Lots of classes", "Busy HTML, and hundreds of class names to look up."],
@@ -692,7 +749,7 @@ dividerSlide("CSS Frameworks", "What they are   ·   what they cost   ·   the p
 
 {
   const s = panelSlide("Two Kinds of Framework",
-    "This is the main idea for comparing frameworks, and it's why we look at Tailwind next class.\n\nComponent frameworks (Bootstrap, Foundation, Bulma) give you finished parts with names: a button, a card, a navbar. You write class=\"btn btn-primary\" and get a complete, styled button.\n\nUtility-first frameworks (Tailwind) give you small classes that each do about one CSS property: bg-blue-600 is a background colour, px-4 is left and right padding, rounded is a border radius. You build the button yourself, out of those.\n\nBoth buttons here look about the same in a browser. Ask: which HTML would be easier to read? Which would be easier to make look different from every other site?\n\nBootstrap has utility classes too (we'll see them today), so the line isn't perfectly sharp. It's about what each one leads with.");
+    "This is the main idea for comparing frameworks, and it's why we look at Tailwind next week.\n\nComponent frameworks (Bootstrap, Foundation, Bulma) give you finished parts with names: a button, a card, a navbar. You write class=\"btn btn-primary\" and get a complete, styled button.\n\nUtility-first frameworks (Tailwind) give you small classes that each do about one CSS property: bg-blue-600 is a background colour, px-4 is left and right padding, rounded is a border radius. You build the button yourself, out of those.\n\nBoth buttons here look about the same in a browser. Ask: which HTML would be easier to read? Which would be easier to make look different from every other site?\n\nBootstrap has utility classes too (we'll see them today), so the line isn't perfectly sharp. It's about what each one leads with.");
   [["COMPONENT · BOOTSTRAP", "Ready-made parts with names.", ['<button class="btn btn-primary">', "   Order", "</button>"], C.teal],
     ["UTILITY-FIRST · TAILWIND", "Small classes you put together.", ['<button class="bg-blue-600 text-white', '               px-4 py-2 rounded">', "   Order", "</button>"], C.purple]].forEach(([k, d, code, c], i) => {
     const y = 1.95 + i * 2.4;
@@ -713,7 +770,7 @@ dividerSlide("CSS Frameworks", "What they are   ·   what they cost   ·   the p
   s.addTable([hdr, ...rows.map((r, i) => r.map((t, j) => ({ text: t, options: { bold: j === 0, fill: { color: i % 2 ? "F7F9FA" : C.white } } })))],
     { x: CX, y: 1.95, w: CW, colW: [1.85, 1.6, 4.1], fontFace: FONT, fontSize: 15, color: C.black, border: { type: "solid", pt: 0.75, color: "D0D7DB" }, rowH: 0.75, valign: "middle", margin: 0.1 });
   card(s, { x: CX, y: 5.95, w: CW, h: 0.75, fill: "FBE9DF", border: "F2C6AC" });
-  richBullets(s, [[["This week: ", "b"], "Bootstrap (both classes), and a look at Tailwind next class: one of each kind."]], { x: CX + 0.25, y: 5.95, w: CW - 0.5, h: 0.75, size: 15, bullet: false, valign: "middle" });
+  richBullets(s, [[["Bootstrap this week, ", "b"], "and a look at Tailwind next week: one of each kind."]], { x: CX + 0.25, y: 5.95, w: CW - 0.5, h: 0.75, size: 15, bullet: false, valign: "middle" });
 }
 
 quiz({
@@ -923,14 +980,14 @@ trySlide({
     ["Add a heading and a button", ["Then drag the window narrower. Do they stack?"]],
   ],
   lw: 5.4,
-  code: upTo(bodyOf("activity/try_it_1_answer.html"), '<div class="row g-3">', "A light button").map((l) => l.replace(/<p>[^<]*<\/p>/, "<p>...</p>")).concat(["      </div>", "   </div>", "   <!-- ...two more columns, the same way -->", "</div>"]),
+  code: upTo(bodyOf("try_it_1_answer.html"), '<div class="row g-3">', "A light button").map((l) => l.replace(/<p>[^<]*<\/p>/, "<p>...</p>")).concat(["      </div>", "   </div>", "   <!-- ...two more columns, the same way -->", "</div>"]),
   tip: [[["Why ", "b"], ["text-bg-", "c"], [" and not ", "b"], ["bg-", "c"], ["? ", "b"], "It picks a text colour you can read, even on yellow."]],
-  notes: "This is the 'Activity - together' from last year's slides. Do it together: you type, they type along, one step at a time.\n\nOne change from the original: it asked for bg-primary, bg-success and bg-warning. Use text-bg-* instead, so the text is readable (white on blue and green, black on yellow).\n\nWhy the colour goes on an inner div, not on the column: the column has padding for the gutter, and a coloured column would make the boxes touch. g-3 on the row adds space between them.\n\nThe finished page is activity/try_it_1_answer.html.\n\nFast finishers: make the middle column wider (col-md-6, with col-md-3 on each side), or add a fourth column that goes 2 across on md and 4 across on lg.",
+  notes: "This is the 'Activity - together' from last year's slides. Do it together: you type, they type along, one step at a time.\n\nOne change from the original: it asked for bg-primary, bg-success and bg-warning. Use text-bg-* instead, so the text is readable (white on blue and green, black on yellow).\n\nWhy the colour goes on an inner div, not on the column: the column has padding for the gutter, and a coloured column would make the boxes touch. g-3 on the row adds space between them.\n\nThe finished page is try_it_1_answer.html.\n\nFast finishers: make the middle column wider (col-md-6, with col-md-3 on each side), or add a fourth column that goes 2 across on md and 4 across on lg.",
 });
 
 {
   const s = panelSlide("Class 1 Recap",
-    "If students remember three things: link your CSS after Bootstrap's, rows have 12 columns, and col-md-4 means 'from 768px up'.\n\nNext class: Bootstrap's components, customizing Bootstrap, a look at Tailwind CSS, and rebuilding Harbourside with Bootstrap.\n\nIf there's time, have students start reading through getbootstrap.com/docs/5.3/layout/grid/.");
+    "If students remember three things: link your CSS after Bootstrap's, rows have 12 columns, and col-md-4 means 'from 768px up'.\n\nNext class: a wireframe as a Bootstrap grid, Bootstrap's components, and a layout of our own.\n\nIf there's time, have students start reading through getbootstrap.com/docs/5.3/layout/grid/.");
   labelBullets(s, [
     { label: "What we covered:", text: [
       "A framework is CSS someone else wrote. You use it with class names.",
@@ -940,23 +997,23 @@ trySlide({
       "col-md-4: a third of the row, from 768px and up.",
       "text-bg-*, p-3, mb-2: colour and spacing utilities.",
     ] },
-    { label: "Next class:", text: ["Components, customizing, Tailwind, and Harbourside in Bootstrap."] },
+    { label: "Next class:", text: ["A wireframe as a Bootstrap grid, then Bootstrap's components."] },
   ], { size: 20, sub: 16 });
 }
 
 // =====================================================================
-// WEEK 10, CLASS 2: Components, Tailwind and Harbourside
-section("Class 2 - Components, Tailwind and Harbourside");
+// WEEK 10, CLASS 2: Components and Your Layout
+section("Class 2 - Components and Your Layout");
 
-dividerSlide("Week 10, Class 2", "Components   ·   customizing   ·   Tailwind CSS   ·   Harbourside in Bootstrap",
-  "Welcome back. Last class was the grid and the utilities. Today: Bootstrap's ready-made components, how to make Bootstrap look like your site and not everyone else's, a look at Tailwind, and then the big activity: Harbourside, rebuilt with Bootstrap.");
+dividerSlide("Week 10, Class 2", "A wireframe as a grid   ·   components   ·   your layout   ·   the component library",
+  "Welcome back. Last class was the grid and the utilities. Today: a warm-up that turns a wireframe into a Bootstrap grid, Bootstrap's ready-made components, and our own layout with a navbar and cards.\n\nNext week: making Bootstrap look like your site, a look at Tailwind, and Harbourside rebuilt with Bootstrap.");
 
 setupSlide("Is Your Environment Set Up?", [
   ["GIT", "Did you run git pull since last class?"],
   ["VS CODE", "Is the 10_CSS_Frameworks folder open in VS Code?"],
-  ["LIVE SERVER", "Does activity/index.html open with Go Live? (It has no CSS yet.)"],
+  ["LIVE SERVER", "Does layout/01_start.html open with Go Live? (It's blank.)"],
   ["OUTLOOK AND TEAMS", "Have you checked your school email and the Teams channel?"],
-], "Take attendance while everyone checks these.\n\nactivity/index.html is the Harbourside page with no CSS at all, so it should look plain: big logo, bullet-point menu, Times New Roman. That's correct.\n\nThe Harbourside activity needs the internet again, for Bootstrap's CDN.");
+], "Take attendance while everyone checks these.\n\nlayout/01_start.html is the warm-up's starting page: Bootstrap is linked, but the body is empty, so the page is blank. That's correct.\n\nToday needs the internet again, for Bootstrap's CDN.");
 
 recallSlide("Recall: What Did We Do Last Class?", (s) => {
   const x = 0.75, w = 5.2, cw = w / 12;
@@ -974,13 +1031,76 @@ recallSlide("Recall: What Did We Do Last Class?", (s) => {
   ["Utilities", [["text-bg-primary", "c"], ", ", ["p-3", "c"], ", ", ["mb-2", "c"], ": colour and spacing with classes."]],
 ], "Same as always: 30 seconds with a neighbour, then take answers, then go through the four points.\n\nQuick check while you're here: on a phone, what does col-md-4 do? (Nothing: the column is full width.)");
 
-overviewSlide("Week 10, Class 2: Overview", "Components, Tailwind and Harbourside", [
+// ---- Warm-up: a wireframe, as a Bootstrap grid (layout/) ----
+// The body of each layout page, as students' code (2 tabs of indent taken off)
+const LAY1 = bodyOf("layout/01_layout_answer.html");
+const LAY2 = bodyOf("layout/02_navbar_answer.html");
+const LAY3 = bodyOf("layout/03_cards_answer.html");
+
+{
+  const s = activitySlide("Warm-up: From Wireframe to Grid (2 min)",
+    "The warm-up. Students saw wireframes back in Week 3; this is the step from a wireframe to code.\n\nGive them two minutes with a neighbour to answer the four questions from the picture. The faint orange stripes are Bootstrap's 12 columns, so they can count.\n\nAnswers:\n1. Three rows: the header, then the sidebar and main together, then the footer.\n2. The sidebar covers 3 of the 12 columns.\n3. The main area covers the other 9. 3 + 9 = 12.\n4. On a phone everything is full width, stacked in order: header, sidebar, main, footer. So the columns need a breakpoint: col-md-3 and col-md-9, not col-3 and col-9 (which would stay side by side on a phone, squashed).\n\nThe wireframe is layout/00_wireframe.svg. It opens in any browser.");
+  framedImage(s, SH.wire, 0.75, 1.75, 7.9, "THE WIREFRAME · LAYOUT/00_WIREFRAME.SVG");
+  const rx = 9.0, rw = W - rx - 0.6;
+  card(s, { x: rx, y: 1.45, w: rw, h: 5.5 });
+  txt(s, "Count the columns:", { x: rx + 0.3, y: 1.65, w: rw - 0.6, h: 0.4, fontSize: 18, bold: true, color: C.black });
+  [["How many rows?", "The bands that go all the way across."],
+    ["The sidebar?", "How many of the 12 columns?"],
+    ["The main area?", "It has to add up to 12."],
+    ["On a phone?", "What happens, and which class does that?"]].forEach(([t, d], i) => {
+    const y = 2.3 + i * 1.12;
+    numCircle(s, i + 1, rx + 0.3, y, C.orange, 0.44);
+    txt(s, t, { x: rx + 0.9, y: y - 0.02, w: rw - 1.1, h: 0.36, fontSize: 16, bold: true, color: C.black });
+    txt(s, d, { x: rx + 0.9, y: y + 0.34, w: rw - 1.1, h: 0.6, fontSize: 13.5, color: C.grey, valign: "top" });
+  });
+}
+
+trySlide({
+  label: "Warm-up: Build It, Together", time: "15 min", lw: 5.5, codeTitle: "INSIDE <BODY>, ABOVE THE SCRIPT", lang: "html",
+  steps: [
+    ["Open the starter", ["Save ", ["layout/01_start.html", "c"], " as ", ["my_layout.html", "c"], ". The links and the viewport tag are done."]],
+    ["One container", ["A ", ["<div class=\"container\">", "c"], " around the whole page."]],
+    ["Row 1: the header", ["A ", ["row", "c"], " with one ", ["col-12", "c"], " in it. Put the h1 inside."]],
+    ["Row 2: sidebar and main", [["col-md-3", "c"], " + ", ["col-md-9", "c"], " = 12. Use ", ["<aside>", "c"], " and ", ["<main>", "c"], "."]],
+    ["Row 3: the footer", ["Another ", ["col-12", "c"], "."]],
+    ["Colour every part", [["text-bg-primary", "c"], ", ", ["-warning", "c"], ", ", ["-info", "c"], ", ", ["-dark", "c"], ", and ", ["p-3", "c"], ". Then drag the window narrower."]],
+  ],
+  code: between(LAY1, '<div class="container">', "<!-- Bootstrap's JavaScript")
+    .filter((l) => !l.includes("Link three") && !l.includes("<p>Make the window"))
+    .map((l) => l.replace(/<p>[^<]*<\/p>/, "<p>...</p>")),
+  notes: "Do this together: you type, they type along, one row at a time. Save after each row and look.\n\nIt's meant to look like a wireframe, not a finished site: the bright colours are only there so you can see where each part is. Don't let anyone spend time making it pretty yet.\n\nThings to point out as you go:\n- The semantic elements are still here. header, aside, main and footer can carry Bootstrap's classes themselves: <header class=\"row\">, <aside class=\"col-md-3\">.\n- Every row adds up to 12: 12, then 3 + 9, then 12.\n- text-bg-* sets a background and a readable text colour (Class 1's colour grid). p-3 adds padding so the words aren't on the edge.\n- The colour is on the columns, so the parts touch. That's fine for a layout. (On the colour grid we put it on an inner div, so the gutters showed.)\n- Drag the window under 768px: everything stacks, like the phone wireframe.\n\nThe finished page is layout/01_layout_answer.html.\n\nFast finishers: make the sidebar narrower on large screens (col-md-3 col-lg-2, and col-md-9 col-lg-10). Or put the sidebar on the right: swap the aside and main.",
+});
+
+{
+  const s = activitySlide("Warm-up: The Wireframe, in Bootstrap",
+    "The answer, side by side with the wireframe. Every box in the wireframe became a column, and every band across became a row.\n\nOpen layout/01_layout_answer.html and drag the window narrower: at 767px it changes to the phone wireframe, everything stacked.\n\nThis is the plan for the rest of the day's 'Your Layout' work: next we replace the h1 with a real navbar (Part 2), then put cards in the main area (Part 3). Students who didn't finish can start Part 2 from layout/02_navbar_start.html, which is this page.");
+  const gap = 0.35, w = W - 1.5;
+  const h = Math.min(3.45, (w - gap) / (1 / SH.wire.ratio + 1 / SH.lay1.ratio));
+  framedImage(s, SH.wire, 0.75, 1.75, h / SH.wire.ratio, "THE WIREFRAME");
+  framedImage(s, SH.lay1, 0.75 + h / SH.wire.ratio + gap, 1.75, h / SH.lay1.ratio, "IN BOOTSTRAP · 1000PX");
+  const items = [["<header class=\"row\">", "col-12", "All 12 columns.", BS.primary], ["<aside>", "col-md-3", "3 of 12, from 768px up.", BS.warning],
+    ["<main>", "col-md-9", "The other 9. 3 + 9 = 12.", BS.info], ["<footer class=\"row\">", "col-12", "All 12 columns.", BS.dark]];
+  const iy = 1.75 + h + 0.3, iw = (w - 3 * 0.2) / 4, ih = 1.45;
+  items.forEach(([el, cls, d, c], i) => {
+    const x = 0.75 + i * (iw + 0.2);
+    card(s, { x, y: iy, w: iw, h: ih });
+    s.addShape(pres.shapes.RECTANGLE, { x, y: iy, w: iw, h: 0.12, fill: { color: c }, line: { color: c } });
+    txt(s, el, { x: x + 0.2, y: iy + 0.22, w: iw - 0.4, h: 0.3, fontSize: 12, fontFace: MONO, color: C.grey });
+    txt(s, cls, { x: x + 0.2, y: iy + 0.52, w: iw - 0.4, h: 0.4, fontSize: 19, fontFace: MONO, bold: true, color: "8A2B0B" });
+    txt(s, d, { x: x + 0.2, y: iy + 0.95, w: iw - 0.4, h: 0.35, fontSize: 13, color: C.dark });
+  });
+  card(s, { x: 0.75, y: iy + ih + 0.2, w, h: 0.6, fill: C.dark, border: C.dark });
+  richBullets(s, [[["Under 768px: ", "b"], "the ", ["md", "c"], " classes switch off, and every part is full width, like the phone wireframe."]],
+    { x: 1.05, y: iy + ih + 0.2, w: w - 0.6, h: 0.6, size: 15, bullet: false, color: C.white, valign: "middle", codeColor: "F2C6AC" });
+}
+
+overviewSlide("Week 10, Class 2: Overview", "Components and Your Layout", [
+  "Warm-up: a wireframe, as a Bootstrap grid",
   "Bootstrap's components: buttons, alerts, cards, the navbar",
-  "Customizing Bootstrap so it looks like your site",
-  "Tailwind CSS: the same cards, the other way",
-  "Rebuild Harbourside with Bootstrap, then submit",
-], [["Use", "Components"], ["Compare", "Tailwind"], ["Build", "Harbourside"]],
-  "Rough plan:\n- 10 min: environment, recall, overview\n- 20 min: components, Examples 05 and 06, Pop Quiz 7\n- 10 min: customizing, Example 07, Pop Quiz 8\n- 15 min: Tailwind, Examples 08 and 09, Pop Quizzes 9 and 10\n- 45 min: Harbourside, Try Its 2 to 7, then submit\n- 5 min: recap and the one-sentence summary\n\nThe activity is the priority. If time is short, demo Tailwind quickly and skip the 'Which one?' slide.");
+  "Your layout: add a navbar, then cards",
+  "The rest of Bootstrap's components, and where to look them up",
+], [["Plan", "A wireframe"], ["Use", "Components"], ["Build", "Your layout"]],
+  "Rough plan:\n- 5 min: environment, recall\n- 15 min: warm-up, the wireframe as a grid\n- 5 min: overview\n- 15 min: components, Examples 05 and 06, Pop Quiz 7\n- 20 min: your layout, Part 2 (navbar) and Part 3 (cards)\n- 10 min: the component library: fast finishers add one to their layout\n- 10 min: show and hide, where to look things up, resources\n- 5 min: recap and the one-sentence summary\n\nAbout 85 minutes. If there's time left, students start the component library's 'Your turn' or look at Assignment 4.\n\nCustomizing, Tailwind and Harbourside moved to Week 11 (11_Customizing_Bootstrap_Tailwind).");
 
 dividerSlide("Components", "Buttons   ·   alerts   ·   cards   ·   the navbar",
   "Components are Bootstrap's ready-made parts. You copy the HTML from the docs, then change the words.");
@@ -1004,7 +1124,7 @@ codeSlide({
     ["Put cards ", ["in grid columns", "b"], " to line them up."],
     [["badge", "c"], " is the small label."],
   ],
-  notes: "A card is a box with a border and rounded corners. Inside: card-body for padding, card-title and card-text for spacing. It can also have card-header, card-footer and card-img-top for a picture at the top.\n\nCards don't set their own width. They fill whatever column they're in. So the pattern is always: row, then col-md-6 (or whatever), then the card inside it. That's how Harbourside's menu will work.\n\nLast year's slides listed 'wells'. Wells were Bootstrap 3, and cards replaced them in Bootstrap 4.\n\nThe headings use class=\"h5\": it makes an h3 look like an h5, so you can keep the right heading order for screen readers and still pick the size.",
+  notes: "A card is a box with a border and rounded corners. Inside: card-body for padding, card-title and card-text for spacing. It can also have card-header, card-footer and card-img-top for a picture at the top.\n\nCards don't set their own width. They fill whatever column they're in. So the pattern is always: row, then col-md-6 (or whatever), then the card inside it. That's how Harbourside's menu will work next week.\n\nLast year's slides listed 'wells'. Wells were Bootstrap 3, and cards replaced them in Bootstrap 4.\n\nThe headings use class=\"h5\": it makes an h3 look like an h5, so you can keep the right heading order for screen readers and still pick the size.",
 });
 
 codeSlide({
@@ -1027,6 +1147,72 @@ quiz({
   revealNotes: "Answer: A.\n\nDemo it: in Example 06, change data-bs-toggle to data-toggle and save. The button stops working, and there's no error in the Console, which is what makes it hard to find.\n\nThe lesson: check the version of anything you copy.",
 });
 
+// ---- Your layout, parts 2 and 3: the warm-up page gets a navbar, then cards ----
+trySlide({
+  label: "Your Layout, Part 2: Add a Navbar", time: "10 min", lw: 4.9, codeTitle: "THE HEADER ROW · LAYOUT/02_NAVBAR_ANSWER.HTML", lang: "html",
+  steps: [
+    ["Open the finished warm-up", [["layout/02_navbar_start.html", "c"], ", or keep going in your own file."]],
+    ["Empty the header's column", ["Delete the ", ["<h1>", "c"], ". Change the column's classes to ", ["col-12 p-0", "c"], "."]],
+    ["Paste a navbar", ["From Example 06, or type it from the slide. ", ["container-fluid", "c"], " inside it."]],
+    ["Make it yours", ["Your site's name in the ", ["navbar-brand", "c"], ", and your own links."]],
+    ["Test it", ["Narrow the window. Does the menu button open the links?"]],
+  ],
+  code: upTo(LAY2, '<header class="row">', "</header>").filter((l) => !l.includes("<!-- p-0")).map((l) => l.replace(' aria-current="page"', "")),
+  notes: "Students who didn't finish the warm-up start from layout/02_navbar_start.html: it's the finished warm-up, with a comment in the header saying where the navbar goes.\n\nThe navbar is Example 06's, with three changes:\n- The column it's in gets p-0 (no padding), so the navbar fills it edge to edge. The h1 and text-bg-primary go: the navbar has its own colour, bg-primary, and data-bs-theme=\"dark\" makes its links and menu button light.\n- container-fluid inside the navbar, not container: we're already inside the page's container, and a second fixed-width one would be narrower than the column.\n- navbar-brand holds the site name, the job the h1 had.\n\n(The slide leaves aria-current=\"page\" off the Home link to fit. The answer file has it: it tells screen readers which page you're on.)\n\nIf the menu button does nothing: the script is missing, or data-bs-target doesn't match the id. Pop Quiz 7 again.\n\nFinished page: layout/02_navbar_answer.html.\n\nFast finishers: add a dropdown to the navbar (Bootstrap's docs, Navbar, 'Supported content' has one), or make the sidebar a list group (list-group and list-group-item on the ul and li).",
+});
+
+resultSlide("Part 2: What You Should See", [{ img: SH.lay2, label: "1000PX" }, { img: SH.lay2p, label: "360PX, MENU OPEN" }],
+  "Left: wide, the links sit on the right (ms-auto). Right: on a phone, the links fold into the menu button. This picture shows it after clicking.\n\nCheck a few screens around the room before moving on. The usual problems:\n- The navbar is narrower than the yellow and blue parts: they used container instead of container-fluid, or left the padding on the column (p-0 fixes it).\n- The menu button shows, but nothing happens: the script, or data-bs-toggle and data-bs-target.\n- Dark links on blue: data-bs-theme=\"dark\" is missing.", 5.0,
+  [["Wide: ", "b"], "the links sit on the right (", ["ms-auto", "c"], "). ", ["Narrow: ", "b"], "they fold into the menu button, and it opens."]);
+
+trySlide({
+  label: "Your Layout, Part 3: Add Cards", time: "10 min", lw: 5.3, codeTitle: "IN <MAIN>, UNDER THE PARAGRAPHS", lang: "html",
+  steps: [
+    ["A row inside main", ["Under the paragraphs, a ", ["<div class=\"row g-3\">", "c"], ". Rows can go inside columns."]],
+    ["Two columns", [["col-sm-6", "c"], " each: side by side from 576px up."]],
+    ["A card in each", [["card", "c"], ", then ", ["card-body", "c"], " with a ", ["card-title", "c"], ", ", ["card-text", "c"], " and a button."]],
+    ["A picture on one", ["An ", ["<img class=\"card-img-top\">", "c"], " above the card-body. Try ", ["images/harbour.jpg", "c"], "."]],
+    ["Line them up", [["h-100", "c"], " on each card: the same height, even with different words."]],
+  ],
+  code: upTo(LAY3, '<div class="row g-3">', "</div>", { skip: 8 }).concat([
+    '   <div class="col-sm-6">', '      <div class="card h-100">', '         <img src="images/harbour.jpg"', '            class="card-img-top" alt="...">',
+    "         <!-- a card-body, like card one -->", "      </div>", "   </div>", "</div>"]),
+  notes: "The new idea: a row inside a column. The main column is 9 of 12 wide, and the row inside it has its own 12 columns. So col-sm-6 is half of main, not half of the page.\n\nThe card is from Example 05:\n- card: the box with a border and rounded corners. It's white, so it shows up on the blue main area.\n- card-body: the padding inside. card-title and card-text space the words.\n- card-img-top: a picture across the top, with the top corners rounded to match. It goes inside the card, before card-body.\n- h-100: height 100%, so both cards are as tall as the column. Without it, the card with less in it is shorter.\n\ng-3 on the row puts a gap between the two cards.\n\nalt=\"...\" on the slide is only to fit: write real alt text. The answer file has it.\n\nFinished page: layout/03_cards_answer.html.\n\nFast finishers: a third card, with col-sm-6 col-lg-4 on all three (2 across, then 3 across). Or a card-header and card-footer on a card.",
+});
+
+resultSlide("Part 3: What You Should See", [{ img: SH.lay3, label: "1000PX: TWO CARDS IN MAIN" }, { img: SH.lay3p, label: "360PX" }],
+  "Left: wide, the two cards share the main column. Right: on a phone, everything is one column again, the cards too. (The phone picture is the whole page, scaled down.)\n\nAsk: between 576px and 767px, what happens? (The sidebar and main stack, because they're md, but the cards are still side by side, because they're sm.) Drag the window to check.\n\nThat's the whole layout: a wireframe, the grid, a navbar and cards. Next: what else Bootstrap has.", 5.1);
+
+componentSlide("Bootstrap's Components (1 of 2): Content and Style", [
+  ["Alerts", "A coloured message box: success, warning, danger.", "alerts", "alerts"],
+  ["Badge", "A small label or count: New, 3, Today's special.", "badge", "badges"],
+  ["Breadcrumb", "Where you are: Home / Menu / Lunch.", "breadcrumb", "pagination"],
+  ["Buttons", "btn plus a colour, an outline or a size.", "buttons", "buttons"],
+  ["Button group", "Buttons joined into one bar.", "button-group", "button_groups"],
+  ["Card", "A box with a body, and a header, footer or picture.", "card", "cards"],
+  ["List group", "A list of items or links, in a bordered box.", "list-group", "list_groups"],
+  ["Navs and tabs", "Links styled as tabs or pills.", "navs-tabs", "navs"],
+  ["Pagination", "Page links: Previous, 1, 2, 3, Next.", "pagination", "pagination"],
+  ["Progress", "A progress bar, in any colour, with stripes.", "progress", "progressbars"],
+  ["Spinners", "A \"loading\" circle, or growing dots.", "spinners", "spinners"],
+  ["Placeholders", "Grey blocks that stand in while content loads.", "placeholders", null],
+], "Bootstrap 5.3 has 24 components. These 12 are CSS only: copy the HTML and they work.\n\nThe names are links. Click one to open its page in Bootstrap's docs, and the W3Schools link under it opens W3Schools' version (breadcrumbs are on W3Schools' pagination page; placeholders aren't on W3Schools at all).\n\nShow how to read a docs page: an example at the top, the HTML under it with a copy button, then the variations (colours, sizes) further down. Copy, paste, change the words.\n\nSo far today: alerts, badges, buttons and cards (Example 05) and the navbar (Example 06).\n\nThe 'Your turn' line: students who've finished Part 3 pick one and add it to their layout. Good first choices: a list group in the sidebar, a breadcrumb above the main heading, an alert at the top of main, or a progress bar.");
+
+componentSlide("Bootstrap's Components (2 of 2): The Ones That Move", [
+  ["Navbar", "The site menu. Folds into a menu button on phones.", "navbar", "navbar", true],
+  ["Dropdowns", "A button or link that opens a list of links.", "dropdowns", "dropdowns", true],
+  ["Collapse", "A button that shows and hides a section.", "collapse", "collapse", true],
+  ["Accordion", "Stacked sections that open one at a time.", "accordion", "collapse", true],
+  ["Carousel", "A slideshow of pictures, with arrows.", "carousel", "carousel", true],
+  ["Modal", "A pop-up dialog box over the page.", "modal", "modal", true],
+  ["Offcanvas", "A panel that slides in from the side.", "offcanvas", "offcanvas", true],
+  ["Tooltips", "A small hint on hover. One line of JS turns them on.", "tooltips", "tooltip", true],
+  ["Popovers", "A bigger box on click. One line of JS turns them on.", "popovers", "popover", true],
+  ["Toasts", "A small notice in a corner, like a phone's.", "toasts", "toast", true],
+  ["Scrollspy", "Lights up the menu link for the part you're reading.", "scrollspy", "scrollspy", true],
+  ["Close button", "The × that closes an alert, a modal or a toast.", "close-button", null, false],
+], "These need Bootstrap's JavaScript: the bootstrap.bundle.min.js script at the end of the body. Without it they show up but don't do anything, like the navbar's menu button in Pop Quiz 7.\n\nMost of them work with data-bs- attributes only, no JavaScript of our own: data-bs-toggle=\"modal\", data-bs-toggle=\"collapse\", and so on. Tooltips and popovers are the exception: the docs page has one line of JavaScript to turn them on, because they're off by default (they slow down big pages).\n\nGood ones to try in the layout: an accordion in the main area, a modal opened by one of the card buttons, or an offcanvas menu for the sidebar on phones.\n\nThe close button isn't moving on its own: it's the × used inside alerts, modals, toasts and offcanvas, and their JavaScript makes it work.\n\nThe accordion is on W3Schools' Collapse page.");
+
 {
   const s = panelSlide("Show and Hide by Screen Size",
     "From last year's 'Responsive Utilities' slide.\n\nThe display classes: d-none is display: none. d-block, d-inline, d-flex and so on set display. Add a breakpoint to make them responsive, and like the grid, each one applies from that size up.\n\nSo d-none d-md-block reads: hidden, and then from 768px up, shown as a block. Example 03's badges use this to show one badge at each size.\n\nThe opposite, d-md-none: shown on phones, hidden from md up. Handy for a phone-only call button.\n\nBe careful hiding content: if something matters, phone users need it too. Hiding is better for different versions of the same thing.\n\ncontainer-fluid is from the same slide: always the full width, where container stops growing at each breakpoint (max 1320px).");
@@ -1038,32 +1224,9 @@ quiz({
   });
 }
 
-dividerSlide("Customizing Bootstrap", "Your CSS after theirs   ·   Bootstrap 5's variables",
-  "Every Bootstrap site looks like Bootstrap until you change it. The question is how.");
-
-codeSlide({
-  kicker: "CUSTOMIZING · EXAMPLE 07", title: "Changing a Button's Colour", file: "10_CSS_Frameworks/07_customizing_example.css",
-  lines: cssOf("07_customizing_example.html").slice(2), lang: "css", frames: [[{ img: SH.ex07, label: "NORMAL" }], [{ img: SH.ex07h, label: "WHILE YOU HOVER" }]], maxFrameH: 2.9, size: 14,
-  bullets: [
-    ["Button 1 changes ", ["background-color", "c"], ". Hover, and it goes ", ["blue", "b"], "."],
-    ["Button 2 changes Bootstrap's ", ["variables", "b"], ". Every state uses them."],
-  ],
-  notes: "Open 07_customizing_example.html and hover over each button.\n\nPart 0: overriding any rule works the normal way. Bootstrap's body rule and ours tie, ours is later, ours wins. The font is Georgia.\n\nPart 1 is the way from last year's slides (and lots of tutorials). It looks right until you hover: Bootstrap has a .btn:hover rule, which is more specific than ours, and it sets the background to var(--bs-btn-hover-bg). That's still blue. The bottom picture applies that exact rule to both buttons.\n\nPart 2 is how Bootstrap 5.3 wants it done. A Bootstrap button reads all of its colours from variables (custom properties, the --name ones). Set those, and the normal, hover and active states all follow.\n\nWhere do the variable names come from? Inspect a button in DevTools: the .btn-primary rule lists them all.\n\nFor bigger changes (every primary colour on the site), professional projects use Bootstrap's Sass source. That's beyond this course. Ready-made Bootstrap themes are another option (last year's slides mention buying one); Bootswatch has free ones.",
-});
-
-quiz({
-  q: "This is in your CSS, after Bootstrap's. What colour is the button while you hover over it?",
-  code: [".btn-primary {", "   background-color: #ff5722;", "   border-color: #ff5722;", "}"], codeTitle: "LAST YEAR'S SLIDE",
-  options: ["Orange, the same as always", "Bootstrap's blue", "A slightly darker orange", "See-through: it has no colour"], answer: 1,
-  why: ["Bootstrap's `.btn:hover` (two classes' worth) beats `.btn-primary` (one), so its hover rule wins.", "That rule uses `var(--bs-btn-hover-bg)`, which is still blue. Change the variables instead: Example 07, part 2."],
-  revealImg: SH.ex07h,
-  notes: "The code is word for word from last year's Customizing Bootstrap slide. Specificity from Week 6.",
-  revealNotes: "Answer: B.\n\nThe picture is Example 07 with Bootstrap's hover rule applied: button 1 is blue.\n\nSpecificity: .btn:hover is a class plus a pseudo-class, so (0,2,0). .btn-primary is (0,1,0). Ours comes later, but specificity is checked first.",
-});
-
 {
   const s = panelSlide("Where to Look Things Up",
-    "Nobody memorizes Bootstrap. Professionals have the docs open all the time. Show the docs site quickly: the left menu has Layout (the grid), Content (tables, images), Components and Utilities.\n\nThe Examples page has full page templates (Album, Pricing, Checkout, Product, Cover, Carousel...). Last year's activity was to download one and customize it. It's a fast-finisher option today.\n\nThe list from last year's slides, updated:\n- Grids, tables, images, alerts, buttons, navbar, carousel, modal, tooltip and popover are all still in Bootstrap 5.\n- Wells and Glyphicons were Bootstrap 3, and are gone. Use cards instead of wells, and Bootstrap Icons (a separate download, at icons.getbootstrap.com) instead of Glyphicons.\n- Tooltips and popovers need one line of JavaScript to turn them on. The docs show it.\n\nW3Schools has a Bootstrap 5 tutorial too. Check the URL says bootstrap5, not bootstrap (which is version 3).");
+    "Nobody memorizes Bootstrap. Professionals have the docs open all the time. Show the docs site quickly: the left menu has Layout (the grid), Content (tables, images), Components and Utilities.\n\nThe Examples page has full page templates (Album, Pricing, Checkout, Product, Cover, Carousel...). Last year's activity was to download one and customize it. It's a fast-finisher option next week, after Harbourside.\n\nThe list from last year's slides, updated:\n- Grids, tables, images, alerts, buttons, navbar, carousel, modal, tooltip and popover are all still in Bootstrap 5.\n- Wells and Glyphicons were Bootstrap 3, and are gone. Use cards instead of wells, and Bootstrap Icons (a separate download, at icons.getbootstrap.com) instead of Glyphicons.\n- Tooltips and popovers need one line of JavaScript to turn them on. The docs show it.\n\nW3Schools has a Bootstrap 5 tutorial too. Check the URL says bootstrap5, not bootstrap (which is version 3).");
   [["Bootstrap's docs", "getbootstrap.com/docs/5.3", "Layout, Components, Utilities. Copy the HTML, change the words.", C.purple],
     ["Bootstrap's examples", "getbootstrap.com/docs/5.3/examples", "Whole pages to start from: Album, Pricing, Product, Cover...", C.orange],
     ["W3Schools", "w3schools.com/bootstrap5", "Short lessons with Try It editors. Check it says bootstrap5.", C.teal]].forEach(([t, u, d, c], i) => {
@@ -1078,217 +1241,30 @@ quiz({
   richBullets(s, [[["Gone since Bootstrap 3: ", "b"], "wells (use ", ["card", "c"], ") and Glyphicons (use Bootstrap Icons)."]], { x: CX + 0.25, y: 5.65, w: CW - 0.5, h: 1.05, size: 15, bullet: false, valign: "middle" });
 }
 
-dividerSlide("Tailwind CSS", "Utility-first   ·   the same cards, two ways   ·   which one should you use?",
-  "Tailwind is the other kind of framework: no ready-made components, just small classes you combine.");
-
 {
-  const s = plainSlide("The Same Cards, Two Ways",
-    "Examples 08 and 09 are the same three menu cards. Open them side by side.\n\nBootstrap (left): the card is card, card-body, card-title. Someone else decided what a card looks like, and you get it with a few names.\n\nTailwind (right): there's no 'card' class. The article gets bg-white (background), rounded-lg (border-radius), shadow (box-shadow) and p-5 (padding). You decide every part.\n\nThey look nearly the same. Ask: which HTML would you rather read? Which would you rather change to a totally different look?\n\nTailwind's HTML is longer, but you rarely need a CSS file. Bootstrap's HTML is shorter, but making it look different takes CSS, like Example 07.");
-  [["BOOTSTRAP · EXAMPLE 08", "08_bootstrap_cards_example.html", SH.ex08, ['<article class="card h-100 shadow-sm">', '   <div class="card-body">', '      <h2 class="card-title h5">...</h2>', '      <p class="card-text">...</p>', '      <a class="btn btn-primary">Order</a>', "   </div>", "</article>"], C.teal],
-    ["TAILWIND · EXAMPLE 09", "09_tailwind_cards_example.html", SH.ex09, ['<article class="bg-white rounded-lg shadow p-5">', '   <h2 class="text-lg font-semibold">...</h2>', '   <p class="mt-2">...</p>', '   <a class="inline-block mt-3 px-4 py-2', '      rounded bg-blue-600 text-white', '      hover:bg-blue-700">Order</a>', "</article>"], C.purple]].forEach(([k, f, img, code, c], i) => {
-    const x = 0.75 + i * 6.05, w = 5.8;
-    txt(s, k, { x, y: 1.35, w, h: 0.32, fontSize: 13, bold: true, color: c, charSpacing: 1 });
-    codeBox(s, code, { x, y: 1.75, w, h: 2.55, maxSize: 13, lang: "html" });
-    framedImage(s, img, x, 4.75, w, "RESULT");
-    txt(s, "10_CSS_Frameworks/" + f, { x, y: 4.75 + w * img.ratio + 0.08, w, h: 0.3, fontSize: 11, color: C.mid, fontFace: MONO });
-  });
-}
-
-codeSlide({
-  kicker: "TAILWIND · EXAMPLE 09", title: "Reading Tailwind Classes", file: "10_CSS_Frameworks/09_tailwind_cards_example.html",
-  lines: [...upTo(bodyOf("09_tailwind_cards_example.html"), '<div class="grid', "</article>")],
-  lang: "html", result: SH.ex09, size: 14,
-  bullets: [
-    ["One ", ["<script>", "c"], " in the head loads it (the \"Play CDN\")."],
-    ["About one CSS property per class: ", ["p-5", "c"], " is padding, ", ["rounded-lg", "c"], " is border-radius."],
-    [["md:grid-cols-3", "c"], ": a prefix is a ", ["media query", "b"], ". ", ["hover:", "c"], " is ", [":hover", "c"], "."],
-  ],
-  notes: "Open 09_tailwind_cards_example.html.\n\nThe script tag: Tailwind's 'Play CDN'. It reads the classes on the page and writes the CSS in the browser, as the page loads. It's great for learning and trying ideas. Real projects run Tailwind as a build step, which writes a small CSS file with only the classes the site uses. That's why Tailwind sites end up smaller than Bootstrap ones.\n\nRead the grid line: grid (display: grid), gap-4 (a 1rem gap), md:grid-cols-3 (three columns, from 768px up). Tailwind's md is 768px, same as Bootstrap's, and also min-width: phones first. Below md there's no grid-cols, so it's one column.\n\nOn the button: hover:bg-blue-700 is a darker blue on hover. Tailwind puts the state in the class name, which is why there's no hover problem like Example 07's.\n\nThe colours are a palette: blue-600 is a mid blue, blue-700 a bit darker. 50 is the lightest, 950 the darkest.\n\nTailwind's spacing numbers are different from Bootstrap's: p-5 here is 1.25rem (each step is 0.25rem). Same idea, different scale, which is a good reason to check the docs.",
-});
-
-quiz({
-  q: "In Tailwind, what does `md:grid-cols-3` mean?",
-  options: ["Three columns, but only on medium-sized screens", "Three columns, on screens up to 768px wide", "Three columns of medium width", "Three columns, on screens 768px wide and wider"], answer: 3,
-  why: ["Like Bootstrap, Tailwind is phones first: `md:` is `@media (min-width: 768px)`.", "It applies from 768px up, including big screens, until a bigger prefix like `lg:` overrides it."],
-  notes: "Students who got Pop Quiz 4 should get this. A is the common wrong answer.",
-  revealNotes: "Answer: D.\n\nCheck in DevTools: inspect the grid in Example 09 and the rule is inside @media (width >= 48rem). 48rem is 768px.",
-});
-
-{
-  const s = panelSlide("Bootstrap, Tailwind, or Plain CSS?",
-    "There's no single right answer, and students will hear strong opinions online.\n\n- Bootstrap: when you need something that works and looks decent quickly, especially with menus, modals and forms. Very common on existing sites, admin pages and internal tools, so you'll likely maintain some at work.\n- Tailwind: when you have a design to build, and want it to look like no one else's. Very popular for new projects, and often used with JavaScript frameworks like React. Its build step makes small CSS files.\n- Plain CSS: small sites, and anywhere you want full control with no extra files. Also: everything you learn in plain CSS makes both frameworks easier.\n\nWhy we demoed these two: they're the most common, they're one of each kind, and between them students will recognize almost any framework they meet.");
-  [["Bootstrap", "Pick it when you need it working fast: menus, forms and pages that look good with little CSS.", C.teal],
-    ["Tailwind", "Pick it when you have your own design to build, and want it to look like nobody else's.", C.purple],
-    ["Plain CSS", "Pick it for small sites, or full control with no extra files. And it's what both are made of.", C.orange]].forEach(([t, d, c], i) => {
-    const y = 1.95 + i * 1.45;
-    card(s, { x: CX, y, w: CW, h: 1.25 });
-    s.addShape(pres.shapes.RECTANGLE, { x: CX, y, w: 0.12, h: 1.25, fill: { color: c }, line: { color: c } });
-    txt(s, t, { x: CX + 0.35, y: y + 0.12, w: 3, h: 0.4, fontSize: 19, bold: true, color: c });
-    txt(s, d, { x: CX + 0.35, y: y + 0.55, w: CW - 0.6, h: 0.6, fontSize: 15, color: C.dark, valign: "top" });
-  });
-  card(s, { x: CX, y: 6.35 - 0.05, w: CW, h: 0.45, fill: C.light, border: C.light });
-  txt(s, "Learn one of each kind, and the rest will look familiar.", { x: CX, y: 6.3, w: CW, h: 0.45, fontSize: 15, italic: true, color: C.grey });
-}
-
-quiz({
-  q: "Which of these was written with Tailwind CSS?",
-  options: ['`class="bg-white rounded-lg shadow p-5"`', '`class="card h-100 shadow-sm"`', '`class="btn btn-primary"`', '`class="alert alert-warning"`'], answer: 0,
-  why: ["Each Tailwind class does about one thing: a background, a radius, a shadow, padding.", "`card`, `btn` and `alert` are Bootstrap's named components. (`shadow-sm` is a Bootstrap utility, but `card` gives it away.)"],
-  notes: "A last check before the activity.",
-  revealNotes: "Answer: A.\n\nIt's the card from Example 09. B is the card from Example 08.",
-});
-
-dividerSlide("Harbourside in Bootstrap", "Same page, same words   ·   Bootstrap does the layout   ·   Try Its 2 to 7",
-  "The big activity. This replaces last year's 'download an example and customize it', which is now a fast-finisher option.\n\nStudents take the Harbourside page from Week 7, with all the CSS taken away, and rebuild it with Bootstrap. Each Try It adds one part.");
-
-{
-  const s = activitySlide("Harbourside, Part 4: Before and After",
-    "Open activity/index.html with Go Live. It's our Harbourside page with no CSS at all: that's the left picture.\n\nBy the end of class it looks like the right pictures, and on a phone the menu folds into a menu button.\n\nThe plan:\n- Try It 2: link Bootstrap and add a container.\n- Try It 3: the navbar.\n- Try It 4: a banner, and the intro in two columns.\n- Try It 5: the menu as cards.\n- Try It 6: the hours table and the footer.\n- Try It 7: make it look like Harbourside, in style.css.\n\nEvery Try It's code is on its slide, and the finished page is in activity/answer/. The comments in index.html say where each Try It goes.\n\nThe content and the semantic HTML (header, nav, main, section, article, aside, footer) all stay. Bootstrap only adds classes and a few wrapper divs.");
-  const ih = 5.3;
-  framedImage(s, SH.act0, 0.75, 1.75, Math.min(4.2, ih / SH.act0.ratio), "BEFORE: NO CSS");
-  const crop = { path: SH.actD.path, ratio: SH.actD.ratio };
-  framedImage(s, crop, 5.35, 1.75, ih / crop.ratio, "AFTER: BOOTSTRAP");
-  phoneFrame(s, SH.actP, 5.35 + ih / crop.ratio + 0.35, 1.75, 2.15, "PHONE", C.green);
-}
-
-trySlide({
-  n: 2, title: "Link Bootstrap", time: "4 min", lw: 5.0, codeTitle: "IN THE HEAD, WHERE THE TRY IT 2 COMMENT IS", lang: "html",
-  steps: [
-    ["Open the activity", [["activity/index.html", "c"], " with Go Live, and in VS Code."]],
-    ["Add the two links", "Bootstrap's first, then style.css. Save: the fonts change right away."],
-    ["Add a container", [["<main class=\"container my-5\">", "c"], ": centred, with space above and below."]],
-  ],
-  code: upTo(ANS, '<link rel="stylesheet" href="https://cdn', 'href="style.css"').concat(["", "<!-- further down -->", '<main class="container my-5">']),
-  tip: [[["Watch the page as you save: ", "b"], "it changes before you've added a single other class."]],
-  notes: "Bootstrap's base styles (its 'Reboot') change the page as soon as it's linked: a modern font, no margin on the body, nicer tables. Point that out.\n\nmy-5: margin on the top and bottom (y), size 5 (3rem).\n\nCheck everyone has the link right before moving on: if Bootstrap didn't load, nothing else today works.",
-});
-
-trySlide({
-  n: 3, title: "The Navbar", time: "10 min", codeTitle: "REPLACES THE LOGO AND THE OLD <NAV>", lang: "html",
-  steps: [
-    ["Delete the old parts", ["The ", ["<img>", "c"], " logo and the whole ", ["<nav>", "c"], ". Keep the ", ["<h1>", "c"], " for now."]],
-    ["Paste the navbar", "In the header, where they were."],
-    ["Add the script", ["Bootstrap's JavaScript just before ", ["</body>", "c"], ", like Example 01."]],
-    ["Test it", "Make the window narrow. Does the menu button open? Does the Menu dropdown work?"],
-  ],
-  lw: 4.0,
-  code: [
-    '<nav class="navbar navbar-expand-md bg-harbour"',
-    '     data-bs-theme="dark" aria-label="Main">',
-    '  <div class="container">',
-    '    <a class="navbar-brand d-flex align-items-center gap-2" href="#">',
-    '      <img src="images/logo.svg" width="40" height="40" alt="">',
-    '      Harbourside',
-    '    </a>',
-    '    <button class="navbar-toggler" type="button"',
-    '        data-bs-toggle="collapse" data-bs-target="#mainNav"',
-    '        aria-controls="mainNav" aria-expanded="false"',
-    '        aria-label="Toggle navigation">',
-    '      <span class="navbar-toggler-icon"></span>',
-    '    </button>',
-    '    <div class="collapse navbar-collapse" id="mainNav">',
-    '      <ul class="navbar-nav ms-auto">',
-    '        <li class="nav-item dropdown">',
-    '          <a class="nav-link dropdown-toggle" href="#menu" role="button"',
-    '              data-bs-toggle="dropdown" aria-expanded="false">Menu</a>',
-    '          <ul class="dropdown-menu">',
-    '            <li><a class="dropdown-item"',
-    '                href="#haddock">Haddock &amp; Chips</a></li>',
-    '            <!-- ...and the other three, the same way -->',
-    '          </ul>',
-    '        </li>',
-    '        <li class="nav-item"><a class="nav-link" href="#hours">Hours &amp; Location</a></li>',
-    '        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>',
-    '      </ul>',
-    '    </div>',
-    '  </div>',
-    '</nav>',
-  ],
-  notes: "The code is on the slide, but it's long: students can copy it from activity/answer/index.html. The slide leaves out three of the dropdown items to fit; the answer file has them all. Careful: the answer file's image paths start with ../ because it's one folder deeper. In activity/index.html it's images/logo.svg.\n\nNew things since Example 06:\n- bg-harbour is our own class (it's already in style.css): navy.\n- data-bs-theme=\"dark\" tells Bootstrap the background is dark, so the links and the menu button turn light.\n- The logo goes inside the navbar-brand. d-flex align-items-center gap-2 is flexbox from Week 8, as classes.\n- The Menu item is a dropdown: dropdown-toggle on the link, dropdown-menu on the list, dropdown-item on each link. data-bs-toggle=\"dropdown\" makes it open. It needs the script too.\n\nThe usual problems: the script is missing (nothing opens), or the id on the collapse div doesn't match data-bs-target.",
-});
-
-trySlide({
-  n: 4, title: "A Banner and Two Columns", time: "8 min", codeTitle: "THE H1 BECOMES A BANNER; THE INTRO BECOMES A ROW", lang: "html",
-  steps: [
-    ["Make the banner", ["Replace the ", ["<h1>", "c"], " with the banner div, under the navbar."]],
-    ["Make the intro a row", ["Add ", ["row g-4 align-items-center", "c"], " to the intro section."]],
-    ["Two columns", ["The words in one ", ["col-md-6", "c"], ", the figure in another."]],
-    ["Fit the photo", [["img-fluid", "c"], " is ", ["max-width: 100%", "c"], " from last week."]],
-  ],
-  lw: 5.2,
-  code: [...upTo(ANS, '<div class="bg-harbour text-white', "</div>"), "", ...upTo(ANS, '<section class="intro', '<div class="col-md-6">'), "      <h2>Fresh from the Wharf</h2>", "      <p>...</p>  <p>...</p>", "   </div>", ...upTo(ANS, '<div class="col-md-6">', "</section>", { start: ANS.findIndex((l) => l.includes("<figure")) - 1 }).filter((l) => !l.includes("alt=") && !l.includes("figcaption"))],
-  notes: "The banner: display-5 is one of Bootstrap's big heading sizes, lead is the bigger paragraph from Example 01. btn-harbour is a class we make in Try It 7. Until then the button has no colour, which is fine.\n\nThe intro: the section itself becomes the row. Two col-md-6 divs: words first, photo second. On a phone they stack, with the words on top.\n\nalign-items-center lines the two columns up in the middle (flexbox, Week 8). g-4 is the gap.\n\nimg-fluid on the photo: it's Bootstrap's version of last week's img { max-width: 100%; height: auto; }. figure, figure-img and figure-caption style the figure.\n\nThe slide skips the alt text and the figcaption to fit: keep them, from the original.",
-});
-
-trySlide({
-  n: 5, title: "The Menu as Cards", time: "10 min", codeTitle: "INSIDE <SECTION ID=\"MENU\">, UNDER THE H2", lang: "html",
-  steps: [
-    ["Wrap the cards in a row", [["<div class=\"row g-4\">", "c"], " around all four articles."]],
-    ["A column for each card", [["col-sm-6 col-lg-3", "c"], ": 1 across, 2 from sm, 4 from lg."]],
-    ["Make each one a card", ["Add ", ["card", "c"], " to the article, and a ", ["card-body", "c"], " div inside it."]],
-    ["Today's special", ["Add the ", ["badge", "c"], " to the lobster roll."]],
-  ],
-  lw: 5.2,
-  code: upTo(ANS, '<div class="row g-4">', "</div>", { skip: 8 }).map((l) => l.replace(/(card-text">)[^<]*/, "$1...")).concat(["", "   <!-- ...the same for the other three -->", "   <!-- In the lobster roll's card-body: -->", '   <span class="badge text-bg-warning mb-2">Today\'s special</span>', "</div>"]),
-  notes: "Each article keeps its id (for the dropdown links) and its class=\"special\". h-100 makes every card the full height of its column, so they line up even with different amounts of text. shadow-sm adds a light shadow.\n\nclass=\"card-title h5\" on the h3: the right heading level, at a smaller size.\n\nThe column classes: count them at each size. Under 576px, no class applies, so full width. sm (576px+): 6 of 12, so 2 across. lg (992px+): 3 of 12, so 4 across.\n\nCheck with the device toolbar at 360px, 700px and 1100px.",
-});
-
-trySlide({
-  n: 6, title: "The Table and the Footer", time: "6 min", lw: 5.0, codeTitle: "THE ASIDE, THEN THE FOOTER", lang: "html",
-  steps: [
-    ["Make the aside a row", ["The address in ", ["col-md-5", "c"], ", the table in ", ["col-md-7", "c"], "."]],
-    ["Style the table", [["table table-striped", "c"], ", inside a ", ["table-responsive", "c"], " div."]],
-    ["Style the footer", ["Navy, white text, centred, with padding."]],
-  ],
-  code: [...upTo(ANS, '<aside id="hours"', '<table class="table'), "            ...", "         </table>", "      </div>", "   </div>", "</aside>", "", ...upTo(ANS, '<footer id="contact"', "</footer>")],
-  notes: "table: Bootstrap's table style (padding, lines between rows). table-striped: every second row shaded. Others to try: table-hover, table-bordered, table-sm.\n\ntable-responsive: if the table is wider than the screen, it scrolls sideways inside its own box, instead of the whole page scrolling. We did this by hand in Week 7 with the table-wrap div.\n\nThe footer reuses bg-harbour. text-center centres the text, py-4 is padding on the top and bottom. mb-1 and mb-0 tidy up the paragraph margins.\n\nThe caption shows under the table: Bootstrap puts captions at the bottom. Add caption-top to the table to move it.",
-});
-
-trySlide({
-  n: 7, title: "Make It Yours", time: "8 min", lw: 5.6, codeTitle: "ADD TO STYLE.CSS, UNDER THE TRY IT 7 HEADING",
-  steps: [
-    ["Open style.css", ["It's linked after Bootstrap, so a tie goes to us."]],
-    ["Add the rules on the right", "Georgia headings, orange-red prices, the special, our button."],
-    ["Hover the banner button", ["It should stay orange-red: we set the ", ["variables", "b"], ", like Example 07."]],
-    ["Make it yours", "Change a colour, a font, or a Bootstrap class. Anything you like."],
-  ],
-  code: upTo(ANSCSS, "/* 1. Headings", "font-weight: bold;").concat(["}", "", "/* 3. and 4.: the special, and .btn-harbour", "   (copy them from answer/style.css) */"]),
-  tip: [[["Bootstrap's rule still winning? ", "b"], "Inspect it in DevTools. It may be more specific, like ", [".btn:hover", "c"], "."]],
-  notes: "This is what turns a Bootstrap page into Harbourside. The whole file is about 40 lines, compared with about 300 lines in Week 9's style.css. That's the trade-off in one number.\n\nThe special: .special sets background-color and border-color. Bootstrap's .card rule uses the same specificity (one class), so ours wins because it's later.\n\n.btn-harbour sets the button variables, so the hover and active colours are ours too. Orange-red (#B5451B) and not the logo's lighter orange (#E97132): white text on the lighter orange is too low contrast to read easily.\n\nFast finishers: make the navbar stick to the top (sticky-top on the nav), add a card-img-top photo to a card, or swap btn-harbour for a btn-outline-light.",
-});
-
-{
-  const s = activitySlide("Class Activity: Submit Harbourside",
-    "This replaces last year's activity (download a Bootstrap example and customize it), which is now the fast-finisher option.\n\nStudents take the screenshots with the device toolbar, so the phone width shows. Its menu (the three dots on the toolbar) has 'Capture screenshot', and 'Capture full size screenshot' gets the whole page.\n\nCheck that the Week 10 Brightspace submission box is set up before class.\n\nTailwind version: for students who want a challenge, rebuild the menu cards with Tailwind's Play CDN, using Example 09 as a guide. Don't link Bootstrap and Tailwind in the same page: their classes clash (both have p-3, for example).");
-  const LW = 6.05;
-  card(s, { x: 0.75, y: 1.45, w: LW, h: 5.5 });
-  txt(s, "Your page should have:", { x: 1.05, y: 1.65, w: LW - 0.6, h: 0.4, fontSize: 18, bold: true, color: C.black });
-  ["A navbar that folds into a menu button", "The menu as cards in a responsive grid", "Your own colours in style.css"].forEach((t, i) => {
-    const y = 2.2 + i * 0.6;
-    numCircle(s, "✓", 1.05, y, C.teal, 0.42);
-    txt(s, t, { x: 1.65, y, w: LW - 1.2, h: 0.42, fontSize: 16, color: C.black, valign: "middle" });
-  });
-  txt(s, "Then:", { x: 1.05, y: 4.1, w: LW - 0.6, h: 0.4, fontSize: 18, bold: true, color: C.black });
-  [[["Take two screenshots: wide, and at phone width (", ["Ctrl + Shift + M", "b"], ")."]], [["Drop them in the box on Week 10 Brightspace."]]].forEach(([d], i) => {
-    const y = 4.6 + i * 0.95;
-    numCircle(s, i + 1, 1.05, y, C.orange, 0.42);
-    richBullets(s, [d], { x: 1.65, y: y - 0.03, w: LW - 1.2, h: 0.8, size: 16, bullet: false, color: C.black });
-  });
-  const rx = 0.75 + LW + 0.35, rw = W - rx - 0.6;
-  txt(s, "Finished early?", { x: rx, y: 1.45, w: rw, h: 0.4, fontSize: 18, bold: true, color: C.black });
-  [["Last year's activity", ["Download one of the Bootstrap examples (", ["getbootstrap.com/docs/5.3/examples", "c"], ") and make it yours: a heading, some text, an image."]],
-    ["Try Tailwind", ["Rebuild the menu cards in a new file with Tailwind, using Example 09 as a guide."]],
-    ["Stuck?", [["activity/answer/", "c"], " has the finished page."]]].forEach(([t, d], i) => {
-    const y = 2.0 + i * 1.6;
-    card(s, { x: rx, y, w: rw, h: 1.4 });
-    txt(s, t, { x: rx + 0.25, y: y + 0.12, w: rw - 0.5, h: 0.38, fontSize: 16, bold: true, color: [C.purple, C.teal, C.orange][i] });
-    richBullets(s, [d], { x: rx + 0.25, y: y + 0.5, w: rw - 0.5, h: 0.85, size: 14, bullet: false });
+  const s = plainSlide("Resources",
+    "Everything on this slide is a link: the names, the addresses and the red play buttons.\n\nUseful links:\n- Bootstrap's docs: the left menu has Layout (the grid), Content, Forms, Components, Helpers and Utilities. Layout, Components and Utilities are the ones we used.\n- Bootstrap's Examples page: whole page templates (Album, Pricing, Checkout, Dashboard...). Download them all as one zip, or view the source of any of them.\n- W3Schools: short lessons, each with a Try It editor. Make sure the address says bootstrap5. W3Schools' plain /bootstrap/ tutorial is Bootstrap 3.\n- Tailwind's docs, for next week's Tailwind examples.\n\nVideos:\n- thenewboston (Bucky Roberts): a beginner series, short videos. It's Bootstrap 3, from 2015. The grid works the same way (container, row, 12 columns), but some class names have changed: col-xs-6 is col-6 now, and navbar-default, panels and glyphicons are gone. A good test of what we've learned: spot what's changed.\n- Web Dev Simplified (Kyle Cook): the Bootstrap 5 Crash Course covers the grid, six components and the utility classes in about 70 minutes. It's the best match for this week.\n- Web Dev Simplified, Should You Use Bootstrap?: the pros and cons, like our 'Bootstrap, Tailwind, or Plain CSS?' slide.\n- Web Dev Simplified, Bootstrap 5 Will Change The Web: what changed from Bootstrap 4 to 5. Made in 2020, before 5 was finished, but it explains why old code like data-toggle stops working.");
+  const cw = (W - 1.5 - 0.35) / 2, ch = 1.18, gap = 0.14;
+  [["Useful links", C.teal, false, [
+    ["Bootstrap 5.3 documentation", "https://getbootstrap.com/docs/5.3/", "getbootstrap.com/docs/5.3", "Layout, Components and Utilities are the sections we use."],
+    ["Bootstrap examples", "https://getbootstrap.com/docs/5.3/examples/", "getbootstrap.com/docs/5.3/examples", "Whole page templates to start from."],
+    ["W3Schools Bootstrap 5 tutorial", "https://www.w3schools.com/bootstrap5/", "w3schools.com/bootstrap5", "Short lessons with Try It editors. Check it says bootstrap5."],
+    ["Tailwind CSS documentation", "https://tailwindcss.com/docs", "tailwindcss.com/docs", "Every utility class, with what CSS it writes."],
+  ]], ["Videos", C.red, true, [
+    ["Bootstrap Tutorials for Beginners", "https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBPw1sFodruZUPheWVKchlM", "thenewboston · YouTube playlist", "A playlist of short videos. Bootstrap 3: the grid's the same, some class names aren't."],
+    ["Bootstrap 5 Crash Course", "https://www.youtube.com/watch?v=Jyvffr3aCp0", "Web Dev Simplified · YouTube", "The grid, six components and the utilities, in about 70 minutes."],
+    ["Should You Use Bootstrap?", "https://www.youtube.com/watch?v=svPDhmXY1Yg", "Web Dev Simplified · YouTube", "When a framework helps, and when it gets in the way."],
+    ["Bootstrap 5 Will Change The Web", "https://www.youtube.com/watch?v=pKw-fBvsyYE", "Web Dev Simplified · YouTube", "What changed from Bootstrap 4 to 5, and why old code breaks."],
+  ]]].forEach(([head, color, video, links], c) => {
+    const x = 0.75 + c * (cw + 0.35);
+    txt(s, head.toUpperCase(), { x, y: 1.35, w: cw, h: 0.35, fontSize: 13, bold: true, color, charSpacing: 1 });
+    links.forEach(([name, url, show, d], i) => linkCard(s, { x, y: 1.8 + i * (ch + gap), w: cw, h: ch, name, url, show, d, color, video }));
   });
 }
 
 {
   const s = panelSlide("Week 10 Recap",
-    "If students remember three things from this week: a framework is still CSS underneath, Bootstrap's grid is 12 columns with min-width breakpoints, and to change Bootstrap's look you put your CSS after it (and use its variables for buttons).\n\nThe Week 10 quiz on Brightspace is 10 questions, built from today's and last class's pop quizzes.\n\nThen the last slide: the one-sentence summary.");
+    "If students remember three things from this week: a framework is still CSS underneath, Bootstrap's grid is 12 columns with min-width breakpoints, and a wireframe turns into rows and columns.\n\nThe Week 10 quiz on Brightspace is 7 questions, built from today's and last class's pop quizzes (1 to 7).\n\nThen the last slide: the one-sentence summary.");
   labelBullets(s, [
     { label: "Class 1:", text: [
       "A framework is CSS someone else wrote. It's still CSS underneath.",
@@ -1296,11 +1272,11 @@ trySlide({
       "col-md-4: a third, from 768px up. text-bg-*, p-3, mb-2.",
     ] },
     { label: "Class 2:", text: [
+      "A wireframe becomes rows and columns. Rows can go inside columns.",
       "Components: btn, alert, card, navbar (which needs the JavaScript).",
-      "Customize with your own CSS, and Bootstrap 5's --bs- variables.",
-      "Tailwind: small utility classes, with md: and hover: prefixes.",
+      "24 components: find one in the docs, copy it, change the words.",
     ] },
-    { label: "Coming up:", text: ["The Week 10 quiz on Brightspace: 10 questions, like the pop quizzes."] },
+    { label: "Coming up:", text: ["The Week 10 quiz on Brightspace: 7 questions, like the pop quizzes.", "Next week: customizing Bootstrap, Tailwind CSS, and Harbourside."] },
   ], { size: 19, sub: 15.5 });
 }
 

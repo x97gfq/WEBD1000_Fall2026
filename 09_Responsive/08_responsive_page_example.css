@@ -71,4 +71,7 @@ h1 {
 	.cards {
 		grid-template-columns: 1fr;
 	}
+	.photo {
+		display: none;
+	}
 }

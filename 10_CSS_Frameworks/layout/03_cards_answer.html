@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<!-- The viewport tag: Bootstrap is built phones first, so every page needs it -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>My Layout</title>
+
+		<!-- Bootstrap's CSS, from a CDN -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+
+		<!-- One container holds the whole page -->
+		<div class="container">
+
+			<!-- Row 1: the header. The navbar takes the h1's place. -->
+			<header class="row">
+				<!-- p-0: no padding, so the navbar fills the column -->
+				<div class="col-12 p-0">
+					<nav class="navbar navbar-expand-md bg-primary"
+						data-bs-theme="dark" aria-label="Main">
+						<div class="container-fluid">
+							<a class="navbar-brand" href="#">My Site</a>
+							<button class="navbar-toggler" type="button"
+								data-bs-toggle="collapse" data-bs-target="#mainNav"
+								aria-controls="mainNav" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="mainNav">
+								<ul class="navbar-nav ms-auto">
+									<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">About</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</header>
+
+			<!-- Row 2: sidebar (3) + main (9) = 12. Under 768px they stack. -->
+			<div class="row">
+				<aside class="col-md-3 text-bg-warning p-3">
+					<h2 class="h4">Sidebar</h2>
+					<ul>
+						<li>Link one</li>
+						<li>Link two</li>
+						<li>Link three</li>
+					</ul>
+				</aside>
+				<main class="col-md-9 text-bg-info p-3">
+					<h2>Main Content</h2>
+					<p>This is where the page's content goes. On a wide screen it gets 9 of the 12 columns, and the sidebar gets the other 3.</p>
+					<p>Make the window narrower. Under 768px, col-md-3 and col-md-9 stop working, and every part is the full width: header, sidebar, main, footer.</p>
+
+					<!-- Part 3: a row inside a column. Two cards: side by side from 576px (sm) up. -->
+					<div class="row g-3">
+						<div class="col-sm-6">
+							<div class="card h-100">
+								<div class="card-body">
+									<h3 class="card-title h5">Card One</h3>
+									<p class="card-text">card is the box. card-body adds padding.</p>
+									<a href="#" class="btn btn-primary">Read more</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="card h-100">
+								<!-- card-img-top: a picture across the top of the card -->
+								<img src="images/harbour.jpg" class="card-img-top" alt="Rocky beach with calm water and a tree-lined point">
+								<div class="card-body">
+									<h3 class="card-title h5">Card Two</h3>
+									<p class="card-text">This one has a picture on top.</p>
+									<a href="#" class="btn btn-outline-primary">Read more</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+			</div>
+
+			<!-- Row 3: the footer, all 12 columns -->
+			<footer class="row">
+				<div class="col-12 text-bg-dark p-3">
+					<p class="mb-0">&copy; 2026 My Site</p>
+				</div>
+			</footer>
+
+		</div>
+
+		<!-- Bootstrap's JavaScript: the navbar's menu button needs it -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
