@@ -7,6 +7,8 @@
 >
 > Customizing Bootstrap, Tailwind and the Harbourside activity moved to Week 11: `../11_Customizing_Bootstrap_Tailwind/`.
 >
+> Slides 54–55 ("Bootstrap's 24 components", with "The Ones That Move" second) are the hook for Week 11, Class 1: it picks six of those up and builds them. Leave those two slides in even if you are short of time.
+>
 > Rebuild the deck: `cd _build`, `npm install` once, then `npm run build`. The build screenshots the examples with Microsoft Edge (headless). Code on the slides is read from the example files and from `layout/`, so edit those files and rebuild.
 >
 > No Node.js on this PC? VS Code's own Node works. In PowerShell, from `_build`: `$env:ELECTRON_RUN_AS_NODE = "1"; & "C:\Program Files\Microsoft VS Code\Code.exe" build_deck.js` (it prints nothing; check the .pptx's time).
@@ -40,7 +42,7 @@
 
 **Your Layout** (added after Class 1 ran a bit dry): Class 2 opens with a warm-up. Students count the columns on a wireframe, then build it from `layout/01_start.html` (a blank page with the viewport tag and Bootstrap's links): a container and three rows (header `col-12`; `aside` `col-md-3` + `main` `col-md-9`; footer `col-12`), each part in a loud `text-bg-*` colour so the layout is obvious. After the navbar example and Pop Quiz 7, they add a navbar to it (Part 2; `02_navbar_start.html` is the finished warm-up), then two cards in a row inside `main` (Part 3). About 85 minutes in all.
 
-**Brightspace quiz:** 7 questions, one per pop quiz (1 to 7). Pop Quizzes 8 to 10 moved to Week 11 as its Pop Quizzes 1 to 3.
+**Brightspace quiz:** 7 questions, one per pop quiz (1 to 7). The old Pop Quizzes 8 to 10 moved to Week 11, where they are now its Pop Quizzes 1, 7 and 8 of ten.
 
 ## Changes from the original deck
 

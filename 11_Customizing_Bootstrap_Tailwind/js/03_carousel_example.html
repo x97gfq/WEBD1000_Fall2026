@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 03: A Carousel</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container py-4">
+
+			<h1 class="h3">A carousel</h1>
+			<p class="lead">A slideshow. Still no JavaScript of our own.</p>
+
+			<!-- data-bs-ride="carousel" starts it moving on its own.
+			     Take that attribute away and it only moves when you click. -->
+			<div id="specials" class="carousel slide" data-bs-ride="carousel">
+
+				<!-- 1. The little dots. One button per slide. -->
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#specials" data-bs-slide-to="0"
+						class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#specials" data-bs-slide-to="1" aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#specials" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				</div>
+
+				<!-- 2. The slides. Exactly one has "active", or nothing shows at all. -->
+				<div class="carousel-inner">
+					<div class="carousel-item active" data-bs-interval="4000">
+						<img src="images/slide1.svg" class="d-block w-100" alt="Fresh haddock">
+						<div class="carousel-caption d-none d-md-block">
+							<h2 class="h4">Haddock &amp; Chips</h2>
+							<p>$16.99, every day.</p>
+						</div>
+					</div>
+					<div class="carousel-item" data-bs-interval="4000">
+						<img src="images/slide2.svg" class="d-block w-100" alt="Hand-cut fries">
+						<div class="carousel-caption d-none d-md-block">
+							<h2 class="h4">Hand-Cut Fries</h2>
+							<p>Cut every morning.</p>
+						</div>
+					</div>
+					<div class="carousel-item" data-bs-interval="4000">
+						<img src="images/slide3.svg" class="d-block w-100" alt="The back deck">
+						<div class="carousel-caption d-none d-md-block">
+							<h2 class="h4">The Back Deck</h2>
+							<p>Open all summer.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- 3. The arrows. data-bs-slide, not data-bs-toggle. -->
+				<button class="carousel-control-prev" type="button" data-bs-target="#specials" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#specials" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+
+			</div>
+
+			<h2 class="h5 mt-4">What the pieces do</h2>
+			<ul>
+				<li><code>carousel-inner</code> holds the slides. <code>carousel-item</code> is one slide.</li>
+				<li>Exactly one slide needs <code>active</code>. Two, or none, and it breaks.</li>
+				<li><code>data-bs-slide="next"</code> on the arrows, <code>data-bs-slide-to="0"</code> on the dots.</li>
+				<li><code>data-bs-interval="4000"</code> is how long a slide stays, in milliseconds. 4000 is four seconds.</li>
+				<li>Every <code>data-bs-target</code> here points back at <code>id="specials"</code>.</li>
+			</ul>
+
+			<div class="alert alert-warning">
+				<strong>Try this:</strong> make <code>data-bs-interval</code> 1000 on all three slides and reload.
+				Now ask yourself whether anyone could read the captions. That is the reason most real sites
+				do <em>not</em> auto-play a carousel: delete <code>data-bs-ride="carousel"</code> and let people
+				click instead.
+			</div>
+
+			<p class="text-body-secondary">
+				Our slides are three SVG files in <code>images/</code>. Swap in your own photos: keep them all
+				the same size, or the page jumps as the slides change. <code>d-block w-100</code> makes each
+				image fill the width of the carousel.
+			</p>
+
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 01: A Modal</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container py-4">
+
+			<h1 class="h3">A modal</h1>
+			<p class="lead">A box that opens on top of the page. We write no JavaScript at all.</p>
+
+			<!-- THE BUTTON.
+			     data-bs-toggle says WHAT kind of thing to open.
+			     data-bs-target says WHICH one, by its id. -->
+			<button type="button" class="btn btn-primary btn-lg"
+				data-bs-toggle="modal" data-bs-target="#orderModal">
+				Order the lobster roll
+			</button>
+
+			<!-- THE MODAL.
+			     It sits in the HTML like anything else. Bootstrap's CSS hides it
+			     until something adds the "show" class, which the script does. -->
+			<div class="modal fade" id="orderModal" tabindex="-1"
+				aria-labelledby="orderTitle" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2 class="modal-title h5" id="orderTitle">Lobster Roll &mdash; $24.00</h2>
+							<!-- data-bs-dismiss closes the modal it is inside -->
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Fresh lobster on a toasted bun with a side salad.</p>
+							<p class="mb-0 text-body-secondary">Ask us for it without the mayo.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Never mind</button>
+							<button type="button" class="btn btn-primary">Add to order</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr class="my-4">
+
+			<h2 class="h5">Three ways to close it</h2>
+			<ul>
+				<li>The X in the corner, or the "Never mind" button: both have <code>data-bs-dismiss="modal"</code>.</li>
+				<li>Click the dark area outside the box.</li>
+				<li>Press <kbd>Esc</kbd>.</li>
+			</ul>
+			<p>Bootstrap's JavaScript gives you all three for free.</p>
+
+			<h2 class="h5 mt-4">The three pieces</h2>
+			<ol>
+				<li>A button with <code>data-bs-toggle="modal"</code> and <code>data-bs-target="#orderModal"</code>.</li>
+				<li>A <code>&lt;div class="modal"&gt;</code> whose <code>id</code> matches that target, exactly.</li>
+				<li>Bootstrap's script, at the end of the body.</li>
+			</ol>
+			<p class="text-body-secondary">
+				Miss any one of the three and the button does nothing at all &mdash; no error message, no clue.
+				That is the most common Bootstrap bug there is. (Example 00 is this page with the script deleted.)
+			</p>
+
+		</div>
+
+		<!-- Bootstrap's JavaScript. Without this line, the button does nothing. -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>

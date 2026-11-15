@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 00: Broken on Purpose (no script)</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container py-4">
+
+			<div class="alert alert-danger">
+				<strong>This page is broken on purpose.</strong>
+				It is Example 01 with one line deleted. Click the buttons: nothing opens.
+			</div>
+
+			<h1 class="h3">Three things that need Bootstrap's JavaScript</h1>
+
+			<p>
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal">Open a modal</button>
+				<button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#moreInfo">Open a collapse</button>
+			</p>
+
+			<div class="collapse" id="moreInfo">
+				<div class="card card-body">You will never see this, because the script is missing.</div>
+			</div>
+
+			<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body">You will never see this either.</div>
+					</div>
+				</div>
+			</div>
+
+			<hr class="my-4">
+
+			<h2 class="h5">But all of this still works</h2>
+			<p>Everything below is CSS only, so it does not care about the script at all.</p>
+
+			<div class="row g-3">
+				<div class="col-md-4">
+					<div class="card h-100">
+						<div class="card-body">
+							<h3 class="card-title h6">A card</h3>
+							<p class="card-text mb-0">Cards are CSS. Still fine.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="alert alert-success h-100 mb-0">An alert. Still fine.</div>
+				</div>
+				<div class="col-md-4">
+					<div class="p-3 text-bg-dark rounded h-100">The grid and the colours. Still fine.</div>
+				</div>
+			</div>
+
+			<div class="alert alert-warning mt-4">
+				<strong>The missing line</strong> goes just before <code>&lt;/body&gt;</code>:<br>
+				<code>&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code>
+			</div>
+
+			<p class="text-body-secondary">
+				Open your browser's DevTools and look at the Console tab. An empty console is the clue:
+				nothing is wrong with your HTML, the code that was supposed to listen for the click was never loaded.
+			</p>
+
+		</div>
+
+		<!-- Bootstrap's JavaScript belongs here. It has been deleted on purpose. -->
+
+	</body>
+</html>

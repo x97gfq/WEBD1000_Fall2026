@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 05: Tooltips (your first JavaScript)</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container py-4">
+
+			<h1 class="h3">Tooltips</h1>
+			<p class="lead">
+				The first component today that needs JavaScript <em>we</em> write. One line of it.
+			</p>
+
+			<!-- data-bs-toggle="tooltip" is not enough on its own.
+			     Tooltips are "opt in": we have to switch them on. -->
+			<p>
+				<button type="button" class="btn btn-primary"
+					data-bs-toggle="tooltip" data-bs-title="Comes with fries and coleslaw">
+					Haddock &amp; Chips
+				</button>
+
+				<button type="button" class="btn btn-primary"
+					data-bs-toggle="tooltip" data-bs-placement="bottom"
+					data-bs-title="Market price, changes weekly">
+					Lobster Roll
+				</button>
+
+				<button type="button" class="btn btn-outline-secondary"
+					data-bs-toggle="tooltip" data-bs-placement="right"
+					data-bs-title="Shared fryers: may contain fish, shellfish, wheat and milk">
+					Allergens
+				</button>
+			</p>
+
+			<p>
+				Hover over a button, or tab to it with the keyboard. Nothing happens until the
+				script at the bottom of this page runs.
+			</p>
+
+			<hr class="my-4">
+
+			<h2 class="h5">Why this one is different</h2>
+			<p>
+				A page can have hundreds of things with a <code>title</code>. Setting up a tooltip for
+				every one of them, on every page, would be slow, so Bootstrap does not do it
+				automatically. You tell it which ones you want.
+			</p>
+
+			<h2 class="h5 mt-4">The line, word by word</h2>
+			<dl class="row">
+				<dt class="col-sm-5"><code>document</code></dt>
+				<dd class="col-sm-7">the page</dd>
+
+				<dt class="col-sm-5"><code>.querySelectorAll('[data-bs-toggle="tooltip"]')</code></dt>
+				<dd class="col-sm-7">find every element that has that attribute &mdash; a CSS selector, same as in your stylesheet</dd>
+
+				<dt class="col-sm-5"><code>.forEach(...)</code></dt>
+				<dd class="col-sm-7">do the next bit once for each one you found</dd>
+
+				<dt class="col-sm-5"><code>new bootstrap.Tooltip(el)</code></dt>
+				<dd class="col-sm-7">make a tooltip out of that element. <code>bootstrap</code> is the name the bundle script puts on the page</dd>
+			</dl>
+
+			<p class="text-body-secondary">
+				Popovers work exactly the same way: <code>data-bs-toggle="popover"</code>, and
+				<code>new bootstrap.Popover(el)</code>. A popover is a tooltip with a heading that stays
+				open when you click.
+			</p>
+
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+		<!-- OUR JavaScript. It goes AFTER Bootstrap's, because it uses it. -->
+		<script>
+			// Find every tooltip button on the page,
+			// and turn each one into a tooltip.
+			document.querySelectorAll('[data-bs-toggle="tooltip"]')
+				.forEach(function (el) {
+					new bootstrap.Tooltip(el);
+				});
+		</script>
+	</body>
+</html>

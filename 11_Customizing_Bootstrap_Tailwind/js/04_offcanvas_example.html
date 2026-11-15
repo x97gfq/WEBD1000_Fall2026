@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Example 04: An Offcanvas Menu</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container py-4">
+
+			<h1 class="h3">An offcanvas menu</h1>
+			<p class="lead">A panel that slides in from the side. Still no JavaScript of our own.</p>
+
+			<!-- Same two attributes again. Only the word after toggle changes. -->
+			<button type="button" class="btn btn-primary"
+				data-bs-toggle="offcanvas" data-bs-target="#sideMenu" aria-controls="sideMenu">
+				Menu
+			</button>
+
+			<!-- offcanvas-start = slides in from the left.
+			     Also: offcanvas-end (right), offcanvas-top, offcanvas-bottom. -->
+			<div class="offcanvas offcanvas-start" tabindex="-1" id="sideMenu" aria-labelledby="sideMenuTitle">
+				<div class="offcanvas-header">
+					<h2 class="offcanvas-title h5" id="sideMenuTitle">Harbourside</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body">
+					<ul class="nav flex-column">
+						<li class="nav-item"><a class="nav-link" href="#">Our menu</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Hours &amp; location</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">The back deck</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<hr class="my-4">
+
+			<h2 class="h5">Modal, offcanvas, collapse: notice the pattern</h2>
+			<p>Three different components. The same two attributes every time:</p>
+			<pre class="bg-body-tertiary p-3 rounded"><code>data-bs-toggle="modal"      data-bs-target="#orderModal"
+data-bs-toggle="collapse"   data-bs-target="#allergens"
+data-bs-toggle="offcanvas"  data-bs-target="#sideMenu"</code></pre>
+			<p>
+				Learn the pattern once and you can use any of them. Look up the <em>class names</em> in the
+				docs, copy the HTML, change the words.
+			</p>
+
+			<p class="text-body-secondary">
+				This is a very common way to do a phone menu: a navbar that uses an offcanvas instead of a
+				collapse, so the menu slides over the page instead of pushing it down. Bootstrap's docs call it
+				"Navbar with offcanvas".
+			</p>
+
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
