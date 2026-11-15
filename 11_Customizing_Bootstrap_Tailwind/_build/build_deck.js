@@ -1215,19 +1215,18 @@ codeSlide({
     '',
     "<!-- and at the end of the page, after Bootstrap's script: -->",
     '<script>',
-    '   document.querySelectorAll(\'[data-bs-toggle="tooltip"]\')',
-    '      .forEach(function (el) {',
-    '         new bootstrap.Tooltip(el);',
-    '      });',
+    '   document.querySelectorAll(\'[data-bs-toggle="tooltip"]\').forEach(function (el) {',
+    '      new bootstrap.Tooltip(el);',
+    '   });',
     '</script>',
   ],
-  lang: "html", result: SH.tooltip, size: 14, mark: [9, 10, 11],
+  lang: "html", result: SH.tooltip, size: 14, mark: [9, 10],
   bullets: [
     ["The attribute is not enough. Tooltips are ", ["opt in", "b"], "."],
     [["querySelectorAll", "c"], " takes a ", ["CSS selector", "b"], ": find them all."],
     [["forEach", "c"], ": do this once for each one you found."],
   ],
-  notes: "Open js/05_tooltip_example.html and hover a button. Then comment the script out live (Ctrl + /) and reload: the tooltips are gone, and nothing else changes.\n\nWhy opt in? Performance. A real page might have hundreds of elements with a title. Setting up a tooltip object for every one of them on every page load would be slow, so Bootstrap makes you say which.\n\nRead the three marked lines as English: 'find everything on the page with that attribute; for each one, make a tooltip out of it.'\n\nThe selector in the brackets is a CSS attribute selector from Week 6. They have written these before, in a stylesheet. Same selector, different place.\n\nnew bootstrap.Tooltip(el) - 'bootstrap' here is a name the bundle script puts on the page for us. Don't go further than that today.\n\ndata-bs-placement=\"bottom\" or \"left\" or \"right\" moves it. data-bs-title is the text; in older code you will see plain title instead, which also works.\n\nPopovers are the same two steps, with Popover instead of Tooltip.",
+  notes: "Open js/05_tooltip_example.html and hover a button. Then comment the script out live (Ctrl + /) and reload: the tooltips are gone, and nothing else changes.\n\nWhy opt in? Performance. A real page might have hundreds of elements with a title. Setting up a tooltip object for every one of them on every page load would be slow, so Bootstrap makes you say which.\n\nRead the two marked lines as English: 'find everything on the page with that attribute; for each one, make a tooltip out of it.'\n\nThe selector in the brackets is a CSS attribute selector from Week 6. They have written these before, in a stylesheet. Same selector, different place.\n\nnew bootstrap.Tooltip(el) - 'bootstrap' here is a name the bundle script puts on the page for us. Don't go further than that today.\n\ndata-bs-placement=\"bottom\" or \"left\" or \"right\" moves it. data-bs-title is the text; in older code you will see plain title instead, which also works.\n\nPopovers are the same two steps, with Popover instead of Tooltip.",
 });
 
 trySlide({
