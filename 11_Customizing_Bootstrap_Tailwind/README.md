@@ -4,7 +4,7 @@
 > 1. `11_Customizing_Bootstrap_Tailwind/*.html` (+ `.css`): three numbered examples (customizing, and the same cards in Bootstrap and Tailwind).
 > 2. `js/`: eight more example pages, one per JavaScript-powered component, each one openable on its own. Class 1's "try it" material.
 > 3. `activity/`: Harbourside, Part 4. The Week 7 page with no CSS, rebuilt with Bootstrap in Try Its 1 to 6. `activity/answer/` is the key.
-> 4. `WEBD1000_Quiz_Week_11.md`: the 10-question Brightspace quiz. One question per pop quiz. `WEBD1000_Quiz_Week_11.csv` is the same quiz for Brightspace's question import (Quizzes → Question Library → Import → Upload a File). The `.md` is the source: after editing it, run `python _build/quiz_to_csv.py WEBD1000_Quiz_Week_11.md WEBD1000_Quiz_Week_11.csv`. Code in the questions is flattened onto one line after "Code:", and the csv module does the quoting, so a `"` in the JavaScript comes out as `""`.
+> 4. The 10-question Brightspace quiz, one question per pop quiz, is **not in this folder**: it's in the git-ignored `../temp/` (`WEBD1000_Quiz_Week_11.md` and `.csv`), so students can't pull the answer key. The `.csv` is for Brightspace's question import (Quizzes → Question Library → Import → Upload a File). The `.md` is the source: after editing it, run, from this folder, `python _build/quiz_to_csv.py ../temp/WEBD1000_Quiz_Week_11.md ../temp/WEBD1000_Quiz_Week_11.csv`. Code in the questions is flattened onto one line after "Code:", and the csv module does the quoting, so a `"` in the JavaScript comes out as `""`.
 > 5. `Customizing_Bootstrap_Tailwind.pptx` (67 slides, two PowerPoint sections, one per class; same style as the Week 10 deck; every slide has speaker notes).
 >
 > Bootstrap and Tailwind load from a CDN, so **every example needs the internet**.
@@ -87,7 +87,7 @@ One interactive component from Class 1 is an optional extra.
 
 ## Brightspace quiz
 
-**10 questions**, one per pop quiz, in `WEBD1000_Quiz_Week_11.md`. Six come from Class 1 and four
+**10 questions**, one per pop quiz, in `../temp/WEBD1000_Quiz_Week_11.md` (git-ignored). Six come from Class 1 and four
 from Class 2. Tell students at Pop Quiz 1 that every pop quiz this week is on the quiz, so they
 write the answers down.
 
@@ -103,8 +103,6 @@ write the answers down.
 ```
 11_Customizing_Bootstrap_Tailwind/
 ├── README.md
-├── WEBD1000_Quiz_Week_11.md             ← the 10-question Brightspace quiz (the source)
-├── WEBD1000_Quiz_Week_11.csv            ← ...as a Brightspace question-import CSV (_build/quiz_to_csv.py)
 ├── 01_customizing_example.html / .css   ← hover each button: the old way vs the variables
 ├── 02_bootstrap_cards_example.html      ← the same three cards...
 ├── 03_tailwind_cards_example.html       ← ...in Tailwind (Play CDN)

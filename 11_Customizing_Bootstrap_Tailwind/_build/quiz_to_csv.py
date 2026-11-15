@@ -1,6 +1,8 @@
 """Convert WEBD1000_Quiz_Week_11.md into a Brightspace question-import CSV.
 
-    python _build/quiz_to_csv.py WEBD1000_Quiz_Week_11.md WEBD1000_Quiz_Week_11.csv
+    python _build/quiz_to_csv.py ../temp/WEBD1000_Quiz_Week_11.md ../temp/WEBD1000_Quiz_Week_11.csv
+
+The quiz lives in the git-ignored temp/ folder so students can't pull the answer key.
 
 Import it in Brightspace: Quizzes -> Question Library -> Import -> Upload a File.
 
