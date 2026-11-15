@@ -1039,7 +1039,8 @@ codeSlide({
     '   <div class="accordion-item">',
     '      <h3 class="accordion-header">',
     '         <button class="accordion-button" type="button"',
-    '            data-bs-toggle="collapse" data-bs-target="#q1">',
+    '            data-bs-toggle="collapse" data-bs-target="#q1"',
+    '            aria-expanded="true" aria-controls="q1">',
     '            Do you take reservations?',
     '         </button>',
     '      </h3>',
@@ -1051,20 +1052,20 @@ codeSlide({
     '   <!-- ...and two more items, the same way -->',
     '</div>',
   ],
-  lang: "html", result: SH.accordion, size: 13.5, mark: [21],
+  lang: "html", result: SH.accordion, size: 13.5, mark: [22],
   bullets: [
     ["Same pattern, new word: ", ["data-bs-toggle=\"collapse\"", "c"], "."],
     [["data-bs-parent=\"#faq\"", "c"], " is what makes it an ", ["accordion", "b"], ": open one, the open one closes."],
     [["show", "c"], " on an answer means it starts open."],
   ],
-  notes: "Open js/02_accordion_example.html. Click the allergen button first: one collapse on its own, nothing fancy. Then say the useful thing - this is exactly what the navbar's menu button does under 768px. They have been using a collapse since last week without knowing its name.\n\nThen the accordion. Open each question and let them watch the previous one close.\n\nThe orange mark is the whole lesson: data-bs-parent. Take it away and you have three independent collapses that all stay open. That is Try It 2, step 3, and it is worth doing live if there is time.\n\nThe heading structure matters for accessibility: the button lives inside a real heading (h3 here), so a screen reader can jump between questions. Bootstrap's docs use h2; use whatever level fits your page.\n\naria-expanded is on the buttons in the file. Bootstrap updates it as you click, so a screen reader announces 'expanded' or 'collapsed'. Point at it, don't dwell.\n\nFAQ accordions are everywhere. If anyone is short of ideas for Assignment 4, this is a five-minute win.",
+  notes: "Open js/02_accordion_example.html. Click the allergen button first: one collapse on its own, nothing fancy. Then say the useful thing - this is exactly what the navbar's menu button does under 768px. They have been using a collapse since last week without knowing its name.\n\nThen the accordion. Open each question and let them watch the previous one close.\n\nThe orange mark is the whole lesson: data-bs-parent. Take it away and you have three independent collapses that all stay open. That is Try It 2, step 3, and it is worth doing live if there is time.\n\nThe heading structure matters for accessibility: the button lives inside a real heading (h3 here), so a screen reader can jump between questions. Bootstrap's docs use h2; use whatever level fits your page.\n\naria-expanded and aria-controls are on the buttons (slide and file). aria-controls names the answer it opens, so it changes along with data-bs-target. Bootstrap updates aria-expanded as you click, so a screen reader announces 'expanded' or 'collapsed'. Point at it, don't dwell.\n\nFAQ accordions are everywhere. If anyone is short of ideas for Assignment 4, this is a five-minute win.",
 });
 
 trySlide({
   n: 2, title: "Add a Question, Then Remove the Parent", time: "5 min", lw: 5.6, codeTitle: "ONE ACCORDION ITEM", lang: "html",
   steps: [
     ["Open the example", [["js/02_accordion_example.html", "c"], ". Open all three questions."]],
-    ["Add a fourth", ["Copy an ", ["accordion-item", "c"], ". Change ", ["#q3", "c"], " to ", ["#q4", "c"], " in ", ["both", "b"], " places."]],
+    ["Add a fourth", ["Copy an ", ["accordion-item", "c"], ". Change ", ["q3", "c"], " to ", ["q4", "c"], " in ", ["all three", "b"], " places."]],
     ["Take the parent out", ["Delete ", ["data-bs-parent=\"#faq\"", "c"], " from all four. Reload. What changed?"]],
     ["Put it back", "One attribute is the difference between a list and an accordion."],
   ],
@@ -1073,7 +1074,8 @@ trySlide({
     '   <h3 class="accordion-header">',
     '      <button class="accordion-button collapsed"',
     '         type="button" data-bs-toggle="collapse"',
-    '         data-bs-target="#q4">',
+    '         data-bs-target="#q4"',
+    '         aria-expanded="false" aria-controls="q4">',
     '         Do you deliver?',
     '      </button>',
     '   </h3>',
@@ -1085,7 +1087,7 @@ trySlide({
     '   </div>',
     '</div>',
   ],
-  tip: [[["Two places, every time: ", "b"], "the button's ", ["data-bs-target", "c"], " and the ", ["id", "c"], " on the answer below it."]],
+  tip: [[["Three places, every time: ", "b"], "the button's ", ["data-bs-target", "c"], " and ", ["aria-controls", "c"], ", and the ", ["id", "c"], " on the answer below it."]],
   notes: "Step 3 is the point of the Try It. Ask for the answer out loud before they put it back: with no parent, every answer stays open, because nothing tells one collapse about the others.\n\nThe copied item needs collapsed on the button and no show on the answer, or it starts open and the arrow points the wrong way. That is the most common thing to fix while walking around.\n\nFast finishers: give the accordion flush (no outer border and rounded corners), or make the whole thing start closed by taking show off the first answer and adding collapsed to its button.",
 });
 

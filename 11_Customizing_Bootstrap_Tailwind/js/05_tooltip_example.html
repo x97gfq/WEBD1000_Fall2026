@@ -76,12 +76,10 @@
 
 		<!-- OUR JavaScript. It goes AFTER Bootstrap's, because it uses it. -->
 		<script>
-			// Find every tooltip button on the page,
-			// and turn each one into a tooltip.
-			document.querySelectorAll('[data-bs-toggle="tooltip"]')
-				.forEach(function (el) {
-					new bootstrap.Tooltip(el);
-				});
+			// Find every tooltip button on the page, and turn each one into a tooltip.
+			document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (el) {
+				new bootstrap.Tooltip(el);
+			});
 		</script>
 	</body>
 </html>
