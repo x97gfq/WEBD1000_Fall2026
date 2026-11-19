@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Who Styled It?</title>
+		<!-- Week 11, Class 2: a sorting game. No frameworks on this page on purpose,
+		     so nothing here gives the answers away. Works without the internet. -->
+		<style>
+			:root {
+				--bg: #F3F5F8; --surface: #FFFFFF; --ink: #15212C; --muted: #566573; --line: #D5DCE4;
+				--bs: #6F42C1; --tw: #0E7490; --ours: #B5451B; --mix: #4A5A6A;
+				--right: #1E6B48; --right-soft: #E3F2EA; --wrong: #B42318; --wrong-soft: #FDECEA;
+				--code-bg: #EEF1F5;
+			}
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--bg: #0C131A; --surface: #131E28; --ink: #E3EAF0; --muted: #98A8B6; --line: #2A3B4A;
+					--bs: #B79AF0; --tw: #5CC6DD; --ours: #F08D63; --mix: #A9B7C4;
+					--right: #7FD1A8; --right-soft: #14301F; --wrong: #F59A90; --wrong-soft: #3A1714;
+					--code-bg: #1B2834; color-scheme: dark;
+				}
+			}
+			* { box-sizing: border-box; }
+			body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, "Segoe UI", sans-serif; }
+			.page { max-width: 1100px; margin: 0 auto; padding: 28px 16px 64px; }
+			h1 { margin: 0 0 6px; font-size: clamp(26px, 4vw, 34px); }
+			.intro { margin: 0 0 18px; color: var(--muted); max-width: 72ch; }
+			code { font-family: Consolas, ui-monospace, monospace; }
+
+			.legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 0 0 18px; padding: 0; list-style: none; }
+			.legend li { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid; border-radius: 6px; padding: 10px 12px; font-size: 14px; }
+			.legend b { display: block; font-size: 15px; }
+
+			.bar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: var(--bg); padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+			.score { font-size: 18px; font-weight: 700; margin-right: auto; font-variant-numeric: tabular-nums; }
+			.bar button { font: 600 14px system-ui, sans-serif; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 7px 14px; cursor: pointer; }
+			.bar button:hover { border-color: var(--ink); }
+
+			ol.items { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+			.item { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; }
+			.num { font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+			.where { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+			.snippet { display: block; background: var(--code-bg); border-radius: 5px; padding: 8px 10px; font-size: 15px; white-space: pre-wrap; overflow-wrap: anywhere; }
+			.choices { display: grid; grid-template-columns: repeat(4, 7.2em); gap: 6px; }
+			.choices button { font: 600 13px/1.2 system-ui, sans-serif; padding: 9px 6px; border-radius: 6px; cursor: pointer; background: var(--surface); color: var(--c); border: 2px solid var(--c); }
+			.choices button:hover:not(:disabled) { background: var(--c); color: var(--surface); }
+			.choices button:disabled { cursor: default; opacity: .35; }
+			.choices button.picked, .choices button.answer { opacity: 1; }
+			.choices button.answer { background: var(--right); border-color: var(--right); color: var(--surface); }
+			.choices button.picked.no { background: var(--wrong); border-color: var(--wrong); color: var(--surface); }
+			.why { grid-column: 2 / -1; margin: 6px 0 0; padding: 8px 12px; border-radius: 5px; font-size: 15px; }
+			.why.ok { background: var(--right-soft); }
+			.why.no { background: var(--wrong-soft); }
+			.why b { margin-right: 4px; }
+			button:focus-visible { outline: 3px solid var(--ours); outline-offset: 2px; }
+
+			@media (max-width: 760px) {
+				.item { grid-template-columns: 2em minmax(0, 1fr); }
+				.choices { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+				.why { grid-column: 1 / -1; }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<h1>Who Styled It?</h1>
+			<p class="intro">
+				Each card is something you might find in a page's HTML or CSS. Decide where its styling comes from,
+				then click a column. You find out straight away. With a partner, talk it through <em>before</em> you click.
+			</p>
+
+			<ul class="legend">
+				<li style="border-left-color: var(--bs)"><b style="color: var(--bs)">Bootstrap</b>A Bootstrap class, attribute or rule. Only Bootstrap has it.</li>
+				<li style="border-left-color: var(--tw)"><b style="color: var(--tw)">Tailwind</b>A Tailwind class or file. Only Tailwind has it.</li>
+				<li style="border-left-color: var(--ours)"><b style="color: var(--ours)">Our own style.css</b>Something we wrote ourselves. No framework would know it.</li>
+				<li style="border-left-color: var(--mix)"><b style="color: var(--mix)">Other combination</b>A mix of sources on one element, or a class both frameworks have.</li>
+			</ul>
+
+			<div class="bar">
+				<span class="score" id="score">0 / 0 answered</span>
+				<button type="button" id="reveal">Show all answers</button>
+				<button type="button" id="reset">Start again</button>
+			</div>
+
+			<ol class="items" id="items"></ol>
+		</div>
+
+		<script>
+			// k: bs = Bootstrap, tw = Tailwind, ours = our own style.css, mix = other combination
+			// also: another answer we accept, with the same explanation
+			const items = [
+				{ w: "HTML", s: 'class="btn btn-primary"', k: "bs",
+					why: "btn and btn-primary are Bootstrap's button component. Tailwind has no btn class." },
+				{ w: "HTML", s: 'class="text-lg font-semibold"', k: "tw",
+					why: "Tailwind: text-lg is a font size, font-semibold a weight. Bootstrap would say fs-5 and fw-semibold." },
+				{ w: "CSS", s: ".price {\n   color: #B5451B;\n   font-weight: bold;\n}", k: "ours",
+					why: "Neither framework has a price class. That's a name we made up, in Harbourside's style.css." },
+				{ w: "HTML", s: 'class="card h-100 shadow-sm special"', k: "mix",
+					why: "card, h-100 and shadow-sm are Bootstrap. special is ours, from style.css. Two sources on one element." },
+				{ w: "HTML", s: 'class="grid gap-4 md:grid-cols-3"', k: "tw",
+					why: "The colon gives it away: md: is Tailwind's way of writing a media query (768px and up). Bootstrap would use row and col-md-4." },
+				{ w: "HTML", s: 'class="col-sm-6 col-lg-3"', k: "bs",
+					why: "Bootstrap's 12-column grid: 6 of 12 from sm, 3 of 12 from lg. Tailwind writes sizes as prefixes (sm:, lg:), not in the middle of the name." },
+				{ w: "HTML", s: 'class="text-center"', k: "mix",
+					why: "Trick question: both Bootstrap and Tailwind have text-center, and it does the same thing in both. You can't tell from the class. Look at what the page links in its head." },
+				{ w: "CSS", s: ".bg-harbour {\n   background-color: #12304A;\n}", k: "ours",
+					why: "It looks like a Bootstrap name (bg-primary, bg-dark...) on purpose, but harbour is ours. It's the navy in style.css." },
+				{ w: "HTML", s: 'class="d-flex align-items-center gap-2"', k: "bs",
+					why: "Bootstrap writes flexbox as d-flex (display: flex) and align-items-center, the full CSS words. Compare the next one." },
+				{ w: "HTML", s: 'class="flex items-center gap-2"', k: "tw",
+					why: "The same flexbox in Tailwind: flex and items-center, shorter names. gap-2 is in both, but flex and items-center are only Tailwind." },
+				{ w: "HTML", s: 'class="navbar navbar-expand-md bg-harbour"', k: "mix",
+					why: "navbar and navbar-expand-md are Bootstrap's navbar. bg-harbour is our navy. Bootstrap does the layout, we do the colour." },
+				{ w: "HTML", s: 'data-bs-toggle="collapse"\ndata-bs-target="#mainNav"', k: "bs",
+					why: "data-bs- means Bootstrap, and these two need Bootstrap's JavaScript. Tailwind has no interactive parts at all." },
+				{ w: "CSS", s: ".btn-harbour {\n   --bs-btn-bg: #B5451B;\n   --bs-btn-hover-bg: #8A2B0B;\n}", k: "ours", also: "mix",
+					why: "We wrote this rule, in our style.css, so it's ours. But it only works because Bootstrap's .btn reads those --bs-btn- variables. If you said Other combination, that's fair too." },
+				{ w: "HTML", s: 'class="bg-slate-100"', k: "tw",
+					why: "Tailwind's colour palette: slate is a blue-grey, 100 is very light. Bootstrap's colours have names like bg-light and bg-secondary, no numbers." },
+				{ w: "CSS", s: "h1, h2, .navbar-brand {\n   font-family: Georgia, serif;\n}", k: "ours",
+					why: "Our own rule. It styles a Bootstrap class (navbar-brand), but the rule is in our style.css, which we link after Bootstrap's." },
+				{ w: "HTML", s: 'class="mx-auto"', k: "mix",
+					why: "Another one both frameworks have: margin-left and margin-right auto, to centre a block. The class can't tell you which framework the page uses." },
+				{ w: "HTML", s: 'class="display-5"', k: "bs",
+					why: "Bootstrap's big heading sizes run display-1 to display-6. Tailwind would use text-5xl or similar." },
+				{ w: "HTML (in the head)", s: '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>', k: "tw",
+					why: "Tailwind's Play CDN. It reads the classes on the page and writes the CSS in the browser. Bootstrap loads with a <link> to a CSS file instead." },
+				{ w: "HTML", s: '<a class="btn btn-harbour btn-lg">', k: "mix",
+					why: "btn and btn-lg are Bootstrap. btn-harbour is ours, the orange-red button from style.css." },
+				{ w: "CSS", s: ".special {\n   background-color: #FBE9DF;\n   border-color: #E97132;\n}", k: "ours",
+					why: "Ours. It ties with Bootstrap's .card (one class each), and wins because style.css is linked second. That's Pop Quiz 10." },
+			];
+			const cols = [["bs", "Bootstrap", "--bs"], ["tw", "Tailwind", "--tw"], ["ours", "Our style.css", "--ours"], ["mix", "Other combo", "--mix"]];
+			const names = { bs: "Bootstrap", tw: "Tailwind", ours: "Our own style.css", mix: "Other combination" };
+			const list = document.getElementById("items");
+			const scoreEl = document.getElementById("score");
+			let answered = 0, right = 0;
+
+			function showScore() {
+				scoreEl.textContent = answered === 0 ? "0 / " + items.length + " answered" : right + " right out of " + answered + " (" + items.length + " in all)";
+			}
+
+			function settle(li, item, pick) {
+				const ok = pick === item.k || pick === item.also;
+				li.querySelectorAll(".choices button").forEach((b) => {
+					b.disabled = true;
+					if (b.dataset.k === item.k || (ok && b.dataset.k === pick)) b.classList.add("answer");
+					if (pick && b.dataset.k === pick) b.classList.add("picked", ok ? "ok" : "no");
+				});
+				const p = document.createElement("p");
+				p.className = "why " + (pick && !ok ? "no" : "ok");
+				p.innerHTML = "<b>" + (pick ? (ok ? "Yes." : "Not quite: " + names[item.k] + ".") : names[item.k] + ".") + "</b>";
+				p.append(document.createTextNode(item.why));
+				li.append(p);
+				return ok;
+			}
+
+			function build() {
+				list.innerHTML = "";
+				answered = 0; right = 0;
+				items.forEach((item, i) => {
+					const li = document.createElement("li");
+					li.className = "item";
+					li.innerHTML = '<span class="num">' + (i + 1) + '</span><div><span class="where"></span><code class="snippet"></code></div><div class="choices" role="group"></div>';
+					li.querySelector(".where").textContent = item.w;
+					li.querySelector(".snippet").textContent = item.s;
+					li.querySelector(".choices").setAttribute("aria-label", "Where does item " + (i + 1) + " come from?");
+					cols.forEach(([k, label, v]) => {
+						const b = document.createElement("button");
+						b.type = "button"; b.dataset.k = k; b.textContent = label;
+						b.style.setProperty("--c", "var(" + v + ")");
+						b.addEventListener("click", () => {
+							answered++;
+							if (settle(li, item, k)) right++;
+							showScore();
+						});
+						li.querySelector(".choices").append(b);
+					});
+					list.append(li);
+				});
+				showScore();
+			}
+
+			document.getElementById("reset").addEventListener("click", build);
+			document.getElementById("reveal").addEventListener("click", () => {
+				list.querySelectorAll(".item").forEach((li, i) => {
+					if (!li.querySelector(".why")) settle(li, items[i], null);
+				});
+			});
+			build();
+		</script>
+	</body>
+</html>

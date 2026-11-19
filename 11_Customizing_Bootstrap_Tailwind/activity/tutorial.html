@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Harbourside in Bootstrap: Tutorial</title>
+		<!-- Harbourside, Part 4: the step-by-step guide for working on your own.
+		     Open it in the browser next to VS Code. Every code block has a Copy button. -->
+		<style>
+			:root {
+				--bg: #F3F5F8; --surface: #FFFFFF; --ink: #15212C; --muted: #566573; --line: #D5DCE4;
+				--navy: #12304A; --accent: #B5451B; --soft: #FBE9DF; --ok: #1E6B48; --ok-soft: #E3F2EA;
+				--warn: #C18A12; --warn-soft: #FFF4D6; --code-bg: #0F1C27; --code-head: #182A39;
+			}
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--bg: #0C131A; --surface: #131E28; --ink: #E3EAF0; --muted: #98A8B6; --line: #2A3B4A;
+					--navy: #9CC0E0; --accent: #F08D63; --soft: #3A2219; --ok: #7FD1A8; --ok-soft: #14301F;
+					--warn: #D9A93A; --warn-soft: #33290F; --code-bg: #08111A; --code-head: #112130; color-scheme: dark;
+				}
+			}
+			* { box-sizing: border-box; }
+			html { scroll-behavior: smooth; }
+			body { margin: 0; background: var(--bg); color: var(--ink); font: 16.5px/1.6 system-ui, "Segoe UI", sans-serif; }
+			code { font-family: Consolas, ui-monospace, monospace; font-size: .9em; background: var(--soft); padding: .05em .3em; border-radius: 3px; overflow-wrap: anywhere; }
+			a { color: var(--navy); }
+			.top { background: #12304A; color: #fff; }
+			.top .in { max-width: 920px; margin: 0 auto; padding: 28px 16px 20px; }
+			.eyebrow { margin: 0 0 4px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #F2B79C; font-weight: 600; }
+			.top h1 { margin: 0; font-size: clamp(26px, 4vw, 34px); line-height: 1.2; }
+			nav.jump { position: sticky; top: 0; z-index: 3; background: var(--surface); border-bottom: 1px solid var(--line); }
+			nav.jump ol { max-width: 920px; margin: 0 auto; padding: 8px 16px; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+			nav.jump a { display: block; padding: 3px 10px; border: 1px solid var(--line); border-radius: 4px; font-size: 13.5px; text-decoration: none; color: var(--ink); }
+			nav.jump a:hover { border-color: var(--accent); color: var(--accent); }
+			main { max-width: 920px; margin: 0 auto; padding: 24px 16px 80px; display: flex; flex-direction: column; gap: 22px; }
+
+			.step { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px 24px; scroll-margin-top: 60px; min-width: 0; }
+			.step header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 8px; }
+			.tag { background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 2px 10px; border-radius: 4px; }
+			.mins { color: var(--muted); font-size: 14px; }
+			.step h2 { flex-basis: 100%; margin: 4px 0 0; font-size: 23px; color: var(--navy); line-height: 1.25; }
+			.step h3 { margin: 22px 0 4px; font-size: 17px; color: var(--navy); }
+			.step p { margin: 8px 0; max-width: 75ch; }
+			ol.do { padding-left: 22px; margin: 8px 0; max-width: 75ch; }
+			ol.do li { margin: 6px 0; }
+			ul.have { margin: 4px 0 8px; }
+
+			figure.code { margin: 14px 0 0; border-radius: 6px; overflow: hidden; background: var(--code-bg); min-width: 0; }
+			figure.code figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; background: var(--code-head); padding: 8px 8px 8px 14px; font-size: 13px; color: #8EA3B5; }
+			.lbl { color: #fff; font-weight: 600; }
+			.where { flex: 1 1 200px; min-width: 0; }
+			.lang { font-family: Consolas, monospace; font-size: 11px; letter-spacing: .08em; }
+			button.copy { font: 600 13px system-ui, sans-serif; background: #B5451B; color: #fff; border: 0; border-radius: 4px; padding: 6px 14px; cursor: pointer; min-width: 76px; }
+			button.copy:hover { background: #8A2B0B; }
+			button.copy.done { background: #1E6B48; }
+			figure.code pre { margin: 0; padding: 14px 16px; overflow-x: auto; tab-size: 3; }
+			figure.code pre code { background: none; padding: 0; color: #DCE6EE; font-size: 13.5px; line-height: 1.55; white-space: pre; overflow-wrap: normal; }
+
+			.box { margin-top: 14px; border-radius: 6px; padding: 10px 14px; border-left: 4px solid var(--navy); background: var(--bg); }
+			.box.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+			.box.new { border-left-color: var(--accent); }
+			.box ul { margin: 4px 0 0; padding-left: 20px; }
+			.box li { margin: 4px 0; }
+			.h { margin: 0 0 2px !important; font-weight: 700; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+			.checks { margin-top: 14px; padding: 10px 14px; border-radius: 6px; background: var(--ok-soft); display: grid; gap: 6px; }
+			.checks label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+			.checks input { margin-top: 5px; width: 17px; height: 17px; accent-color: #1E6B48; flex: none; }
+			.checks input:checked + span { text-decoration: line-through; color: var(--muted); }
+			.quiz { margin-top: 14px; border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+			.quiz .q { font-weight: 600; }
+			.opts { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 4px; }
+			.opts b { font-family: Consolas, monospace; color: var(--muted); margin-right: 6px; }
+			details summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+			.opt { margin-top: 12px; }
+			a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+			@media (max-width: 600px) { .step { padding: 16px; } }
+		</style>
+	</head>
+	<body>
+		<header class="top"><div class="in">
+			<p class="eyebrow">WEBD1000 · Week 11 · Harbourside, Part 4</p>
+			<h1>Harbourside in Bootstrap</h1>
+		</div></header>
+		<nav class="jump" aria-label="Steps"><ol><li><a href="#start">Start</a></li><li><a href="#t1">1 · Link</a></li><li><a href="#t2">2 · Navbar</a></li><li><a href="#t3">3 · Banner</a></li><li><a href="#t4">4 · Cards</a></li><li><a href="#t5">5 · Table</a></li><li><a href="#t6">6 · Colours</a></li><li><a href="#submit">Submit</a></li><li><a href="#extras">Extras</a></li></ol></nav>
+		<main>
+<section class="step" id="start"><header><h2>Before you start</h2></header>
+<p>You're rebuilding our Harbourside page from Week 7 with Bootstrap. The page you start with has <b>no CSS at all</b>. By the end it has a navbar that folds into a menu button on a phone, a banner, the menu as cards, a striped table, and Harbourside's own colours.</p>
+<p>Work through Try Its 1 to 6 in order. Each one adds one part. Plan on about an hour.</p>
+<ol class="do"><li>Run <code>git pull</code>, and open the Week 11 folder in VS Code.</li><li>Open <code>activity/index.html</code>. Right-click it and pick <b>Open with Live Server</b> (or click <b>Go Live</b>).</li><li>It should look plain: a big logo, a bullet-point menu, Times New Roman. That's right. That's where we start.</li><li>You need the internet: Bootstrap loads from the web.</li></ol>
+<div class="box tip"><p class="h">How each Try It works</p><p>The comments in <code>index.html</code> say where each Try It goes, like <code>&lt;!-- Try It 3: ... --&gt;</code>. Find the comment, use the <b>Copy</b> button on the code, paste it where it says, save, and look at the page. Then read <em>What's new</em> to see what each class did.</p></div>
+<div class="box warn"><p class="h">Stuck?</p><p>The finished page is in <code>activity/answer/</code>. Peek at it if you need to, but if you copy from it, change <code>../images/</code> to <code>images/</code>. The answer file is one folder deeper, so its image paths are different and your logo and photo will break.</p></div>
+</section>
+<section class="step" id="t1"><header><span class="tag">Try It 1</span><span class="mins">about 4 min</span><h2>Link Bootstrap</h2></header><ol class="do"><li>In <code>&lt;head&gt;</code>, find the comment <em>Try It 1: Bootstrap's CSS, then style.css, go here</em>. Paste these two lines under it.</li><li>Save, and look at the page. The font changes before you've added a single class.</li><li>Find <code>&lt;main&gt;</code> (there's a Try It 1 comment above it). Replace that opening tag with the one below.</li></ol><figure class="code">
+<figcaption><span class="lbl">In the head</span><span class="where">under the Try It 1 comment in &lt;head&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c1">Copy</button></figcaption>
+<pre id="c1"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</code></pre>
+</figure><figure class="code">
+<figcaption><span class="lbl">The main tag</span><span class="where">replaces &lt;main&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c2">Copy</button></figcaption>
+<pre id="c2"><code>&lt;main class=&quot;container my-5&quot;&gt;</code></pre>
+</figure><div class="box new"><p class="h">What's new</p><ul><li><b>Order matters:</b> Bootstrap's CSS first, then ours. When a rule in each one ties, the one linked last wins, so ours does.</li><li><code>container</code> keeps the page in the middle with room at the sides.</li><li><code>my-5</code> is margin on the y-axis (top and bottom), size 5 (3rem).</li></ul></div><div class="checks"><p class="h">Check it</p><label><input type="checkbox" id="t1c0"> <span>The font is no longer Times New Roman.</span></label><label><input type="checkbox" id="t1c1"> <span>The page content has space at the sides on a wide screen.</span></label></div><div class="box warn"><p class="h">Nothing changed?</p><p>Bootstrap didn't load. Check the link is inside <code>&lt;head&gt;</code>, is spelled exactly right, and you're online. Nothing else today works until this does.</p></div></section>
+<section class="step" id="t2"><header><span class="tag">Try It 2</span><span class="mins">about 10 min</span><h2>The navbar</h2></header><ol class="do"><li>In <code>&lt;header&gt;</code>, delete the logo <code>&lt;img&gt;</code> line, and the whole old <code>&lt;nav&gt;</code>, from <code>&lt;nav</code> down to <code>&lt;/nav&gt;</code>. <b>Keep the <code>&lt;h1&gt;</code></b> for now. Try It 3 replaces it.</li><li>Paste the navbar where the logo was, at the top of the header, above the <code>&lt;h1&gt;</code>.</li><li>Scroll to the bottom. Paste the script just before <code>&lt;/body&gt;</code>, where the Try It 2 comment is.</li><li>Save. Make the window narrow (or press <code>Ctrl + Shift + M</code> in DevTools and pick a phone).</li></ol><figure class="code">
+<figcaption><span class="lbl">The navbar</span><span class="where">at the top of &lt;header&gt;, replacing the logo and the old &lt;nav&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c3">Copy</button></figcaption>
+<pre id="c3"><code>&lt;nav class=&quot;navbar navbar-expand-md bg-harbour&quot; data-bs-theme=&quot;dark&quot; aria-label=&quot;Main&quot;&gt;
+	&lt;div class=&quot;container&quot;&gt;
+		&lt;a class=&quot;navbar-brand d-flex align-items-center gap-2&quot; href=&quot;#&quot;&gt;
+			&lt;img src=&quot;images/logo.svg&quot; width=&quot;40&quot; height=&quot;40&quot; alt=&quot;&quot;&gt;
+			Harbourside
+		&lt;/a&gt;
+		&lt;button class=&quot;navbar-toggler&quot; type=&quot;button&quot; data-bs-toggle=&quot;collapse&quot; data-bs-target=&quot;#mainNav&quot;
+			aria-controls=&quot;mainNav&quot; aria-expanded=&quot;false&quot; aria-label=&quot;Toggle navigation&quot;&gt;
+			&lt;span class=&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;
+		&lt;/button&gt;
+		&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;mainNav&quot;&gt;
+			&lt;ul class=&quot;navbar-nav ms-auto&quot;&gt;
+				&lt;li class=&quot;nav-item dropdown&quot;&gt;
+					&lt;a class=&quot;nav-link dropdown-toggle&quot; href=&quot;#menu&quot; role=&quot;button&quot;
+						data-bs-toggle=&quot;dropdown&quot; aria-expanded=&quot;false&quot;&gt;Menu&lt;/a&gt;
+					&lt;ul class=&quot;dropdown-menu&quot;&gt;
+						&lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#haddock&quot;&gt;Haddock &amp;amp; Chips&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#clams&quot;&gt;Clam Strips&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#lobster&quot;&gt;Lobster Roll&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#kids&quot;&gt;Kids&#x27; Fish Bites&lt;/a&gt;&lt;/li&gt;
+					&lt;/ul&gt;
+				&lt;/li&gt;
+				&lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#hours&quot;&gt;Hours &amp;amp; Location&lt;/a&gt;&lt;/li&gt;
+				&lt;li class=&quot;nav-item&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+</figure><figure class="code">
+<figcaption><span class="lbl">Bootstrap's JavaScript</span><span class="where">just before &lt;/body&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c4">Copy</button></figcaption>
+<pre id="c4"><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+</figure><div class="box new"><p class="h">What's new</p><ul><li>It's last class's pattern twice. The menu button has <code>data-bs-toggle=&quot;collapse&quot;</code> and <code>data-bs-target=&quot;#mainNav&quot;</code>, which opens the div with <code>id=&quot;mainNav&quot;</code>. The Menu link has <code>data-bs-toggle=&quot;dropdown&quot;</code>.</li><li><code>navbar-expand-md</code>: the full menu from md (768px) up, a menu button below that.</li><li><code>bg-harbour</code> isn't Bootstrap. It's ours, our navy, already in <code>style.css</code>.</li><li><code>data-bs-theme=&quot;dark&quot;</code> tells Bootstrap the background is dark, so the links and the menu button turn light.</li><li><code>d-flex align-items-center gap-2</code> is Week 8's flexbox, as classes: the logo and the name side by side.</li><li><code>ms-auto</code> pushes the links to the right (margin-start: auto).</li></ul></div><div class="checks"><p class="h">Check it</p><label><input type="checkbox" id="t2c0"> <span>Wide: the links are on the right of a navy bar, with the logo on the left.</span></label><label><input type="checkbox" id="t2c1"> <span>Narrow: the links are hidden behind a menu button, and the button opens them.</span></label><label><input type="checkbox" id="t2c2"> <span>The Menu link opens a dropdown with the four dishes.</span></label></div><div class="box warn"><p class="h">Menu button does nothing?</p><ul><li><b>The script is missing</b>, or isn't just before <code>&lt;/body&gt;</code>. Bootstrap gives no error. It just does nothing.</li><li>The <code>id</code> on the collapse div doesn't match <code>data-bs-target</code> exactly (<code>#mainNav</code> goes with <code>id=&quot;mainNav&quot;</code>).</li><li>No logo? Its path must be <code>images/logo.svg</code>, not <code>../images/logo.svg</code>.</li></ul></div></section>
+<section class="step" id="t3"><header><span class="tag">Try It 3</span><span class="mins">about 8 min</span><h2>A banner and two columns</h2></header><ol class="do"><li>Replace the <code>&lt;h1&gt;</code> with the banner below. It stays inside <code>&lt;header&gt;</code>, under the navbar.</li><li>Replace the whole <code>&lt;section class=&quot;intro&quot;&gt;</code> with the new one. The words come first now and the photo second, each in its own column.</li><li>Save, then try it wide and narrow.</li></ol><figure class="code">
+<figcaption><span class="lbl">The banner</span><span class="where">replaces the &lt;h1&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c5">Copy</button></figcaption>
+<pre id="c5"><code>&lt;div class=&quot;bg-harbour text-white text-center py-5&quot;&gt;
+	&lt;h1 class=&quot;display-5&quot;&gt;Harbourside Fish &amp;amp; Chips&lt;/h1&gt;
+	&lt;p class=&quot;lead&quot;&gt;On the Yarmouth waterfront since 1987.&lt;/p&gt;
+	&lt;a class=&quot;btn btn-harbour btn-lg&quot; href=&quot;#menu&quot;&gt;See the menu&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</figure><figure class="code">
+<figcaption><span class="lbl">The intro</span><span class="where">replaces the whole intro section</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c6">Copy</button></figcaption>
+<pre id="c6"><code>&lt;section class=&quot;intro row g-4 align-items-center mb-5&quot;&gt;
+	&lt;div class=&quot;col-md-6&quot;&gt;
+		&lt;h2&gt;Fresh from the Wharf&lt;/h2&gt;
+		&lt;p&gt;We buy our haddock &lt;strong&gt;straight off the &lt;em&gt;boats&lt;/em&gt;&lt;/strong&gt;,
+			cut our fries by hand, and make our tartar sauce every morning.&lt;/p&gt;
+		&lt;p&gt;Harbourside opened in 1987 in an old net loft at the end of Water Street.
+			In the summer we open the back deck, so bring a sweater: the fog rolls in
+			off the Gulf of Maine most afternoons.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;col-md-6&quot;&gt;
+		&lt;figure class=&quot;figure mb-0&quot;&gt;
+			&lt;img src=&quot;images/harbour.jpg&quot; width=&quot;800&quot; height=&quot;458&quot;
+				class=&quot;figure-img img-fluid rounded shadow-sm&quot;
+				alt=&quot;Rocky beach with calm water and a tree-lined point&quot;&gt;
+			&lt;figcaption class=&quot;figure-caption&quot;&gt;Our view of the Yarmouth waterfront.&lt;/figcaption&gt;
+		&lt;/figure&gt;
+	&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+</figure><div class="box new"><p class="h">What's new</p><ul><li><code>display-5</code> is one of Bootstrap's big heading sizes. <code>lead</code> is a bigger paragraph. <code>py-5</code> is padding top and bottom.</li><li>The button has <code>btn-harbour</code>, a class we make in Try It 6. Until then it has no colour. That's fine.</li><li>The section becomes a <code>row</code>, with two <code>col-md-6</code> columns: side by side from 768px, stacked on a phone, words on top.</li><li><code>g-4</code> is the gap between the columns. <code>align-items-center</code> lines them up in the middle (flexbox again).</li><li><code>img-fluid</code> is Bootstrap's version of <code>img { max-width: 100%; height: auto; }</code> from Week 9.</li></ul></div><div class="checks"><p class="h">Check it</p><label><input type="checkbox" id="t3c0"> <span>A navy banner with a big heading sits under the navbar.</span></label><label><input type="checkbox" id="t3c1"> <span>Wide: the words and the photo are side by side.</span></label><label><input type="checkbox" id="t3c2"> <span>Narrow: they stack, words first, and the photo fits the screen.</span></label></div></section>
+<section class="step" id="t4"><header><span class="tag">Try It 4</span><span class="mins">about 10 min</span><h2>The menu as cards</h2></header><ol class="do"><li>In <code>&lt;section id=&quot;menu&quot;&gt;</code>, keep the <code>&lt;h2&gt;Our Menu&lt;/h2&gt;</code>.</li><li>Replace <b>all four</b> <code>&lt;article&gt;</code>s under it (and the Try It 4 comment) with the block below.</li><li>Save, and look at it at three widths: about 360px, 700px and 1100px.</li></ol><figure class="code">
+<figcaption><span class="lbl">The menu cards</span><span class="where">replaces the four articles, under &lt;h2&gt;Our Menu&lt;/h2&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c7">Copy</button></figcaption>
+<pre id="c7"><code>&lt;div class=&quot;row g-4&quot;&gt;
+	&lt;div class=&quot;col-sm-6 col-lg-3&quot;&gt;
+		&lt;article id=&quot;haddock&quot; class=&quot;card h-100 shadow-sm&quot;&gt;
+			&lt;div class=&quot;card-body&quot;&gt;
+				&lt;h3 class=&quot;card-title h5&quot;&gt;Haddock &amp;amp; Chips&lt;/h3&gt;
+				&lt;p class=&quot;card-text&quot;&gt;One piece of local haddock in our crispy batter, with fries and coleslaw.&lt;/p&gt;
+				&lt;p class=&quot;price mb-0&quot;&gt;$16.99&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/article&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;col-sm-6 col-lg-3&quot;&gt;
+		&lt;article id=&quot;clams&quot; class=&quot;card h-100 shadow-sm&quot;&gt;
+			&lt;div class=&quot;card-body&quot;&gt;
+				&lt;h3 class=&quot;card-title h5&quot;&gt;Clam Strips&lt;/h3&gt;
+				&lt;p class=&quot;card-text&quot;&gt;Lightly breaded clam strips with fries and tartar sauce.&lt;/p&gt;
+				&lt;p class=&quot;price mb-0&quot;&gt;$14.50&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/article&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;col-sm-6 col-lg-3&quot;&gt;
+		&lt;article id=&quot;lobster&quot; class=&quot;card h-100 shadow-sm special&quot;&gt;
+			&lt;div class=&quot;card-body&quot;&gt;
+				&lt;span class=&quot;badge text-bg-warning mb-2&quot;&gt;Today&#x27;s special&lt;/span&gt;
+				&lt;h3 class=&quot;card-title h5&quot;&gt;Lobster Roll&lt;/h3&gt;
+				&lt;p class=&quot;card-text&quot;&gt;Fresh lobster on a toasted bun with a side salad.&lt;/p&gt;
+				&lt;p class=&quot;price mb-0&quot;&gt;$24.00&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/article&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;col-sm-6 col-lg-3&quot;&gt;
+		&lt;article id=&quot;kids&quot; class=&quot;card h-100 shadow-sm&quot;&gt;
+			&lt;div class=&quot;card-body&quot;&gt;
+				&lt;h3 class=&quot;card-title h5&quot;&gt;Kids&#x27; Fish Bites&lt;/h3&gt;
+				&lt;p class=&quot;card-text&quot;&gt;Bite-size haddock with fries and a juice box.&lt;/p&gt;
+				&lt;p class=&quot;price mb-0&quot;&gt;$9.50&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/article&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</figure><div class="box new"><p class="h">What's new</p><ul><li><code>&lt;div class=&quot;row g-4&quot;&gt;</code> wraps all the cards. Each card sits in a <code>col-sm-6 col-lg-3</code> column.</li><li>Count the columns at each size, out of 12. Under 576px no class applies, so each card is full width. From sm (576px): 6 of 12, so <b>2 across</b>. From lg (992px): 3 of 12, so <b>4 across</b>.</li><li><code>card</code> and <code>card-body</code> make the box. <code>h-100</code> makes every card the full height of its column, so they line up. <code>shadow-sm</code> is a light shadow.</li><li><code>class=&quot;card-title h5&quot;</code> on the <code>&lt;h3&gt;</code>: the right heading level, at a smaller size.</li><li>Each article keeps its <code>id</code>, so the dropdown links in the navbar still jump to it.</li><li><code>badge text-bg-warning</code> is the yellow <em>Today's special</em> label.</li></ul></div><div class="checks"><p class="h">Check it</p><label><input type="checkbox" id="t4c0"> <span>360px: one card per row.</span></label><label><input type="checkbox" id="t4c1"> <span>700px: two cards per row.</span></label><label><input type="checkbox" id="t4c2"> <span>1100px: four cards in a row, all the same height.</span></label><label><input type="checkbox" id="t4c3"> <span>Menu → Lobster Roll in the navbar jumps to the lobster card.</span></label></div></section>
+<section class="step" id="t5"><header><span class="tag">Try It 5</span><span class="mins">about 6 min</span><h2>The table and the footer</h2></header><ol class="do"><li>Replace the whole <code>&lt;aside id=&quot;hours&quot;&gt;</code> with the one below. The table is all there. You don't need to copy the rows by hand.</li><li>Replace the <code>&lt;footer&gt;</code> too.</li><li>Save, and make the window narrow.</li></ol><figure class="code">
+<figcaption><span class="lbl">The aside</span><span class="where">replaces &lt;aside id=&quot;hours&quot;&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c8">Copy</button></figcaption>
+<pre id="c8"><code>&lt;aside id=&quot;hours&quot; class=&quot;row g-4&quot;&gt;
+	&lt;div class=&quot;col-md-5&quot;&gt;
+		&lt;h2&gt;Hours &amp;amp; Location&lt;/h2&gt;
+		&lt;p&gt;12 Water Street, Yarmouth, NS&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;col-md-7&quot;&gt;
+		&lt;div class=&quot;table-responsive&quot;&gt;
+			&lt;table class=&quot;table table-striped&quot;&gt;
+				&lt;caption&gt;Opening hours&lt;/caption&gt;
+				&lt;thead&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;
+						&lt;th scope=&quot;col&quot;&gt;Open&lt;/th&gt;
+						&lt;th scope=&quot;col&quot;&gt;Close&lt;/th&gt;
+					&lt;/tr&gt;
+				&lt;/thead&gt;
+				&lt;tbody&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;row&quot;&gt;Monday&lt;/th&gt;
+						&lt;td&gt;11am&lt;/td&gt;
+						&lt;td&gt;8pm&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;row&quot;&gt;Tuesday&lt;/th&gt;
+						&lt;td&gt;11am&lt;/td&gt;
+						&lt;td&gt;8pm&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;row&quot;&gt;Wednesday&lt;/th&gt;
+						&lt;td&gt;11am&lt;/td&gt;
+						&lt;td&gt;8pm&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;row&quot;&gt;Thursday&lt;/th&gt;
+						&lt;td&gt;11am&lt;/td&gt;
+						&lt;td&gt;8pm&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;row&quot;&gt;Friday&lt;/th&gt;
+						&lt;td&gt;11am&lt;/td&gt;
+						&lt;td&gt;9pm&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;row&quot;&gt;Saturday&lt;/th&gt;
+						&lt;td&gt;11am&lt;/td&gt;
+						&lt;td&gt;9pm&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt;
+						&lt;th scope=&quot;row&quot;&gt;Sunday&lt;/th&gt;
+						&lt;td&gt;Noon&lt;/td&gt;
+						&lt;td&gt;7pm&lt;/td&gt;
+					&lt;/tr&gt;
+				&lt;/tbody&gt;
+			&lt;/table&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/aside&gt;</code></pre>
+</figure><figure class="code">
+<figcaption><span class="lbl">The footer</span><span class="where">replaces &lt;footer&gt;</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c9">Copy</button></figcaption>
+<pre id="c9"><code>&lt;footer id=&quot;contact&quot; class=&quot;bg-harbour text-white text-center py-4&quot;&gt;
+	&lt;p class=&quot;mb-1&quot;&gt;Call us: 902-555-0147&lt;/p&gt;
+	&lt;p class=&quot;small mb-0&quot;&gt;&amp;copy; 2026 Harbourside Fish &amp;amp; Chips&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+</figure><div class="box new"><p class="h">What's new</p><ul><li>The aside is a row: the address in <code>col-md-5</code>, the table in <code>col-md-7</code> (5 + 7 = 12).</li><li><code>table</code> is Bootstrap's table style. <code>table-striped</code> shades every second row. Try <code>table-hover</code> or <code>table-sm</code> too.</li><li><code>table-responsive</code> is the div around the table. See the question below.</li><li>The footer reuses <code>bg-harbour</code>. <code>text-center</code> centres the text, and <code>py-4</code> is padding on the top and bottom.</li><li>The caption shows under the table. Add <code>caption-top</code> to the table if you want it on top.</li></ul></div><div class="checks"><p class="h">Check it</p><label><input type="checkbox" id="t5c0"> <span>Wide: the address and the table are side by side.</span></label><label><input type="checkbox" id="t5c1"> <span>Every second row of the table is shaded.</span></label><label><input type="checkbox" id="t5c2"> <span>The footer is navy with white, centred text.</span></label></div><div class="quiz"><p class="h">Check yourself</p><p class="q">Your hours table is wider than a phone screen. What does <code>table-responsive</code> do about it?</p><ol class="opts"><li><b>A</b> Shrinks the text until the table fits</li><li><b>B</b> Stacks the columns on top of each other</li><li><b>C</b> Lets the table scroll sideways inside its own box</li><li><b>D</b> Hides the columns that don't fit</li></ol>
+<details><summary>Show the answer</summary><p><b>C.</b> The <code>table-responsive</code> div gets <code>overflow-x: auto</code>, so only the table scrolls and the rest of the page stays still. We did this by hand in Week 7 with a <code>table-wrap</code> div. Try it: phone width in the device toolbar, then drag the table sideways.</p></details></div></section>
+<section class="step" id="t6"><header><span class="tag">Try It 6</span><span class="mins">about 8 min</span><h2>Make it look like Harbourside</h2></header><ol class="do"><li>Open <code>activity/style.css</code>. It already has <code>.bg-harbour</code>.</li><li>Paste the rules below under the <em>Try It 6: make it yours</em> heading.</li><li>Save, and hover the <b>See the menu</b> button in the banner.</li><li>Then make it yours: change a colour, a font, or a Bootstrap class. Anything you like.</li></ol><figure class="code">
+<figcaption><span class="lbl">Try It 6</span><span class="where">style.css, under the Try It 6 heading</span><span class="lang">CSS</span><button class="copy" type="button" data-for="c10">Copy</button></figcaption>
+<pre id="c10"><code>/* 1. Headings in Georgia, like the old site */
+h1, h2, .navbar-brand {
+	font-family: Georgia, &quot;Times New Roman&quot;, serif;
+}
+
+h2 {
+	color: #12304A;
+}
+
+/* 2. Prices in our orange-red */
+.price {
+	color: #B5451B;
+	font-weight: bold;
+}
+
+/* 3. Today&#x27;s special stands out */
+.special {
+	background-color: #FBE9DF;
+	border-color: #E97132;
+}
+
+/* 4. A Harbourside button. In Bootstrap 5, change the button&#x27;s variables,
+      not background-color, or the hover goes back to Bootstrap&#x27;s blue. */
+.btn-harbour {
+	--bs-btn-color: #FFFFFF;
+	--bs-btn-bg: #B5451B;
+	--bs-btn-border-color: #B5451B;
+	--bs-btn-hover-color: #FFFFFF;
+	--bs-btn-hover-bg: #8A2B0B;
+	--bs-btn-hover-border-color: #8A2B0B;
+	--bs-btn-active-bg: #8A2B0B;
+	--bs-btn-active-border-color: #8A2B0B;
+}</code></pre>
+</figure><div class="box new"><p class="h">What's new</p><ul><li>Georgia headings and orange-red prices: ordinary CSS. It works because <code>style.css</code> is linked after Bootstrap.</li><li><code>.special</code> ties with Bootstrap's <code>.card</code> (one class each), so ours wins because it's read last.</li><li><code>.btn-harbour</code> doesn't set <code>background-color</code>. It sets Bootstrap's <b>button variables</b>, like Example 01, so the hover and click colours are ours too. If you set <code>background-color</code> instead, the hover goes back to Bootstrap's blue, because Bootstrap's <code>.btn:hover</code> is more specific.</li><li>The whole <code>style.css</code> is about 40 lines. Week 9's was about 300. That's what a framework buys you.</li></ul></div><div class="checks"><p class="h">Check it</p><label><input type="checkbox" id="t6c0"> <span>Headings are in Georgia and navy.</span></label><label><input type="checkbox" id="t6c1"> <span>Prices are orange-red and bold.</span></label><label><input type="checkbox" id="t6c2"> <span>The lobster card is a light peach with an orange border.</span></label><label><input type="checkbox" id="t6c3"> <span>The banner button is orange-red, and gets darker (not blue) when you hover it.</span></label></div><div class="box warn"><p class="h">Bootstrap's rule still winning?</p><p>Right-click the element, choose <b>Inspect</b>, and look at the Styles panel. Bootstrap's rule may be more specific than yours, like <code>.btn:hover</code>. Crossed-out rules are the ones that lost.</p></div><div class="quiz"><p class="h">Check yourself</p><p class="q">Both rules are one class, so they tie on specificity. Which background does the special card get?</p><figure class="code">
+<figcaption><span class="lbl">One element, class="card special"</span><span class="lang">CSS</span><button class="copy" type="button" data-for="c11">Copy</button></figcaption>
+<pre id="c11"><code>/* bootstrap.min.css, linked FIRST */
+.card {
+   background-color: #fff;
+}
+
+/* your style.css, linked SECOND */
+.special {
+   background-color: #FFF8E1;
+}</code></pre>
+</figure><ol class="opts"><li><b>A</b> White: <code>.card</code> is Bootstrap's own class, so it wins</li><li><b>B</b> Cream: they tie on specificity, and ours is read last</li><li><b>C</b> White: Bootstrap's file is bigger and loads first</li><li><b>D</b> Neither: you need <code>!important</code> to beat a framework</li></ol>
+<details><summary>Show the answer</summary><p><b>B.</b> Two steps, in order. <b>1.</b> Is one selector more specific? Then it wins, whatever the order. <b>2.</b> If they tie, the one the browser reads last wins. That's why <code>style.css</code> goes after Bootstrap's link. <code>!important</code> works too, but it's a last resort: it's how stylesheets become impossible to fix.</p></details></div></section>
+<section class="step" id="submit"><header><h2>Submit it</h2></header>
+<p>Your page should have:</p>
+<ul class="have"><li>A navbar that folds into a menu button</li><li>The menu as cards in a responsive grid</li><li>Your own colours in <code>style.css</code></li></ul>
+<ol class="do"><li><b>Wide screenshot:</b> your whole page at full width.</li><li><b>Phone screenshot:</b> open DevTools (<code>F12</code>), press <code>Ctrl + Shift + M</code>, pick a phone. Then use the device toolbar's <b>⋮</b> menu: <b>Capture full size screenshot</b>.</li><li>Drop both screenshots in the submission box on <b>Week 11 Brightspace</b>.</li></ol>
+<p class="opt"><b>Optional:</b> add one thing from last class, like the Order button or the FAQ accordion below.</p>
+</section>
+<section class="step" id="extras"><header><h2>Finished early?</h2></header><h3>Make the navbar stick to the top</h3><p>Add <code>sticky-top</code> to the navbar. It stays put while you scroll.</p><figure class="code">
+<figcaption><span class="lbl">Sticky navbar</span><span class="where">replaces the navbar's opening tag</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c12">Copy</button></figcaption>
+<pre id="c12"><code>&lt;nav class=&quot;navbar navbar-expand-md bg-harbour sticky-top&quot; data-bs-theme=&quot;dark&quot; aria-label=&quot;Main&quot;&gt;</code></pre>
+</figure><h3>An Order button that opens a modal</h3><p>Last class's <code>js/01_modal_example.html</code>. The button's <code>data-bs-target</code> matches the modal's <code>id</code>.</p><figure class="code">
+<figcaption><span class="lbl">The button</span><span class="where">in the lobster roll's card-body, after the price</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c13">Copy</button></figcaption>
+<pre id="c13"><code>&lt;button type=&quot;button&quot; class=&quot;btn btn-harbour btn-sm mt-2&quot;
+	data-bs-toggle=&quot;modal&quot; data-bs-target=&quot;#orderLobster&quot;&gt;
+	Order
+&lt;/button&gt;</code></pre>
+</figure><figure class="code">
+<figcaption><span class="lbl">The modal</span><span class="where">anywhere in &lt;body&gt;, e.g. just before the script</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c14">Copy</button></figcaption>
+<pre id="c14"><code>&lt;div class=&quot;modal fade&quot; id=&quot;orderLobster&quot; tabindex=&quot;-1&quot;
+	aria-labelledby=&quot;orderLobsterTitle&quot; aria-hidden=&quot;true&quot;&gt;
+	&lt;div class=&quot;modal-dialog&quot;&gt;
+		&lt;div class=&quot;modal-content&quot;&gt;
+			&lt;div class=&quot;modal-header&quot;&gt;
+				&lt;h2 class=&quot;modal-title h5&quot; id=&quot;orderLobsterTitle&quot;&gt;Lobster Roll, $24.00&lt;/h2&gt;
+				&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;/button&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;modal-body&quot;&gt;
+				&lt;p class=&quot;mb-0&quot;&gt;Fresh lobster on a toasted bun with a side salad.&lt;/p&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;modal-footer&quot;&gt;
+				&lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; data-bs-dismiss=&quot;modal&quot;&gt;Never mind&lt;/button&gt;
+				&lt;button type=&quot;button&quot; class=&quot;btn btn-harbour&quot;&gt;Add to order&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</figure><h3>An FAQ accordion under the menu</h3><p>Last class's <code>js/02_accordion_example.html</code>. Add a third question of your own: copy an <code>accordion-item</code> and change <code>q2</code> to <code>q3</code> in all three places.</p><figure class="code">
+<figcaption><span class="lbl">FAQ accordion</span><span class="where">in &lt;main&gt;, after the menu section</span><span class="lang">HTML</span><button class="copy" type="button" data-for="c15">Copy</button></figcaption>
+<pre id="c15"><code>&lt;section class=&quot;mb-5&quot;&gt;
+	&lt;h2&gt;Questions&lt;/h2&gt;
+	&lt;div class=&quot;accordion&quot; id=&quot;faq&quot;&gt;
+		&lt;div class=&quot;accordion-item&quot;&gt;
+			&lt;h3 class=&quot;accordion-header&quot;&gt;
+				&lt;button class=&quot;accordion-button&quot; type=&quot;button&quot;
+					data-bs-toggle=&quot;collapse&quot; data-bs-target=&quot;#q1&quot;
+					aria-expanded=&quot;true&quot; aria-controls=&quot;q1&quot;&gt;
+					Do you take reservations?
+				&lt;/button&gt;
+			&lt;/h3&gt;
+			&lt;div class=&quot;accordion-collapse collapse show&quot; id=&quot;q1&quot; data-bs-parent=&quot;#faq&quot;&gt;
+				&lt;div class=&quot;accordion-body&quot;&gt;Not in the summer. From October to May, call us at 902-555-0147.&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;accordion-item&quot;&gt;
+			&lt;h3 class=&quot;accordion-header&quot;&gt;
+				&lt;button class=&quot;accordion-button collapsed&quot; type=&quot;button&quot;
+					data-bs-toggle=&quot;collapse&quot; data-bs-target=&quot;#q2&quot;
+					aria-expanded=&quot;false&quot; aria-controls=&quot;q2&quot;&gt;
+					Is there parking?
+				&lt;/button&gt;
+			&lt;/h3&gt;
+			&lt;div class=&quot;accordion-collapse collapse&quot; id=&quot;q2&quot; data-bs-parent=&quot;#faq&quot;&gt;
+				&lt;div class=&quot;accordion-body&quot;&gt;Six spots behind the building, and the wharf lot is free after 5pm.&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+</figure><h3>Try Tailwind</h3><p>Rebuild the menu cards in a <b>new file</b> with Tailwind, using <code>03_tailwind_cards_example.html</code> as a guide. Don't put Bootstrap and Tailwind on the same page: their classes clash (both have <code>p-3</code>, for example, and they mean different sizes).</p><h3>Last year's activity</h3><p>Download one of Bootstrap's examples from <a href="https://getbootstrap.com/docs/5.3/examples/" target="_blank" rel="noopener">getbootstrap.com/docs/5.3/examples</a> and make it yours.</p></section>
+		</main>
+		<script>
+			document.addEventListener("click", (e) => {
+				const b = e.target.closest("button.copy");
+				if (!b) return;
+				const pre = document.getElementById(b.dataset.for);
+				const done = () => { b.textContent = "Copied"; b.classList.add("done"); setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1600); };
+				const fallback = () => { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Ctrl+C"; };
+				try { navigator.clipboard.writeText(pre.textContent).then(done, fallback); } catch (err) { fallback(); }
+			});
+			// Ticks are remembered in this browser, so you can pick up where you left off
+			document.querySelectorAll(".checks input").forEach((cb) => {
+				try { cb.checked = localStorage.getItem("harbourside-" + cb.id) === "1"; } catch (err) {}
+				cb.addEventListener("change", () => { try { localStorage.setItem("harbourside-" + cb.id, cb.checked ? "1" : "0"); } catch (err) {} });
+			});
+		</script>
+	</body>
+</html>
