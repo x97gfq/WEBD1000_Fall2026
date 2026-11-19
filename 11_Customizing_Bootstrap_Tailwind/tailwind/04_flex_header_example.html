@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Tailwind 04: A Header with Flexbox</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	</head>
+	<body class="bg-slate-100 text-slate-800">
+
+		<!-- ========== THE HEADER ==========
+		     Tailwind has no "navbar" component. You build one from flexbox classes,
+		     the same flexbox from Week 8, one property per class:
+		       flex              display: flex
+		       justify-between   justify-content: space-between
+		       items-center      align-items: center
+		       gap-6             gap: 1.5rem
+		     (And no toggle button: a collapsing menu needs JavaScript, which Tailwind
+		     doesn't include. That's one reason people still pick Bootstrap.) -->
+		<header class="bg-sky-900 text-white">
+			<div class="max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+				<a href="#" class="text-xl font-bold font-serif">Harbourside</a>
+				<nav>
+					<ul class="flex gap-6">
+						<li><a href="#" class="text-sky-100 hover:text-white">Menu</a></li>
+						<li><a href="#" class="text-sky-100 hover:text-white">Hours</a></li>
+						<li><a href="#" class="text-sky-100 hover:text-white">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main class="max-w-5xl mx-auto px-6 py-8">
+
+			<h1 class="text-3xl font-bold mb-2">A header, built from flexbox</h1>
+			<p class="text-slate-600 mb-8">
+				Read the header's classes in the file. Every one of them is a CSS property you already know.
+			</p>
+
+			<!-- ========== Three ways to line things up ==========
+			     The same three boxes. Only the justify- class changes. -->
+			<h2 class="text-xl font-semibold mb-3">justify-start, justify-center, justify-between</h2>
+			<div class="space-y-3 mb-10">
+				<div class="flex justify-start gap-2 bg-white rounded p-3">
+					<span class="bg-orange-200 px-3 py-1 rounded">A</span>
+					<span class="bg-orange-200 px-3 py-1 rounded">B</span>
+					<span class="bg-orange-200 px-3 py-1 rounded">C</span>
+				</div>
+				<div class="flex justify-center gap-2 bg-white rounded p-3">
+					<span class="bg-orange-200 px-3 py-1 rounded">A</span>
+					<span class="bg-orange-200 px-3 py-1 rounded">B</span>
+					<span class="bg-orange-200 px-3 py-1 rounded">C</span>
+				</div>
+				<div class="flex justify-between gap-2 bg-white rounded p-3">
+					<span class="bg-orange-200 px-3 py-1 rounded">A</span>
+					<span class="bg-orange-200 px-3 py-1 rounded">B</span>
+					<span class="bg-orange-200 px-3 py-1 rounded">C</span>
+				</div>
+			</div>
+
+			<!-- ========== A menu row ==========
+			     Name on the left, price on the right: flex + justify-between.
+			     border-b draws a line under each row; last:border-0 removes it from the last one. -->
+			<h2 class="text-xl font-semibold mb-3">The same trick, for a price list</h2>
+			<ul class="bg-white rounded-lg shadow px-5 mb-10">
+				<li class="flex justify-between py-3 border-b border-slate-200 last:border-0">
+					<span>Haddock &amp; Chips</span><span class="font-bold text-red-700">$16.99</span>
+				</li>
+				<li class="flex justify-between py-3 border-b border-slate-200 last:border-0">
+					<span>Clam Strips</span><span class="font-bold text-red-700">$14.50</span>
+				</li>
+				<li class="flex justify-between py-3 border-b border-slate-200 last:border-0">
+					<span>Lobster Roll</span><span class="font-bold text-red-700">$24.00</span>
+				</li>
+			</ul>
+
+			<div class="bg-amber-100 border border-amber-300 rounded p-4">
+				<strong>Try this:</strong> in the header, change <code>sm:justify-between</code> to
+				<code>sm:justify-center</code>. Then add a fourth link, "Order Online", styled as a button:
+				<code>bg-orange-600 hover:bg-orange-700 px-3 py-1 rounded</code>.
+			</div>
+
+		</main>
+
+		<footer class="bg-sky-900 text-sky-100 text-center text-sm py-6">
+			123 Water Street, Halifax &middot; Open 11 to 9 daily
+		</footer>
+
+	</body>
+</html>

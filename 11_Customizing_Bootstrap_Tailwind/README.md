@@ -3,6 +3,7 @@
 > This README is the source for:
 > 1. `11_Customizing_Bootstrap_Tailwind/*.html` (+ `.css`): three numbered examples (customizing, and the same cards in Bootstrap and Tailwind).
 > 2. `js/`: eight more example pages, one per JavaScript-powered component, each one openable on its own. Class 1's "try it" material.
+> 2b. `tailwind/`: five more basic Tailwind pages (spacing/colour/text, hover and focus, responsive prefixes, a flexbox header, your own colours with `@theme`). Class 2's extra Tailwind material, each openable on its own; none is on a slide yet.
 > 3. `activity/`: Harbourside, Part 4. The Week 7 page with no CSS, rebuilt with Bootstrap in Try Its 1 to 6. `activity/answer/` is the key.
 > 4. The 10-question Brightspace quiz, one question per pop quiz, is **not in this folder**: it's in the git-ignored `../temp/` (`WEBD1000_Quiz_Week_11.md` and `.csv`), so students can't pull the answer key. The `.csv` is for Brightspace's question import (Quizzes → Question Library → Import → Upload a File). The `.md` is the source: after editing it, run, from this folder, `python _build/quiz_to_csv.py ../temp/WEBD1000_Quiz_Week_11.md ../temp/WEBD1000_Quiz_Week_11.csv`. Code in the questions is flattened onto one line after "Code:", and the csv module does the quoting, so a `"` in the JavaScript comes out as `""`.
 > 5. `Customizing_Bootstrap_Tailwind.pptx` (67 slides, two PowerPoint sections, one per class; same style as the Week 10 deck; every slide has speaker notes).
@@ -116,6 +117,12 @@ write the answers down.
 │   ├── 06_toast_example.html            ← when this, do that: the first event listener
 │   ├── 07_all_together_example.html     ← all six on one Harbourside page, five lines of JS
 │   └── images/                          ← slide1–3.svg, the carousel's pictures
+├── tailwind/                            ← Class 2: more basic Tailwind
+│   ├── 01_spacing_colour_text_example.html  ← the three scales: p-4, orange-700, text-xl
+│   ├── 02_hover_and_focus_example.html      ← hover:, transition, focus:, disabled:
+│   ├── 03_responsive_example.html           ← mobile first: sm: md: lg:, and a "what size am I" badge
+│   ├── 04_flex_header_example.html          ← a header from flex classes (no navbar component)
+│   └── 05_theme_colours_example.html        ← @theme: bg-harbour, text-ember (the Tailwind Example 01)
 ├── activity/       ← Harbourside, Part 4 (index.html + style.css to do; answer/ is the key)
 ├── Customizing_Bootstrap_Tailwind.pptx
 └── _build/         ← build_deck.js (screenshots go in _build/shots, git-ignored)

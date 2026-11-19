@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Tailwind 01: Spacing, Colour and Text</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	</head>
+	<body class="bg-slate-100 text-slate-800">
+		<div class="max-w-3xl mx-auto px-6 py-8">
+
+			<h1 class="text-3xl font-bold mb-2">Spacing, colour and text</h1>
+			<p class="text-slate-600 mb-8">
+				Almost every Tailwind class is <strong>what</strong>-<strong>how much</strong>.
+				Learn the three scales on this page and you can read most of Tailwind.
+			</p>
+
+			<!-- ========== 1. SPACING: p = padding, m = margin ==========
+			     The number is a step on a scale. One step = 0.25rem = 4px.
+			     So p-2 is 8px, p-4 is 16px, p-8 is 32px.
+			     Add a side: pt (top), pb, pl, pr, px (left + right), py (top + bottom). -->
+			<h2 class="text-xl font-semibold mb-3">1. Spacing: one step is 4px</h2>
+			<div class="flex flex-wrap items-start gap-3 mb-8">
+				<div class="bg-sky-200 p-1">p-1</div>
+				<div class="bg-sky-200 p-2">p-2</div>
+				<div class="bg-sky-200 p-4">p-4</div>
+				<div class="bg-sky-200 p-8">p-8</div>
+				<div class="bg-sky-200 px-8 py-2">px-8 py-2</div>
+			</div>
+
+			<!-- ========== 2. COLOUR: colour name, then a shade ==========
+			     50 is nearly white, 950 is nearly black, 500 is the "plain" colour.
+			     The SAME colour names work after bg- (background), text- and border-. -->
+			<h2 class="text-xl font-semibold mb-3">2. Colour: a name and a shade</h2>
+			<div class="grid grid-cols-5 gap-2 mb-3 text-sm text-center">
+				<div class="bg-orange-100 p-3 rounded">100</div>
+				<div class="bg-orange-300 p-3 rounded">300</div>
+				<div class="bg-orange-500 p-3 rounded text-white">500</div>
+				<div class="bg-orange-700 p-3 rounded text-white">700</div>
+				<div class="bg-orange-900 p-3 rounded text-white">900</div>
+			</div>
+			<p class="mb-8">
+				The same orange as
+				<span class="text-orange-700 font-semibold">text-orange-700</span> and as a
+				<span class="border-2 border-orange-500 px-2 rounded">border-orange-500</span>.
+			</p>
+
+			<!-- ========== 3. TEXT: size, weight, alignment ==========
+			     Sizes go xs, sm, base (normal), lg, xl, 2xl, 3xl ... 9xl.
+			     Weights go font-light, font-normal, font-semibold, font-bold. -->
+			<h2 class="text-xl font-semibold mb-3">3. Text: size and weight</h2>
+			<div class="bg-white rounded-lg shadow p-5 space-y-1 mb-8">
+				<p class="text-sm">text-sm: the small print</p>
+				<p class="text-base">text-base: normal body text</p>
+				<p class="text-xl">text-xl: a little bigger</p>
+				<p class="text-3xl font-bold">text-3xl font-bold</p>
+				<p class="text-center italic text-slate-500">text-center italic text-slate-500</p>
+			</div>
+
+			<!-- ========== Put them together ==========
+			     Read this one aloud, left to right: white background, rounded corners,
+			     a shadow, padding of 6 steps (24px), an orange bar on the left. -->
+			<h2 class="text-xl font-semibold mb-3">All three at once</h2>
+			<div class="bg-white rounded-lg shadow p-6 border-l-8 border-orange-600">
+				<p class="text-sm uppercase tracking-wide text-orange-700 font-semibold">Today's special</p>
+				<h3 class="text-2xl font-bold mt-1">Lobster Roll</h3>
+				<p class="mt-2 text-slate-600">Fresh lobster on a toasted bun with a side salad.</p>
+				<p class="mt-3 text-xl font-bold text-red-700">$24.00</p>
+			</div>
+
+			<div class="mt-8 bg-amber-100 border border-amber-300 rounded p-4">
+				<strong>Try this:</strong> change <code>p-6</code> on the special to <code>p-12</code>,
+				and <code>border-orange-600</code> to <code>border-emerald-600</code>. Save and refresh.
+				No CSS file, no selector, no specificity to argue with.
+			</div>
+
+		</div>
+	</body>
+</html>

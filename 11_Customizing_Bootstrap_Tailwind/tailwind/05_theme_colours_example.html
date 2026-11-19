@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Tailwind 05: Your Own Colours (@theme)</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+		<!-- ========== CUSTOMIZING TAILWIND ==========
+		     Same question as Example 01 in Bootstrap: "how do I use OUR colours?"
+		     In Bootstrap you override its variables. In Tailwind you ADD to its theme.
+
+		     Name a variable --color-SOMETHING and Tailwind makes all of these for you:
+		       bg-SOMETHING   text-SOMETHING   border-SOMETHING   hover:bg-SOMETHING ...
+
+		     type="text/tailwindcss" is what tells the Play CDN to read this block. -->
+		<style type="text/tailwindcss">
+			@theme {
+				--color-harbour: #12304A;       /* our navy */
+				--color-ember: #B5451B;          /* our orange-red */
+				--color-ember-dark: #8A2B0B;
+				--color-shell: #FBE9DF;          /* the pale background for specials */
+				--font-heading: Georgia, "Times New Roman", serif;
+			}
+		</style>
+	</head>
+	<body class="bg-slate-100 text-slate-800">
+
+		<!-- bg-harbour didn't exist until the @theme block above created it -->
+		<header class="bg-harbour text-white">
+			<div class="max-w-5xl mx-auto px-6 py-10">
+				<p class="font-heading text-4xl">Harbourside Fish &amp; Chips</p>
+				<p class="mt-2 text-slate-300">Same colours as the Bootstrap version. Different way to get there.</p>
+			</div>
+		</header>
+
+		<main class="max-w-5xl mx-auto px-6 py-8">
+
+			<h1 class="font-heading text-3xl text-harbour mb-6">Our Menu</h1>
+
+			<div class="grid gap-4 md:grid-cols-3 mb-10">
+				<article class="bg-white rounded-lg shadow p-5">
+					<h2 class="font-heading text-xl text-harbour">Haddock &amp; Chips</h2>
+					<p class="mt-2">Local haddock, with fries and coleslaw.</p>
+					<p class="mt-3 font-bold text-ember">$16.99</p>
+					<a href="#" class="inline-block mt-3 px-4 py-2 rounded
+						bg-ember text-white hover:bg-ember-dark transition">Order</a>
+				</article>
+				<!-- The special: bg-shell and border-ember are our colours too -->
+				<article class="bg-shell rounded-lg shadow p-5 border-2 border-ember">
+					<p class="text-xs uppercase tracking-wide font-semibold text-ember">Today's special</p>
+					<h2 class="font-heading text-xl text-harbour">Lobster Roll</h2>
+					<p class="mt-2">Fresh lobster on a toasted bun with a side salad.</p>
+					<p class="mt-3 font-bold text-ember">$24.00</p>
+					<a href="#" class="inline-block mt-3 px-4 py-2 rounded
+						bg-ember text-white hover:bg-ember-dark transition">Order</a>
+				</article>
+				<article class="bg-white rounded-lg shadow p-5">
+					<h2 class="font-heading text-xl text-harbour">Clam Strips</h2>
+					<p class="mt-2">Lightly breaded clam strips with fries and tartar sauce.</p>
+					<p class="mt-3 font-bold text-ember">$14.50</p>
+					<a href="#" class="inline-block mt-3 px-4 py-2 rounded
+						bg-ember text-white hover:bg-ember-dark transition">Order</a>
+				</article>
+			</div>
+
+			<!-- Compare with Bootstrap: there, the hover went back to blue unless you
+			     set --bs-btn-hover-bg as well. Here, hover:bg-ember-dark is right there
+			     in the class list, so there's nothing hidden to override. -->
+			<div class="bg-amber-100 border border-amber-300 rounded p-4">
+				<strong>Try this:</strong> change <code>--color-harbour</code> to <code>#1B4D3E</code>
+				(a dark green) and refresh. Every heading and the banner change together, because they
+				all use the one variable. Then add <code>--color-sand: #E8D8B0;</code> and use
+				<code>bg-sand</code> on the page's <code>&lt;body&gt;</code>.
+			</div>
+
+		</main>
+
+		<footer class="bg-harbour text-slate-300 text-center text-sm py-6">
+			123 Water Street, Halifax &middot; Open 11 to 9 daily
+		</footer>
+
+	</body>
+</html>
